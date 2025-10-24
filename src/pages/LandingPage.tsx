@@ -1,282 +1,409 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Shield, Bug, Star, Check, Mail, Phone } from 'lucide-react';
-import { Button } from '../components/ui/button';
+import {
+  ArrowRight, Shield, Bug, Star, Check, Mail, Phone, Clock,
+  Users, Zap, Leaf, Award, MapPin, Calendar
+} from 'lucide-react';
+import { formatCurrencyFromCents } from '../lib/utils';
+import { defaultServices } from '../lib/stripe';
 
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
 
-  // Top services
-  const services = [
+  // Featured services with pricing
+  const featuredServices = [
     {
+      ...defaultServices[0],
       icon: <Shield className="w-6 h-6" />,
-      name: "Advanced Guard",
-      description: "Comprehensive pest protection with regular inspections"
+      features: ["Detailed inspection report", "Problem identification", "Treatment recommendations"]
     },
     {
+      ...defaultServices[1],
       icon: <Bug className="w-6 h-6" />,
-      name: "Wood Eating Pest",
-      description: "Termite and wood-destroying insect treatment"
+      features: ["Eco-friendly treatments", "Same-day service", "30-day guarantee"]
+    },
+    {
+      ...defaultServices[2],
+      icon: <Calendar className="w-6 h-6" />,
+      features: ["Regular monitoring", "Priority scheduling", "24/7 support"]
     }
   ];
 
-  // Key benefits
+  // Key benefits with icons
   const benefits = [
-    "Eco-friendly solutions",
-    "24/7 emergency service",
-    "Certified professionals",
-    "Free inspections",
-    "Satisfaction guarantee",
-    "Pet & child safe treatments"
+    { icon: <Leaf className="w-5 h-5" />, text: "Eco-friendly & safe solutions" },
+    { icon: <Clock className="w-5 h-5" />, text: "24/7 emergency response" },
+    { icon: <Award className="w-5 h-5" />, text: "Licensed & certified experts" },
+    { icon: <Shield className="w-5 h-5" />, text: "100% satisfaction guarantee" },
+    { icon: <Users className="w-5 h-5" />, text: "Family & pet safe treatments" },
+    { icon: <Zap className="w-5 h-5" />, text: "Fast & effective results" }
   ];
 
-  // Testimonial
-  const testimonial = {
-    name: "Sarah Johnson",
-    role: "Homeowner",
-    content: "The team was professional and thorough. Haven't seen a single pest since their treatment!",
-    rating: 5
-  };
+  // Testimonials
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      role: "Homeowner",
+      location: "San Francisco, CA",
+      content: "Grinnage solved our ant problem quickly and safely. Their team was professional and the results speak for themselves!",
+      rating: 5
+    },
+    {
+      name: "Mike Chen",
+      role: "Restaurant Owner",
+      location: "Oakland, CA",
+      content: "We've been using Grinnage for 3 years. Their preventive approach has kept our establishment pest-free.",
+      rating: 5
+    },
+    {
+      name: "Linda Rodriguez",
+      role: "Property Manager",
+      location: "Berkeley, CA",
+      content: "Reliable, effective, and great communication. Grinnage is our go-to for all 12 properties we manage.",
+      rating: 5
+    }
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f1729] to-[#111827] text-white">
-      {/* Header/Navigation */}
-      <header className="border-b border-white/10">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="font-bold text-xl">GRINNAGE</div>
-          <nav className="hidden md:flex space-x-8">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+      {/* Modern Header */}
+      <header className="sticky top-0 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 z-50">
+        <div className="container mx-auto flex justify-between items-center py-4">
+          <div className="font-display font-bold text-2xl text-primary-600 dark:text-primary-400">
+            GRINNAGE
+          </div>
+          <nav className="hidden md:flex items-center space-x-8">
             {['Services', 'About', 'Contact'].map(item => (
-              <button 
+              <button
                 key={item}
+                className="nav-link"
                 onClick={() => navigate(`/${item.toLowerCase()}`)}
-                className="text-gray-300 hover:text-[#56e39f] transition-colors"
               >
                 {item}
               </button>
             ))}
           </nav>
-          <Button 
-            variant="primary" 
-            size="sm"
-            onClick={() => navigate('/login')}
-          >
-            Client Login
-          </Button>
+          <div className="flex items-center gap-3">
+            <button
+              className="btn-secondary"
+              onClick={() => navigate('/login')}
+            >
+              Client Login
+            </button>
+            <button className="btn-primary">
+              Get Quote
+            </button>
+          </div>
         </div>
       </header>
 
       <main>
-        {/* Hero Section */}
-        <section className="py-16 md:py-24">
-          <div className="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0">
-              <div className="inline-flex items-center px-3 py-1 bg-[#56e39f]/10 rounded-full mb-4">
-                <Shield className="w-4 h-4 mr-2 text-[#56e39f]" />
-                <span className="text-sm font-medium text-[#56e39f]">Professional Pest Control</span>
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                Effective Pest Solutions for Your Home & Business
-              </h1>
-              <p className="text-gray-300 mb-6">
-                Protect your property with our eco-friendly pest control services. Safe for your family, tough on pests.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  onClick={() => navigate('/consultation')}
-                  icon={<ArrowRight className="ml-2 w-5 h-5" />}
-                >
-                  Get Free Estimate
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-[#56e39f]/30 text-[#56e39f] hover:bg-[#56e39f]/10"
-                  onClick={() => navigate('/services')}
-                >
-                  View Services
-                </Button>
-              </div>
-              
-              {/* Dashboard Demo Links */}
-              <div className="mt-4 p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg">
-                <p className="text-white text-sm mb-3">View Dashboard Demos:</p>
-                <div className="flex flex-wrap gap-3">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10"
-                    onClick={() => navigate('/demo/client-dashboard')}
-                  >
-                    Client Dashboard
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-purple-500/30 text-purple-400 hover:bg-purple-500/10"
-                    onClick={() => navigate('/demo/admin-dashboard')}
-                  >
-                    Admin Dashboard
-                  </Button>
+        {/* Modern Hero Section */}
+        <section className="section">
+          <div className="container">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="animate-fade-in">
+                <div className="badge-success mb-6">
+                  <Shield className="w-4 h-4 mr-2" />
+                  Professional Pest Control Since 2003
+                </div>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6 leading-tight">
+                  Protect What
+                  <span className="text-primary-500 block">Matters Most</span>
+                </h1>
+                <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-xl">
+                  Safe, effective pest control solutions for your home and business.
+                  Licensed professionals using eco-friendly treatments that work.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <button className="btn-primary">
+                    <Calendar className="w-5 h-5" />
+                    Schedule Inspection
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                  <button className="btn-outline">
+                    <Phone className="w-5 h-5" />
+                    Call (555) 123-4567
+                  </button>
+                </div>
+
+                {/* Trust Indicators */}
+                <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-neutral-500 dark:text-neutral-400">
+                  <div className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-primary-500" />
+                    Licensed & Insured
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-primary-500" />
+                    Same-Day Service
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-primary-500" />
+                    100% Guarantee
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="md:w-1/2 flex justify-center">
-              <div className="relative">
-                {/* Placeholder for illustration - could be replaced with an actual image */}
-                <div className="w-72 h-72 bg-gradient-to-br from-[#56e39f]/20 to-blue-500/20 rounded-full flex items-center justify-center">
-                  <Shield className="w-20 h-20 text-[#56e39f]" />
+
+              <div className="relative animate-float">
+                <div className="card-hover bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-950 dark:to-accent-950 p-8">
+                  <div className="flex items-center justify-center w-24 h-24 bg-primary-500 rounded-2xl mb-6 mx-auto">
+                    <Shield className="w-12 h-12 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-center mb-4">
+                    Free Inspection & Quote
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-400 text-center">
+                    Get a comprehensive property assessment and detailed treatment plan at no cost.
+                  </p>
                 </div>
-                {/* Decorative elements */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-500/10 rounded-full blur-xl"></div>
-                <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-[#56e39f]/10 rounded-full blur-xl"></div>
+
+                {/* Floating elements */}
+                <div className="absolute -top-4 -right-4 w-16 h-16 bg-primary-200 dark:bg-primary-800 rounded-full opacity-20 animate-pulse"></div>
+                <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-accent-200 dark:bg-accent-800 rounded-full opacity-30 animate-pulse delay-300"></div>
               </div>
             </div>
           </div>
         </section>
         
-        {/* Key Services */}
-        <section className="py-10">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {services.map((service, index) => (
-                <div 
-                  key={index}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-[#56e39f]/20 transition-all duration-300"
-                >
-                  <div className="flex items-start">
-                    <div className="p-3 bg-[#56e39f]/10 rounded-lg text-[#56e39f] mr-4">
+        {/* Services with Pricing */}
+        <section className="section bg-white dark:bg-neutral-900">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                Professional Services
+              </h2>
+              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+                Comprehensive pest control solutions tailored to your specific needs.
+                Transparent pricing with no hidden fees.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredServices.map((service, index) => (
+                <div key={service.id} className="card-hover group">
+                  <div className="flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-xl mb-6 group-hover:bg-primary-200 dark:group-hover:bg-primary-800 transition-colors">
+                    <div className="text-primary-600 dark:text-primary-400">
                       {service.icon}
                     </div>
+                  </div>
+
+                  <h3 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50 mb-3">
+                    {service.name}
+                  </h3>
+
+                  <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+                    {service.description}
+                  </p>
+
+                  <div className="space-y-2 mb-6">
+                    {service.features.map((feature, i) => (
+                      <div key={i} className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
+                        <Check className="w-4 h-4 text-primary-500 mr-2 flex-shrink-0" />
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-xl font-bold mb-2">{service.name}</h3>
-                      <p className="text-gray-300 mb-3">{service.description}</p>
-                      <button 
-                        onClick={() => navigate('/services')}
-                        className="text-[#56e39f] hover:text-[#48c98a] flex items-center text-sm font-medium"
-                      >
-                        Learn more <ArrowRight className="ml-1 w-4 h-4" />
-                      </button>
+                      <div className="text-3xl font-bold text-neutral-900 dark:text-neutral-50">
+                        {formatCurrencyFromCents(service.price)}
+                      </div>
+                      <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                        {service.interval === 'one_time' ? 'One-time service' : `Per ${service.interval}`}
+                      </div>
                     </div>
+                    <button className="btn-primary">
+                      Book Now
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="text-center mt-8">
-              <Button
-                variant="outline"
-                onClick={() => navigate('/services')}
-                className="border-white/20 hover:bg-white/5"
-              >
-                View All Services
-              </Button>
+
+            <div className="text-center mt-12">
+              <button className="btn-outline">
+                View All Services & Pricing
+                <ArrowRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
         </section>
 
-        {/* Features & Benefits */}
-        <section className="py-10">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8">
-              <h2 className="text-2xl font-bold mb-6">Why Choose Us</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center">
-                    <Check className="w-5 h-5 text-[#56e39f] mr-3 flex-shrink-0" />
-                    <span className="text-gray-300">{benefit}</span>
+        {/* Why Choose Us */}
+        <section className="section">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                Why Choose Grinnage
+              </h2>
+              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+                Over 20 years of experience protecting homes and businesses with safe, effective solutions.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="card text-center group">
+                  <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl mb-4 mx-auto group-hover:bg-primary-200 dark:group-hover:bg-primary-800 transition-colors">
+                    <div className="text-primary-600 dark:text-primary-400">
+                      {benefit.icon}
+                    </div>
                   </div>
-                ))}
-              </div>
+                  <p className="text-neutral-700 dark:text-neutral-300 font-medium">
+                    {benefit.text}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Testimonial */}
-        <section className="py-10">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="bg-gradient-to-r from-[#56e39f]/10 to-blue-500/10 backdrop-blur-sm border border-white/10 rounded-xl p-8">
-              <div className="flex">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-[#56e39f] fill-[#56e39f]" />
-                ))}
-              </div>
-              <p className="text-lg text-gray-200 my-4">"{testimonial.content}"</p>
-              <div>
-                <p className="font-semibold">{testimonial.name}</p>
-                <p className="text-gray-400 text-sm">{testimonial.role}</p>
-              </div>
+        {/* Testimonials */}
+        <section className="section bg-white dark:bg-neutral-900">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                What Our Clients Say
+              </h2>
+              <p className="text-xl text-neutral-600 dark:text-neutral-400">
+                Real experiences from satisfied customers across the Bay Area.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="card">
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-accent-400 fill-accent-400" />
+                    ))}
+                  </div>
+                  <p className="text-neutral-700 dark:text-neutral-300 mb-6 italic">
+                    "{testimonial.content}"
+                  </p>
+                  <div>
+                    <p className="font-semibold text-neutral-900 dark:text-neutral-100">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                      {testimonial.role}
+                    </p>
+                    <p className="text-sm text-neutral-500 dark:text-neutral-400 flex items-center mt-1">
+                      <MapPin className="w-3 h-3 mr-1" />
+                      {testimonial.location}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Contact/CTA */}
-        <section className="py-10">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div>
-                  <h2 className="text-2xl font-bold mb-2">Ready to get started?</h2>
-                  <p className="text-gray-300">Contact us today for a free estimate or consultation</p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button 
-                    variant="primary" 
-                    size="lg"
-                    onClick={() => navigate('/contact')}
-                  >
-                    Get Free Estimate
-                  </Button>
-                  <a 
-                    href="tel:+18005551234"
-                    className="inline-flex items-center justify-center px-4 py-2 border border-white/20 rounded-lg text-white hover:bg-white/5 transition-colors"
-                  >
-                    <Phone className="w-5 h-5 mr-2" />
-                    (800) 555-1234
-                  </a>
-                </div>
+        {/* CTA Section */}
+        <section className="section bg-gradient-to-r from-primary-500 to-primary-600 text-white">
+          <div className="container">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+                Ready to Protect Your Property?
+              </h2>
+              <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+                Get a free inspection and personalized treatment plan.
+                No obligation, just expert advice from certified professionals.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <button className="btn bg-white text-primary-600 hover:bg-neutral-100">
+                  <Calendar className="w-5 h-5" />
+                  Schedule Free Inspection
+                </button>
+                <a
+                  href="tel:+15551234567"
+                  className="btn border-2 border-white text-white hover:bg-white hover:text-primary-600"
+                >
+                  <Phone className="w-5 h-5" />
+                  Call (555) 123-4567
+                </a>
               </div>
+              <p className="text-primary-200 text-sm mt-4">
+                Available 24/7 for emergency services
+              </p>
             </div>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-10 mt-10">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-            <div className="mb-4 md:mb-0">
-              <div className="font-bold text-xl mb-2">GRINNAGE</div>
-              <p className="text-gray-400 text-sm max-w-xs">
-                Professional pest control services with a focus on eco-friendly solutions.
+      {/* Modern Footer */}
+      <footer className="bg-neutral-900 dark:bg-neutral-950 text-neutral-300">
+        <div className="container py-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {/* Company Info */}
+            <div className="lg:col-span-2">
+              <div className="font-display font-bold text-2xl text-primary-400 mb-4">
+                GRINNAGE
+              </div>
+              <p className="text-neutral-400 mb-6 max-w-md">
+                Professional pest control services since 2003.
+                Protecting Bay Area homes and businesses with safe, effective, eco-friendly solutions.
               </p>
+              <div className="space-y-3">
+                <div className="flex items-center">
+                  <Phone className="w-4 h-4 text-primary-500 mr-3" />
+                  <a href="tel:+15551234567" className="hover:text-primary-400 transition-colors">
+                    (555) 123-4567
+                  </a>
+                </div>
+                <div className="flex items-center">
+                  <Mail className="w-4 h-4 text-primary-500 mr-3" />
+                  <a href="mailto:info@grinnage.com" className="hover:text-primary-400 transition-colors">
+                    info@grinnage.com
+                  </a>
+                </div>
+                <div className="flex items-center">
+                  <MapPin className="w-4 h-4 text-primary-500 mr-3" />
+                  <span>San Francisco Bay Area</span>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-6">
-              <div className="flex items-center">
-                <Phone className="w-4 h-4 text-[#56e39f] mr-2" />
-                <a href="tel:+18005551234" className="text-gray-300 hover:text-[#56e39f] transition-colors">
-                  (800) 555-1234
-                </a>
-              </div>
-              <div className="flex items-center">
-                <Mail className="w-4 h-4 text-[#56e39f] mr-2" />
-                <a href="mailto:info@grinnage.com" className="text-gray-300 hover:text-[#56e39f] transition-colors">
-                  info@grinnage.com
-                </a>
-              </div>
+
+            {/* Services */}
+            <div>
+              <h4 className="font-semibold text-white mb-4">Services</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="/services" className="hover:text-primary-400 transition-colors">Pest Inspection</a></li>
+                <li><a href="/services" className="hover:text-primary-400 transition-colors">Pest Treatment</a></li>
+                <li><a href="/services" className="hover:text-primary-400 transition-colors">Monthly Maintenance</a></li>
+                <li><a href="/services" className="hover:text-primary-400 transition-colors">Emergency Service</a></li>
+                <li><a href="/services" className="hover:text-primary-400 transition-colors">Commercial Services</a></li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h4 className="font-semibold text-white mb-4">Company</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="/about" className="hover:text-primary-400 transition-colors">About Us</a></li>
+                <li><a href="/contact" className="hover:text-primary-400 transition-colors">Contact</a></li>
+                <li><a href="/login" className="hover:text-primary-400 transition-colors">Client Portal</a></li>
+                <li><a href="/careers" className="hover:text-primary-400 transition-colors">Careers</a></li>
+                <li><a href="/reviews" className="hover:text-primary-400 transition-colors">Reviews</a></li>
+              </ul>
             </div>
           </div>
-          <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm mb-4 sm:mb-0">
-              © {currentYear} GRINNAGE Pest Control. All rights reserved.
-            </p>
-            <div className="flex space-x-6">
-              <a href="/privacy" className="text-gray-500 hover:text-[#56e39f] text-sm transition-colors">
-                Privacy
+
+          <div className="border-t border-neutral-800 pt-8 flex flex-col sm:flex-row justify-between items-center">
+            <div className="text-sm text-neutral-500 mb-4 sm:mb-0">
+              © {currentYear} Grinnage Pest Control. All rights reserved.
+            </div>
+            <div className="flex space-x-6 text-sm">
+              <a href="/privacy" className="text-neutral-500 hover:text-primary-400 transition-colors">
+                Privacy Policy
               </a>
-              <a href="/terms" className="text-gray-500 hover:text-[#56e39f] text-sm transition-colors">
-                Terms
+              <a href="/terms" className="text-neutral-500 hover:text-primary-400 transition-colors">
+                Terms of Service
+              </a>
+              <a href="/sitemap" className="text-neutral-500 hover:text-primary-400 transition-colors">
+                Sitemap
               </a>
             </div>
           </div>
