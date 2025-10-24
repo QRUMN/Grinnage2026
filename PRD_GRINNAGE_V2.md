@@ -1,5 +1,5 @@
 # Product Requirements Document (PRD)
-## Grinnage Pest Control - Progressive Web Application
+## Grinnage Exterminating - Progressive Web Application
 
 **Version:** 2.0
 **Date:** October 24, 2025
@@ -256,4 +256,4 @@ content (id, section, key, value, updated_at)
 
 ---
 
-**This PRD serves as the complete specification for rebuilding the Grinnage Pest Control platform. Each phase has clear tasks and checkpoints to ensure systematic progress toward a client-managed business platform.**
+**This PRD serves as the complete specification for rebuilding the Grinnage Exterminating platform. Each phase has clear tasks and checkpoints to ensure systematic progress toward a client-managed business platform.**

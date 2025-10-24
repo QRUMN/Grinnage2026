@@ -339,7 +339,7 @@ export const ContactPageSimple: React.FC = () => {
 
           <div className="border-t border-neutral-800 pt-8 flex flex-col sm:flex-row justify-between items-center">
             <div className="text-sm text-neutral-500 mb-4 sm:mb-0">
-              © 2025 Grinnage Pest Control. All rights reserved.
+              © 2025 Grinnage Exterminating. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
               <a href="/privacy" className="text-neutral-500 hover:text-primary-400 transition-colors">

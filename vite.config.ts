@@ -9,9 +9,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'Grinnage Pest Control',
+        name: 'Grinnage Exterminating',
         short_name: 'Grinnage',
-        description: 'Professional pest control services',
+        description: 'Professional exterminating services',
         theme_color: '#22c55e',
         background_color: '#fafafa',
         display: 'standalone',

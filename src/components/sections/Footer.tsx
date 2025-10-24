@@ -142,7 +142,7 @@ export const Footer: React.FC = () => {
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            © {currentYear} GRINNAGE Pest Control. All rights reserved.
+            © {currentYear} Grinnage Exterminating. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <Link to="/privacy" className="text-gray-500 hover:text-[#56e39f] text-sm transition-colors">

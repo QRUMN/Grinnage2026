@@ -193,7 +193,7 @@ export const AdminLogin: React.FC = () => {
           {/* Footer */}
           <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800">
             <p className="text-center text-sm text-neutral-500 dark:text-neutral-400">
-              Secure admin access for Grinnage Pest Control
+              Secure admin access for Grinnage Exterminating
             </p>
             <p className="text-center text-xs text-neutral-400 dark:text-neutral-500 mt-2">
               Protected by enterprise-grade security

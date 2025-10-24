@@ -1,224 +1,266 @@
-import * as React from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Bug, Bird, ArrowRight, ArrowLeft, Phone, Check, Clock, Rat, Leaf } from 'lucide-react';
-import { Button } from '../components/ui/button';
+import {
+  Shield, Bug, Home, Building, Zap, Clock, Star,
+  ArrowLeft, Phone, Mail, Calendar, CheckCircle,
+  ArrowRight, Target, Award
+} from 'lucide-react';
 
 export const ServicesPageSimple: React.FC = () => {
   const navigate = useNavigate();
-  const currentYear = new Date().getFullYear();
 
-  // Main services
-  const mainServices = [
+  const services = [
     {
-      icon: <Shield className="w-10 h-10" />,
-      name: "Advanced Guard",
-      description: "Comprehensive pest protection with regular inspections and preventive treatments",
+      id: 'residential-inspection',
+      title: 'Residential Inspection',
+      subtitle: 'Comprehensive Home Assessment',
+      price: 8999, // in cents
+      interval: 'one_time',
+      icon: <Home className="w-8 h-8" />,
+      description: 'Thorough property inspection to identify pest issues and prevention opportunities.',
       features: [
-        "Quarterly inspections",
-        "All pest coverage",
-        "Preventive treatments",
-        "Priority service",
-        "Extended warranty",
-        "Free re-treatments"
+        'Complete interior and exterior inspection',
+        'Detailed written report with findings',
+        'Treatment recommendations',
+        'Prevention strategy plan',
+        'Follow-up consultation included'
       ],
-      price: "$120",
-      period: "per quarter"
+      popular: false
     },
     {
-      icon: <Clock className="w-10 h-10" />,
-      name: "Same Day Service",
-      description: "Urgent pest control response for immediate issues with guaranteed results",
+      id: 'residential-treatment',
+      title: 'Residential Treatment',
+      subtitle: 'Complete Pest Elimination',
+      price: 19999, // in cents
+      interval: 'one_time',
+      icon: <Shield className="w-8 h-8" />,
+      description: 'Professional pest treatment using safe, effective methods for your home.',
       features: [
-        "Same-day response",
-        "Emergency treatment",
-        "Targeted solutions",
-        "Expert technicians",
-        "Immediate relief",
-        "Follow-up inspection"
+        'Targeted pest elimination',
+        'Eco-friendly treatment options',
+        'Interior and exterior application',
+        'Safe for family and pets',
+        '30-day service guarantee'
       ],
-      price: "$225",
-      period: "one-time"
+      popular: true
     },
     {
-      icon: <Bird className="w-10 h-10" />,
-      name: "Wildlife Control",
-      description: "Humane wildlife removal and exclusion services for all types of unwanted animals",
+      id: 'commercial-service',
+      title: 'Commercial Service',
+      subtitle: 'Business Pest Management',
+      price: 7999, // in cents
+      interval: 'month',
+      icon: <Building className="w-8 h-8" />,
+      description: 'Ongoing pest control solutions designed for commercial properties.',
       features: [
-        "Free inspection",
-        "Humane removal",
-        "Entry prevention",
-        "Damage repair",
-        "Habitat modification",
-        "Ongoing protection"
+        'Monthly scheduled service',
+        'Customized treatment plans',
+        'Compliance documentation',
+        'Emergency response available',
+        'Dedicated account manager'
       ],
-      price: null,
-      period: "estimate"
-    },
-    {
-      icon: <Bug className="w-10 h-10" />,
-      name: "Wood Eating Pest",
-      description: "Termite and wood-destroying insect treatment with lasting protection",
-      features: [
-        "Free inspection",
-        "Treatment plan",
-        "Barrier protection",
-        "Monitoring stations",
-        "Annual inspections",
-        "Damage warranty"
-      ],
-      price: null,
-      period: "estimate"
+      popular: false
     }
   ];
 
-  // Special services
-  const specialServices = [
+  const additionalServices = [
     {
-      icon: <Rat className="w-6 h-6" />,
-      name: "Rodent Control",
-      description: "Effective solutions for mice, rats, and other rodent infestations"
-    },
-    {
+      title: 'Termite Control',
+      description: 'Specialized termite inspection, treatment, and prevention services.',
       icon: <Bug className="w-6 h-6" />,
-      name: "Bed Bug Treatment",
-      description: "Specialized heat treatments and targeted solutions for bed bug elimination"
+      features: ['Wood-destroying insect inspection', 'Liquid and bait treatments', 'Damage repair consultation']
     },
     {
-      icon: <Leaf className="w-6 h-6" />,
-      name: "Mosquito Control",
-      description: "Yard treatments to reduce mosquito populations and protect your outdoor spaces"
+      title: 'Emergency Service',
+      description: '24/7 emergency pest control for urgent situations.',
+      icon: <Zap className="w-6 h-6" />,
+      features: ['Same-day response', 'After-hours availability', 'Rapid treatment solutions']
+    },
+    {
+      title: 'Preventive Maintenance',
+      description: 'Ongoing protection plans to prevent future infestations.',
+      icon: <Clock className="w-6 h-6" />,
+      features: ['Quarterly treatments', 'Seasonal adjustments', 'Unlimited service calls']
     }
   ];
 
-  // Service process steps
+  const pestTypes = [
+    'Ants', 'Cockroaches', 'Spiders', 'Termites', 'Rodents', 'Wasps',
+    'Bed Bugs', 'Fleas', 'Silverfish', 'Earwigs', 'Moths', 'Beetles'
+  ];
+
   const processSteps = [
     {
       step: 1,
-      title: "Inspection",
-      description: "We thoroughly inspect your property to identify pest issues and entry points"
+      title: 'Inspection',
+      description: 'Comprehensive property assessment to identify pest issues and entry points.'
     },
     {
       step: 2,
-      title: "Treatment Plan",
-      description: "We develop a customized treatment plan tailored to your specific situation"
+      title: 'Treatment Plan',
+      description: 'Custom treatment strategy based on pest type, property size, and your preferences.'
     },
     {
       step: 3,
-      title: "Implementation",
-      description: "Our trained technicians implement the treatment using the latest methods"
+      title: 'Treatment',
+      description: 'Professional application of safe, effective pest control solutions.'
     },
     {
       step: 4,
-      title: "Follow-up",
-      description: "We conduct follow-up visits to ensure the problem is completely resolved"
+      title: 'Follow-up',
+      description: 'Monitoring and additional treatments as needed to ensure complete elimination.'
     }
   ];
 
+  const formatCurrencyFromCents = (cents: number): string => {
+    return `$${(cents / 100).toFixed(0)}`;
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f1729] to-[#111827] text-white">
-      {/* Header/Navigation */}
-      <header className="border-b border-white/10">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="font-bold text-xl">GRINNAGE</div>
-          <nav className="hidden md:flex space-x-8">
-            {['Services', 'About', 'Contact'].map(item => (
-              <button 
-                key={item}
-                onClick={() => navigate(`/${item.toLowerCase()}`)}
-                className={`transition-colors ${item === 'Services' ? 'text-[#56e39f]' : 'text-gray-300 hover:text-[#56e39f]'}`}
-              >
-                {item}
-              </button>
-            ))}
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+      {/* Header */}
+      <header className="sticky top-0 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 z-50">
+        <div className="container mx-auto flex justify-between items-center py-4">
+          <div className="font-display font-bold text-2xl text-primary-600 dark:text-primary-400">
+            GRINNAGE
+          </div>
+          <nav className="hidden md:flex items-center space-x-8">
+            <button onClick={() => navigate('/')} className="nav-link">Home</button>
+            <span className="nav-link-active">Services</span>
+            <button onClick={() => navigate('/about')} className="nav-link">About</button>
+            <button onClick={() => navigate('/contact')} className="nav-link">Contact</button>
           </nav>
-          <Button 
-            variant="primary" 
-            size="sm"
-            onClick={() => navigate('/login')}
-          >
-            Client Login
-          </Button>
+          <div className="flex items-center gap-3">
+            <button
+              className="btn-secondary"
+              onClick={() => navigate('/admin-login')}
+            >
+              Admin Login
+            </button>
+            <button
+              className="btn-primary"
+              onClick={() => navigate('/contact')}
+            >
+              Get Quote
+            </button>
+          </div>
         </div>
       </header>
 
       <main>
-        {/* Back Button */}
-        <div className="max-w-5xl mx-auto px-4 pt-8">
-          <button 
-            onClick={() => navigate('/')}
-            className="flex items-center text-gray-300 hover:text-[#56e39f] transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
-          </button>
-        </div>
-
         {/* Hero Section */}
-        <section className="py-12">
-          <div className="max-w-5xl mx-auto px-4 text-center">
-            <div className="inline-flex items-center px-3 py-1 bg-[#56e39f]/10 rounded-full mb-4">
-              <Shield className="w-4 h-4 mr-2 text-[#56e39f]" />
-              <span className="text-sm font-medium text-[#56e39f]">Professional Solutions</span>
+        <section className="section">
+          <div className="container">
+            <div className="max-w-4xl mx-auto text-center">
+              <button
+                onClick={() => navigate('/')}
+                className="flex items-center text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-8 mx-auto"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Home
+              </button>
+
+              <div className="badge-success mb-6">
+                <Shield className="w-4 h-4 mr-2" />
+                Professional Pest Control Services
+              </div>
+
+              <h1 className="text-5xl md:text-6xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                Our
+                <span className="text-primary-500 block">Services</span>
+              </h1>
+
+              <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-3xl mx-auto">
+                Comprehensive pest control solutions for homes and businesses.
+                Safe, effective treatments that protect what matters most to you.
+              </p>
+
+              <div className="flex flex-wrap justify-center gap-4">
+                <button
+                  className="btn-primary"
+                  onClick={() => navigate('/contact')}
+                >
+                  <Calendar className="w-5 h-5" />
+                  Get Free Quote
+                </button>
+                <a href="tel:+15551234567" className="btn-outline">
+                  <Phone className="w-5 h-5" />
+                  Call (555) 123-4567
+                </a>
+              </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Our Pest Control Services
-            </h1>
-            <p className="text-gray-300 max-w-2xl mx-auto">
-              Comprehensive, effective, and eco-friendly pest control solutions tailored to your needs
-            </p>
           </div>
         </section>
 
         {/* Main Services */}
-        <section className="py-8">
-          <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-2xl font-bold mb-6">Featured Services</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {mainServices.map((service, index) => (
-                <div 
-                  key={index}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-[#56e39f]/20 group"
-                >
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-xl font-bold text-white mb-2">{service.name}</h3>
-                        <p className="text-gray-300 mb-2">{service.description}</p>
-                      </div>
-                      <div className="p-3 bg-[#56e39f]/10 rounded-lg text-[#56e39f]">
-                        {service.icon}
-                      </div>
-                    </div>
+        <section className="section bg-white dark:bg-neutral-900">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                Core Services
+              </h2>
+              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                Professional pest control solutions tailored to your specific needs.
+              </p>
+            </div>
 
-                    {service.price ? (
-                      <div className="mb-4">
-                        <span className="text-2xl font-bold text-white">{service.price}</span>
-                        <span className="text-gray-400 ml-2">{service.period}</span>
+            <div className="grid lg:grid-cols-3 gap-8">
+              {services.map((service) => (
+                <div
+                  key={service.id}
+                  className={`card relative ${service.popular ? 'border-2 border-primary-500' : ''}`}
+                >
+                  {service.popular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <div className="bg-primary-500 text-white px-4 py-1 rounded-full text-sm font-medium">
+                        Most Popular
                       </div>
-                    ) : (
-                      <div className="mb-4">
-                        <span className="text-lg font-semibold text-[#56e39f]">Free Estimate</span>
-                      </div>
-                    )}
-                    
-                    <div className="space-y-2 mb-6">
-                      {service.features.slice(0, 4).map((feature, idx) => (
-                        <div key={idx} className="flex items-start">
-                          <Check className="w-5 h-5 text-[#56e39f] mr-3 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-300">{feature}</span>
-                        </div>
-                      ))}
                     </div>
-                    
-                    <Button
-                      variant={index === 0 ? "primary" : "outline"}
-                      className={index !== 0 ? "border-[#56e39f]/30 text-[#56e39f] hover:bg-[#56e39f]/10 w-full" : "w-full"}
-                      onClick={() => navigate('/consultation')}
-                      icon={<ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />}
-                    >
-                      {service.price ? 'Schedule Service' : 'Get Free Estimate'}
-                    </Button>
+                  )}
+
+                  <div className="flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-2xl mb-6">
+                    <div className="text-primary-600 dark:text-primary-400">
+                      {service.icon}
+                    </div>
                   </div>
+
+                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-primary-600 dark:text-primary-400 font-medium mb-4">
+                    {service.subtitle}
+                  </p>
+                  <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+                    {service.description}
+                  </p>
+
+                  <div className="mb-6">
+                    <div className="flex items-baseline">
+                      <span className="text-4xl font-bold text-neutral-900 dark:text-neutral-50">
+                        {formatCurrencyFromCents(service.price)}
+                      </span>
+                      <span className="text-neutral-500 dark:text-neutral-400 ml-2">
+                        {service.interval === 'one_time' ? 'One-time' : `/${service.interval}`}
+                      </span>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-3 mb-8">
+                    {service.features.map((feature, index) => (
+                      <li key={index} className="flex items-start">
+                        <CheckCircle className="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-neutral-600 dark:text-neutral-400">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    className={`btn w-full ${service.popular ? 'btn-primary' : 'btn-outline'}`}
+                    onClick={() => navigate('/contact')}
+                  >
+                    Get Started
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
               ))}
             </div>
@@ -226,142 +268,278 @@ export const ServicesPageSimple: React.FC = () => {
         </section>
 
         {/* Additional Services */}
-        <section className="py-8">
-          <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-2xl font-bold mb-6">Specialized Services</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {specialServices.map((service, index) => (
-                <div 
-                  key={index}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 transition-all duration-300 hover:border-[#56e39f]/20"
-                >
-                  <div className="flex items-start">
-                    <div className="p-2 bg-[#56e39f]/10 rounded-lg text-[#56e39f] mr-4 mt-1">
+        <section className="section">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                Additional Services
+              </h2>
+              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                Specialized pest control solutions for unique situations and ongoing protection.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {additionalServices.map((service, index) => (
+                <div key={index} className="card">
+                  <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl mb-4">
+                    <div className="text-primary-600 dark:text-primary-400">
                       {service.icon}
                     </div>
-                    <div>
-                      <h3 className="text-lg font-bold mb-2">{service.name}</h3>
-                      <p className="text-gray-300 text-sm">{service.description}</p>
-                      <button 
-                        onClick={() => navigate('/consultation')}
-                        className="text-[#56e39f] hover:text-[#48c98a] flex items-center text-sm font-medium mt-3"
-                      >
-                        Learn more <ArrowRight className="ml-1 w-4 h-4" />
-                      </button>
-                    </div>
                   </div>
+                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+                    {service.description}
+                  </p>
+                  <ul className="space-y-2">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center text-sm text-neutral-500 dark:text-neutral-400">
+                        <CheckCircle className="w-4 h-4 text-primary-500 mr-2 flex-shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Service Process */}
-        <section className="py-12">
-          <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-2xl font-bold mb-6">Our Process</h2>
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {processSteps.map((step, index) => (
-                  <div key={index} className="text-center">
-                    <div className="w-12 h-12 rounded-full bg-[#56e39f]/20 text-[#56e39f] flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                      {step.step}
-                    </div>
-                    <h3 className="text-lg font-bold mb-2">{step.title}</h3>
-                    <p className="text-gray-300 text-sm">{step.description}</p>
+        {/* Pest Types */}
+        <section className="section bg-white dark:bg-neutral-900">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                Pests We Control
+              </h2>
+              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                We provide effective treatment for a wide range of common household and commercial pests.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {pestTypes.map((pest, index) => (
+                <div key={index} className="flex items-center space-x-3 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
+                  <Bug className="w-5 h-5 text-primary-500 flex-shrink-0" />
+                  <span className="text-neutral-900 dark:text-neutral-100 font-medium">
+                    {pest}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Process */}
+        <section className="section">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                Our Process
+              </h2>
+              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                A systematic approach to pest control that ensures effective, long-lasting results.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {processSteps.map((step, index) => (
+                <div key={index} className="text-center">
+                  <div className="flex items-center justify-center w-16 h-16 bg-primary-500 text-white rounded-full mb-6 mx-auto font-bold text-xl">
+                    {step.step}
                   </div>
-                ))}
+                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-400">
+                    {step.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Us */}
+        <section className="section bg-white dark:bg-neutral-900">
+          <div className="container">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                  Why Choose Grinnage?
+                </h2>
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl flex-shrink-0">
+                      <Award className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                        Licensed & Certified
+                      </h3>
+                      <p className="text-neutral-600 dark:text-neutral-400">
+                        All technicians are state-licensed and EPA-certified professionals.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl flex-shrink-0">
+                      <Shield className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                        Safe & Eco-Friendly
+                      </h3>
+                      <p className="text-neutral-600 dark:text-neutral-400">
+                        We use environmentally responsible treatments safe for families and pets.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl flex-shrink-0">
+                      <Target className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                        Guaranteed Results
+                      </h3>
+                      <p className="text-neutral-600 dark:text-neutral-400">
+                        100% satisfaction guarantee with follow-up service included.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-950 dark:to-accent-950 rounded-2xl p-8">
+                <div className="text-center">
+                  <Star className="w-16 h-16 text-primary-500 mx-auto mb-4" />
+                  <h3 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
+                    20+ Years Experience
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+                    Trusted by over 5,000 Bay Area customers for reliable pest control solutions.
+                  </p>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-center text-sm text-neutral-500 dark:text-neutral-400">
+                      <CheckCircle className="w-4 h-4 text-primary-500 mr-2" />
+                      98% Customer Satisfaction Rate
+                    </div>
+                    <div className="flex items-center justify-center text-sm text-neutral-500 dark:text-neutral-400">
+                      <CheckCircle className="w-4 h-4 text-primary-500 mr-2" />
+                      24/7 Emergency Service Available
+                    </div>
+                    <div className="flex items-center justify-center text-sm text-neutral-500 dark:text-neutral-400">
+                      <CheckCircle className="w-4 h-4 text-primary-500 mr-2" />
+                      Licensed in California, Nevada, Oregon
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
-        
-        {/* FAQ Section (simplified) */}
-        <section className="py-8">
-          <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-lg font-bold mb-2">How often should I schedule pest control service?</h3>
-                  <p className="text-gray-300">For most homes, quarterly service provides the best protection. However, we can customize a schedule based on your specific needs and pest pressure in your area.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold mb-2">Are your treatments safe for children and pets?</h3>
-                  <p className="text-gray-300">Yes, we use eco-friendly products that are safe for families and pets when used as directed. Our technicians are trained to apply treatments in a way that minimizes exposure to non-target organisms.</p>
-                </div>
-              </div>
-              <div className="mt-6 text-center">
-                <Button
-                  variant="outline"
-                  className="border-white/20 hover:bg-white/5"
-                  onClick={() => navigate('/faq')}
-                >
-                  View All FAQs
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-        
+
         {/* CTA Section */}
-        <section className="py-12">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="bg-gradient-to-r from-[#56e39f]/20 to-blue-500/20 backdrop-blur-sm border border-[#56e39f]/30 rounded-xl p-8">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Ready to get started?</h3>
-                  <p className="text-gray-300">Contact us today for a free estimate or consultation</p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button 
-                    variant="primary" 
-                    size="lg"
-                    onClick={() => navigate('/consultation')}
-                    className="whitespace-nowrap"
-                  >
-                    Get Free Estimate
-                  </Button>
-                  <a 
-                    href="tel:+13025615654"
-                    className="inline-flex items-center justify-center px-4 py-2 border border-white/20 rounded-lg text-white hover:bg-white/5 transition-colors"
-                  >
-                    <Phone className="w-5 h-5 mr-2" />
-                    (302) 561-5654
-                  </a>
-                </div>
+        <section className="section bg-gradient-to-r from-primary-500 to-primary-600 text-white">
+          <div className="container">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-4xl font-display font-bold mb-6">
+                Ready to Get Started?
+              </h2>
+              <p className="text-xl text-primary-100 mb-8">
+                Contact us today for a free inspection and customized treatment plan.
+                Professional pest control that protects what matters most.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <button
+                  onClick={() => navigate('/contact')}
+                  className="btn bg-white text-primary-600 hover:bg-neutral-100"
+                >
+                  <Calendar className="w-5 h-5" />
+                  Schedule Free Inspection
+                </button>
+                <a
+                  href="tel:+15551234567"
+                  className="btn border-2 border-white text-white hover:bg-white hover:text-primary-600"
+                >
+                  <Phone className="w-5 h-5" />
+                  Call (555) 123-4567
+                </a>
               </div>
+              <p className="text-primary-200 text-sm mt-4">
+                Same-day service available • Licensed & insured professionals
+              </p>
             </div>
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 py-10 mt-10">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <div className="font-bold text-xl mb-2">GRINNAGE</div>
-              <p className="text-gray-400 text-sm">
-                Professional pest control services since 2007.
+      <footer className="bg-neutral-900 dark:bg-neutral-950 text-neutral-300">
+        <div className="container py-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div className="lg:col-span-2">
+              <div className="font-display font-bold text-2xl text-primary-400 mb-4">
+                GRINNAGE
+              </div>
+              <p className="text-neutral-400 mb-6 max-w-md">
+                Professional pest control services since 2003.
+                Protecting Bay Area homes and businesses with safe, effective solutions.
               </p>
+              <div className="space-y-3">
+                <div className="flex items-center">
+                  <Phone className="w-4 h-4 text-primary-500 mr-3" />
+                  <a href="tel:+15551234567" className="hover:text-primary-400 transition-colors">
+                    (555) 123-4567
+                  </a>
+                </div>
+                <div className="flex items-center">
+                  <Mail className="w-4 h-4 text-primary-500 mr-3" />
+                  <a href="mailto:info@grinnage.com" className="hover:text-primary-400 transition-colors">
+                    info@grinnage.com
+                  </a>
+                </div>
+              </div>
             </div>
-            <div className="flex space-x-6">
-              <a href="/privacy" className="text-gray-500 hover:text-[#56e39f] text-sm transition-colors">
-                Privacy
-              </a>
-              <a href="/terms" className="text-gray-500 hover:text-[#56e39f] text-sm transition-colors">
-                Terms
-              </a>
-              <a href="/sitemap" className="text-gray-500 hover:text-[#56e39f] text-sm transition-colors">
-                Sitemap
-              </a>
+
+            <div>
+              <h4 className="font-semibold text-white mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li><button onClick={() => navigate('/')} className="hover:text-primary-400 transition-colors">Home</button></li>
+                <li><span className="text-primary-400">Services</span></li>
+                <li><button onClick={() => navigate('/about')} className="hover:text-primary-400 transition-colors">About</button></li>
+                <li><button onClick={() => navigate('/contact')} className="hover:text-primary-400 transition-colors">Contact</button></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-white mb-4">Services</h4>
+              <ul className="space-y-2 text-sm">
+                <li><span className="hover:text-primary-400 transition-colors">Residential Inspection</span></li>
+                <li><span className="hover:text-primary-400 transition-colors">Residential Treatment</span></li>
+                <li><span className="hover:text-primary-400 transition-colors">Commercial Service</span></li>
+                <li><span className="hover:text-primary-400 transition-colors">Emergency Service</span></li>
+              </ul>
             </div>
           </div>
-          <div className="border-t border-white/10 mt-6 pt-6 text-center">
-            <p className="text-gray-500 text-sm">
-              © {currentYear} GRINNAGE Pest Control. All rights reserved.
-            </p>
+
+          <div className="border-t border-neutral-800 pt-8 flex flex-col sm:flex-row justify-between items-center">
+            <div className="text-sm text-neutral-500 mb-4 sm:mb-0">
+              © 2025 Grinnage Exterminating. All rights reserved.
+            </div>
+            <div className="flex space-x-6 text-sm">
+              <a href="/privacy" className="text-neutral-500 hover:text-primary-400 transition-colors">
+                Privacy Policy
+              </a>
+              <a href="/terms" className="text-neutral-500 hover:text-primary-400 transition-colors">
+                Terms of Service
+              </a>
+            </div>
           </div>
         </div>
       </footer>

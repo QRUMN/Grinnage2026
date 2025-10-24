@@ -1,4 +1,4 @@
--- Grinnage Pest Control - Simplified Database Schema
+-- Grinnage Exterminating - Simplified Database Schema
 -- This schema should be run in your Supabase SQL editor
 
 -- Enable RLS (Row Level Security)
@@ -188,7 +188,7 @@ INSERT INTO content (section, key, value, type) VALUES
   ('hero', 'title', 'Professional Pest Control Services', 'text'),
   ('hero', 'subtitle', 'Reliable, safe, and effective pest management for your home or business', 'text'),
   ('hero', 'cta_text', 'Get Free Inspection', 'text'),
-  ('about', 'title', 'About Grinnage Pest Control', 'text'),
+  ('about', 'title', 'About Grinnage Exterminating', 'text'),
   ('about', 'description', 'With over 20 years of experience, we provide professional pest control services you can trust.', 'text'),
   ('contact', 'phone', '(555) 123-4567', 'text'),
   ('contact', 'email', 'info@grinnage.com', 'text'),

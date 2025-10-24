@@ -297,7 +297,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           className="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-neutral-300 rounded"
         />
         <label className="text-sm text-neutral-600 dark:text-neutral-400">
-          I agree to be contacted by Grinnage Pest Control regarding my inquiry.
+          I agree to be contacted by Grinnage Exterminating regarding my inquiry.
           Message and data rates may apply. You can opt out at any time. *
         </label>
       </div>
