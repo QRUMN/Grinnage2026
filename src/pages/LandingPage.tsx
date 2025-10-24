@@ -91,7 +91,10 @@ export const LandingPage: React.FC = () => {
             >
               Client Login
             </button>
-            <button className="btn-primary">
+            <button
+              className="btn-primary"
+              onClick={() => navigate('/contact')}
+            >
               Get Quote
             </button>
           </div>
@@ -117,15 +120,21 @@ export const LandingPage: React.FC = () => {
                   Licensed professionals using eco-friendly treatments that work.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <button className="btn-primary">
+                  <button
+                    className="btn-primary"
+                    onClick={() => navigate('/contact')}
+                  >
                     <Calendar className="w-5 h-5" />
                     Schedule Inspection
                     <ArrowRight className="w-5 h-5" />
                   </button>
-                  <button className="btn-outline">
+                  <a
+                    href="tel:+15551234567"
+                    className="btn-outline"
+                  >
                     <Phone className="w-5 h-5" />
                     Call (555) 123-4567
-                  </button>
+                  </a>
                 </div>
 
                 {/* Trust Indicators */}
@@ -214,7 +223,10 @@ export const LandingPage: React.FC = () => {
                         {service.interval === 'one_time' ? 'One-time service' : `Per ${service.interval}`}
                       </div>
                     </div>
-                    <button className="btn-primary">
+                    <button
+                      className="btn-primary"
+                      onClick={() => navigate('/contact')}
+                    >
                       Book Now
                     </button>
                   </div>
@@ -223,7 +235,10 @@ export const LandingPage: React.FC = () => {
             </div>
 
             <div className="text-center mt-12">
-              <button className="btn-outline">
+              <button
+                className="btn-outline"
+                onClick={() => navigate('/contact')}
+              >
                 View All Services & Pricing
                 <ArrowRight className="w-5 h-5" />
               </button>
@@ -313,7 +328,10 @@ export const LandingPage: React.FC = () => {
                 No obligation, just expert advice from certified professionals.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <button className="btn bg-white text-primary-600 hover:bg-neutral-100">
+                <button
+                  className="btn bg-white text-primary-600 hover:bg-neutral-100"
+                  onClick={() => navigate('/contact')}
+                >
                   <Calendar className="w-5 h-5" />
                   Schedule Free Inspection
                 </button>
