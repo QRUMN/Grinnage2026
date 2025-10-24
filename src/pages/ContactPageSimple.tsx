@@ -1,140 +1,203 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Phone, Mail, Clock, MapPin, ArrowLeft, ArrowRight } from 'lucide-react';
-import { Button } from '../components/ui/button';
+import {
+  Phone, Mail, Clock, MapPin, ArrowLeft, Shield, Star,
+  MessageCircle, Calendar, Award, Users
+} from 'lucide-react';
+import { ContactForm } from '../components/forms/ContactForm';
+import { ContactFormData } from '../lib/validation/contact';
 
 export const ContactPageSimple: React.FC = () => {
   const navigate = useNavigate();
-  const currentYear = new Date().getFullYear();
-  const [formState, setFormState] = React.useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: ''
-  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value
-    });
-  };
+  // Handle form submission and create CRM lead
+  const handleContactSubmit = async (data: ContactFormData) => {
+    try {
+      // This would integrate with Supabase to create a lead
+      const leadData = {
+        name: data.name,
+        email: data.email,
+        phone: data.phone || null,
+        message: data.message,
+        source: 'contact_form',
+        status: 'new',
+        service_type: data.subject,
+        property_type: data.propertyType,
+        urgency: data.urgency,
+        budget: data.budget || null,
+        address: data.address || null,
+        preferred_contact: data.preferredContact,
+        preferred_time: data.preferredTime || null,
+        created_at: new Date().toISOString()
+      };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would handle the form submission, for example sending the data to your backend
-    console.log('Form submitted:', formState);
-    alert('Thank you for your message! We will get back to you soon.');
-    // Reset form
-    setFormState({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: ''
-    });
+      console.log('Creating lead:', leadData);
+
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // TODO: Integrate with Supabase
+      // await supabase.from('leads').insert([leadData]);
+
+      // TODO: Send email notification to admin
+
+    } catch (error) {
+      console.error('Error creating lead:', error);
+      throw error;
+    }
   };
 
   const contactInfo = [
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Call Us",
-      info: "(302) 561-5654",
-      subInfo: "24/7 Emergency Service"
+      content: "(555) 123-4567",
+      description: "Available 24/7 for emergencies",
+      action: "tel:+15551234567"
     },
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email Us",
-      info: "contact@grinnage.com",
-      subInfo: "We'll respond within 24h"
+      content: "info@grinnage.com",
+      description: "We respond within 24 hours",
+      action: "mailto:info@grinnage.com"
+    },
+    {
+      icon: <MapPin className="w-6 h-6" />,
+      title: "Service Area",
+      content: "San Francisco Bay Area",
+      description: "Licensed in CA, NV, OR",
+      action: null
     },
     {
       icon: <Clock className="w-6 h-6" />,
       title: "Business Hours",
-      info: "Mon-Fri: 8am - 6pm",
-      subInfo: "Sat: 9am - 2pm"
+      content: "Mon-Fri 8AM-6PM",
+      description: "Saturday 9AM-4PM",
+      action: null
+    }
+  ];
+
+  const whyContactUs = [
+    {
+      icon: <Star className="w-5 h-5" />,
+      title: "Free Consultation",
+      description: "No obligation assessment and quote"
     },
     {
-      icon: <MapPin className="w-6 h-6" />,
-      title: "Visit Us",
-      info: "123 Pest Control St",
-      subInfo: "City, State 12345"
+      icon: <Shield className="w-5 h-5" />,
+      title: "Licensed Professionals",
+      description: "Certified and insured technicians"
+    },
+    {
+      icon: <Award className="w-5 h-5" />,
+      title: "Satisfaction Guarantee",
+      description: "100% guarantee on all services"
+    },
+    {
+      icon: <Users className="w-5 h-5" />,
+      title: "Local Experts",
+      description: "20+ years serving the Bay Area"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f1729] to-[#111827] text-white">
-      {/* Header/Navigation */}
-      <header className="border-b border-white/10">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="font-bold text-xl">GRINNAGE</div>
-          <nav className="hidden md:flex space-x-8">
-            {['Services', 'About', 'Contact'].map(item => (
-              <button 
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+      {/* Modern Header */}
+      <header className="sticky top-0 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 z-50">
+        <div className="container mx-auto flex justify-between items-center py-4">
+          <div className="font-display font-bold text-2xl text-primary-600 dark:text-primary-400">
+            GRINNAGE
+          </div>
+          <nav className="hidden md:flex items-center space-x-8">
+            {['Services', 'About'].map(item => (
+              <button
                 key={item}
+                className="nav-link"
                 onClick={() => navigate(`/${item.toLowerCase()}`)}
-                className={`transition-colors ${item === 'Contact' ? 'text-[#56e39f]' : 'text-gray-300 hover:text-[#56e39f]'}`}
               >
                 {item}
               </button>
             ))}
+            <span className="nav-link-active">Contact</span>
           </nav>
-          <Button 
-            variant="primary" 
-            size="sm"
-            onClick={() => navigate('/login')}
-          >
-            Client Login
-          </Button>
+          <div className="flex items-center gap-3">
+            <button
+              className="btn-secondary"
+              onClick={() => navigate('/login')}
+            >
+              Client Login
+            </button>
+            <button
+              className="btn-primary"
+              onClick={() => navigate('/')}
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back Home
+            </button>
+          </div>
         </div>
       </header>
 
       <main>
-        {/* Back Button */}
-        <div className="max-w-5xl mx-auto px-4 pt-8">
-          <button 
-            onClick={() => navigate('/')}
-            className="flex items-center text-gray-300 hover:text-[#56e39f] transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
-          </button>
-        </div>
-
-        {/* Contact Hero Section */}
-        <section className="py-12">
-          <div className="max-w-5xl mx-auto px-4 text-center">
-            <div className="inline-flex items-center px-3 py-1 bg-[#56e39f]/10 rounded-full mb-4">
-              <Mail className="w-4 h-4 mr-2 text-[#56e39f]" />
-              <span className="text-sm font-medium text-[#56e39f]">Get In Touch</span>
+        {/* Hero Section */}
+        <section className="section">
+          <div className="container">
+            <div className="text-center max-w-4xl mx-auto">
+              <div className="badge-success mb-6">
+                <MessageCircle className="w-4 h-4 mr-2" />
+                Get In Touch Today
+              </div>
+              <h1 className="text-5xl md:text-6xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                Contact Our
+                <span className="text-primary-500 block">Expert Team</span>
+              </h1>
+              <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-3xl mx-auto">
+                Ready to solve your pest problem? Our licensed professionals are standing by
+                to provide you with a free consultation and customized treatment plan.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a href="tel:+15551234567" className="btn-primary">
+                  <Phone className="w-5 h-5" />
+                  Call (555) 123-4567
+                </a>
+                <a href="#contact-form" className="btn-outline">
+                  <MessageCircle className="w-5 h-5" />
+                  Send Message
+                </a>
+              </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Contact Us
-            </h1>
-            <p className="text-gray-300 max-w-2xl mx-auto">
-              We're here to help with all your pest control needs. Contact us today for a free consultation.
-            </p>
           </div>
         </section>
 
-        {/* Contact Cards */}
-        <section className="py-8">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {contactInfo.map((item, index) => (
-                <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 transition-all duration-300 hover:border-[#56e39f]/20">
-                  <div className="p-3 bg-[#56e39f]/10 rounded-lg text-[#56e39f] mb-4 inline-block">
-                    {item.icon}
+        {/* Contact Methods */}
+        <section className="section bg-white dark:bg-neutral-900">
+          <div className="container">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {contactInfo.map((info, index) => (
+                <div key={index} className="text-center group">
+                  <div className="flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-2xl mb-6 mx-auto group-hover:bg-primary-200 dark:group-hover:bg-primary-800 transition-colors">
+                    <div className="text-primary-600 dark:text-primary-400">
+                      {info.icon}
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">
-                    {item.title}
+                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                    {info.title}
                   </h3>
-                  <p className="text-white">
-                    {item.info}
-                  </p>
-                  <p className="text-gray-400 text-sm">
-                    {item.subInfo}
+                  {info.action ? (
+                    <a
+                      href={info.action}
+                      className="text-lg font-medium text-primary-600 dark:text-primary-400 hover:underline block mb-1"
+                    >
+                      {info.content}
+                    </a>
+                  ) : (
+                    <p className="text-lg font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                      {info.content}
+                    </p>
+                  )}
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                    {info.description}
                   </p>
                 </div>
               ))}
@@ -142,168 +205,150 @@ export const ContactPageSimple: React.FC = () => {
           </div>
         </section>
 
-        {/* Contact Form & Map Section */}
-        <section className="py-8">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Contact Form */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-                <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
-                <form onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
-                        Full Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formState.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#56e39f]/50"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formState.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#56e39f]/50"
-                      />
+        {/* Why Contact Us */}
+        <section className="section">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                Why Choose Grinnage?
+              </h2>
+              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                When you contact us, you're getting more than just pest control—you're getting peace of mind.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {whyContactUs.map((benefit, index) => (
+                <div key={index} className="text-center">
+                  <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl mb-4 mx-auto">
+                    <div className="text-primary-600 dark:text-primary-400">
+                      {benefit.icon}
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formState.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#56e39f]/50"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="service" className="block text-sm font-medium text-gray-300 mb-1">
-                        Service Interest
-                      </label>
-                      <select
-                        id="service"
-                        name="service"
-                        value={formState.service}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#56e39f]/50"
-                      >
-                        <option value="" className="bg-[#111827]">Select a service</option>
-                        <option value="residential" className="bg-[#111827]">Residential Pest Control</option>
-                        <option value="commercial" className="bg-[#111827]">Commercial Pest Control</option>
-                        <option value="termite" className="bg-[#111827]">Termite Treatment</option>
-                        <option value="wildlife" className="bg-[#111827]">Wildlife Removal</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
-                      Your Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      value={formState.message}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#56e39f]/50"
-                    ></textarea>
-                  </div>
-                  <Button 
-                    variant="primary"
-                    type="submit"
-                    icon={<ArrowRight className="ml-2 w-5 h-5" />}
-                  >
-                    Send Message
-                  </Button>
-                </form>
+                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-400">
+                    {benefit.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Form */}
+        <section id="contact-form" className="section bg-white dark:bg-neutral-900">
+          <div className="container">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                  Get Your Free Quote
+                </h2>
+                <p className="text-xl text-neutral-600 dark:text-neutral-400">
+                  Tell us about your pest problem and we'll provide a customized solution.
+                </p>
               </div>
 
-              {/* Google Map */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden h-[400px]">
-                {/* For a real implementation, you would integrate Google Maps here */}
-                <div className="w-full h-full bg-[#1a2234] flex items-center justify-center">
-                  <div className="text-center px-6">
-                    <MapPin className="w-12 h-12 text-[#56e39f] mx-auto mb-4" />
-                    <h3 className="text-xl font-bold mb-2">Our Location</h3>
-                    <p className="text-gray-300">123 Pest Control Street</p>
-                    <p className="text-gray-300">City, State 12345</p>
-                    <p className="mt-4 text-[#56e39f]">Map integration would be here</p>
-                  </div>
-                </div>
+              <div className="card">
+                <ContactForm onSubmit={handleContactSubmit} />
               </div>
             </div>
           </div>
         </section>
-        
-        {/* CTA Section */}
-        <section className="py-12">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="bg-gradient-to-r from-[#56e39f]/20 to-blue-500/20 backdrop-blur-sm border border-[#56e39f]/30 rounded-xl p-8">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Need emergency assistance?</h3>
-                  <p className="text-gray-300">Our technicians are available 24/7 for emergency pest control services</p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <a 
-                    href="tel:+13025615654"
-                    className="inline-flex items-center justify-center px-6 py-3 bg-[#56e39f] text-white rounded-lg hover:bg-[#48c98a] transition-colors"
-                  >
-                    <Phone className="w-5 h-5 mr-2" />
-                    Call Now
-                  </a>
-                </div>
+
+        {/* Emergency CTA */}
+        <section className="section bg-gradient-to-r from-primary-500 to-primary-600 text-white">
+          <div className="container">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-4xl font-display font-bold mb-6">
+                Need Emergency Service?
+              </h2>
+              <p className="text-xl text-primary-100 mb-8">
+                Don't wait! Our emergency response team is available 24/7 for urgent pest problems.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href="tel:+15551234567"
+                  className="btn bg-white text-primary-600 hover:bg-neutral-100"
+                >
+                  <Phone className="w-5 h-5" />
+                  Emergency Hotline
+                </a>
+                <button className="btn border-2 border-white text-white hover:bg-white hover:text-primary-600">
+                  <Calendar className="w-5 h-5" />
+                  Schedule Same-Day Service
+                </button>
               </div>
+              <p className="text-primary-200 text-sm mt-4">
+                Same-day service available • Licensed & insured professionals
+              </p>
             </div>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-10 mt-10">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <div className="font-bold text-xl mb-2">GRINNAGE</div>
-              <p className="text-gray-400 text-sm">
-                Professional pest control services since 2007.
+      {/* Modern Footer */}
+      <footer className="bg-neutral-900 dark:bg-neutral-950 text-neutral-300">
+        <div className="container py-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div className="lg:col-span-2">
+              <div className="font-display font-bold text-2xl text-primary-400 mb-4">
+                GRINNAGE
+              </div>
+              <p className="text-neutral-400 mb-6 max-w-md">
+                Professional pest control services since 2003.
+                Protecting Bay Area homes and businesses with safe, effective solutions.
               </p>
+              <div className="space-y-3">
+                <div className="flex items-center">
+                  <Phone className="w-4 h-4 text-primary-500 mr-3" />
+                  <a href="tel:+15551234567" className="hover:text-primary-400 transition-colors">
+                    (555) 123-4567
+                  </a>
+                </div>
+                <div className="flex items-center">
+                  <Mail className="w-4 h-4 text-primary-500 mr-3" />
+                  <a href="mailto:info@grinnage.com" className="hover:text-primary-400 transition-colors">
+                    info@grinnage.com
+                  </a>
+                </div>
+              </div>
             </div>
-            <div className="flex space-x-6">
-              <a href="/privacy" className="text-gray-500 hover:text-[#56e39f] text-sm transition-colors">
-                Privacy
-              </a>
-              <a href="/terms" className="text-gray-500 hover:text-[#56e39f] text-sm transition-colors">
-                Terms
-              </a>
-              <a href="/sitemap" className="text-gray-500 hover:text-[#56e39f] text-sm transition-colors">
-                Sitemap
-              </a>
+
+            <div>
+              <h4 className="font-semibold text-white mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li><button onClick={() => navigate('/')} className="hover:text-primary-400 transition-colors">Home</button></li>
+                <li><button onClick={() => navigate('/services')} className="hover:text-primary-400 transition-colors">Services</button></li>
+                <li><button onClick={() => navigate('/about')} className="hover:text-primary-400 transition-colors">About</button></li>
+                <li><span className="text-primary-400">Contact</span></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-white mb-4">Services</h4>
+              <ul className="space-y-2 text-sm">
+                <li><span className="hover:text-primary-400 transition-colors">Pest Inspection</span></li>
+                <li><span className="hover:text-primary-400 transition-colors">Pest Treatment</span></li>
+                <li><span className="hover:text-primary-400 transition-colors">Emergency Service</span></li>
+                <li><span className="hover:text-primary-400 transition-colors">Maintenance Plans</span></li>
+              </ul>
             </div>
           </div>
-          <div className="border-t border-white/10 mt-6 pt-6 text-center">
-            <p className="text-gray-500 text-sm">
-              © {currentYear} GRINNAGE Pest Control. All rights reserved.
-            </p>
+
+          <div className="border-t border-neutral-800 pt-8 flex flex-col sm:flex-row justify-between items-center">
+            <div className="text-sm text-neutral-500 mb-4 sm:mb-0">
+              © 2025 Grinnage Pest Control. All rights reserved.
+            </div>
+            <div className="flex space-x-6 text-sm">
+              <a href="/privacy" className="text-neutral-500 hover:text-primary-400 transition-colors">
+                Privacy Policy
+              </a>
+              <a href="/terms" className="text-neutral-500 hover:text-primary-400 transition-colors">
+                Terms of Service
+              </a>
+            </div>
           </div>
         </div>
       </footer>
