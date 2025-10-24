@@ -72,28 +72,28 @@ export const AboutPageSimple: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+    <div className="min-h-screen bg-gradient-to-b from-[#0f1729] to-[#111827]">
       {/* Header */}
-      <header className="sticky top-0 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 z-50">
+      <header className="sticky top-0 bg-[#0f1729]/80 backdrop-blur-md border-b border-white/10 z-50">
         <div className="container mx-auto flex justify-between items-center py-4">
-          <div className="font-display font-bold text-2xl text-primary-600 dark:text-primary-400">
+          <div className="font-display font-bold text-2xl text-[#56e39f]">
             GRINNAGE
           </div>
           <nav className="hidden md:flex items-center space-x-8">
-            <button onClick={() => navigate('/')} className="nav-link">Home</button>
-            <button onClick={() => navigate('/services')} className="nav-link">Services</button>
-            <span className="nav-link-active">About</span>
-            <button onClick={() => navigate('/contact')} className="nav-link">Contact</button>
+            <button onClick={() => navigate('/')} className="text-gray-300 hover:text-[#56e39f] transition-colors">Home</button>
+            <button onClick={() => navigate('/services')} className="text-gray-300 hover:text-[#56e39f] transition-colors">Services</button>
+            <span className="text-[#56e39f] font-medium">About</span>
+            <button onClick={() => navigate('/contact')} className="text-gray-300 hover:text-[#56e39f] transition-colors">Contact</button>
           </nav>
           <div className="flex items-center gap-3">
             <button
-              className="btn-secondary"
+              className="px-4 py-2 text-gray-300 hover:text-white border border-white/20 rounded-lg hover:bg-white/5 transition-colors"
               onClick={() => navigate('/admin-login')}
             >
               Admin Login
             </button>
             <button
-              className="btn-primary"
+              className="px-4 py-2 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
               onClick={() => navigate('/contact')}
             >
               Get Quote

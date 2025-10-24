@@ -117,28 +117,28 @@ export const ServicesPageSimple: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+    <div className="min-h-screen bg-gradient-to-b from-[#0f1729] to-[#111827]">
       {/* Header */}
-      <header className="sticky top-0 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 z-50">
+      <header className="sticky top-0 bg-[#0f1729]/80 backdrop-blur-md border-b border-white/10 z-50">
         <div className="container mx-auto flex justify-between items-center py-4">
-          <div className="font-display font-bold text-2xl text-primary-600 dark:text-primary-400">
+          <div className="font-display font-bold text-2xl text-[#56e39f]">
             GRINNAGE
           </div>
           <nav className="hidden md:flex items-center space-x-8">
-            <button onClick={() => navigate('/')} className="nav-link">Home</button>
-            <span className="nav-link-active">Services</span>
-            <button onClick={() => navigate('/about')} className="nav-link">About</button>
-            <button onClick={() => navigate('/contact')} className="nav-link">Contact</button>
+            <button onClick={() => navigate('/')} className="text-gray-300 hover:text-[#56e39f] transition-colors">Home</button>
+            <span className="text-[#56e39f] font-medium">Services</span>
+            <button onClick={() => navigate('/about')} className="text-gray-300 hover:text-[#56e39f] transition-colors">About</button>
+            <button onClick={() => navigate('/contact')} className="text-gray-300 hover:text-[#56e39f] transition-colors">Contact</button>
           </nav>
           <div className="flex items-center gap-3">
             <button
-              className="btn-secondary"
+              className="px-4 py-2 text-gray-300 hover:text-white border border-white/20 rounded-lg hover:bg-white/5 transition-colors"
               onClick={() => navigate('/admin-login')}
             >
               Admin Login
             </button>
             <button
-              className="btn-primary"
+              className="px-4 py-2 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
               onClick={() => navigate('/contact')}
             >
               Get Quote
@@ -149,42 +149,42 @@ export const ServicesPageSimple: React.FC = () => {
 
       <main>
         {/* Hero Section */}
-        <section className="section">
-          <div className="container">
+        <section className="py-16">
+          <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <button
                 onClick={() => navigate('/')}
-                className="flex items-center text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-8 mx-auto"
+                className="flex items-center text-gray-300 hover:text-[#56e39f] transition-colors mb-8 mx-auto"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Home
               </button>
 
-              <div className="badge-success mb-6">
-                <Shield className="w-4 h-4 mr-2" />
-                Professional Pest Control Services
+              <div className="inline-flex items-center px-3 py-1 bg-[#56e39f]/10 border border-[#56e39f]/30 rounded-full mb-6">
+                <Shield className="w-4 h-4 mr-2 text-[#56e39f]" />
+                <span className="text-sm font-medium text-[#56e39f]">Professional Pest Control Services</span>
               </div>
 
-              <h1 className="text-5xl md:text-6xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+              <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-6">
                 Our
-                <span className="text-primary-500 block">Services</span>
+                <span className="text-[#56e39f] block">Services</span>
               </h1>
 
-              <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
                 Comprehensive pest control solutions for homes and businesses.
                 Safe, effective treatments that protect what matters most to you.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">
                 <button
-                  className="btn-primary"
+                  className="inline-flex items-center px-6 py-3 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
                   onClick={() => navigate('/contact')}
                 >
-                  <Calendar className="w-5 h-5" />
+                  <Calendar className="w-5 h-5 mr-2" />
                   Get Free Quote
                 </button>
-                <a href="tel:+15551234567" className="btn-outline">
-                  <Phone className="w-5 h-5" />
+                <a href="tel:+15551234567" className="inline-flex items-center px-6 py-3 border-2 border-white/20 text-white rounded-lg hover:bg-white/5 transition-colors">
+                  <Phone className="w-5 h-5 mr-2" />
                   Call (555) 123-4567
                 </a>
               </div>
@@ -193,13 +193,13 @@ export const ServicesPageSimple: React.FC = () => {
         </section>
 
         {/* Main Services */}
-        <section className="section bg-white dark:bg-neutral-900">
-          <div className="container">
+        <section className="py-16 bg-white/5">
+          <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+              <h2 className="text-4xl font-display font-bold text-white mb-6">
                 Core Services
               </h2>
-              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                 Professional pest control solutions tailored to your specific needs.
               </p>
             </div>
@@ -208,38 +208,38 @@ export const ServicesPageSimple: React.FC = () => {
               {services.map((service) => (
                 <div
                   key={service.id}
-                  className={`card relative ${service.popular ? 'border-2 border-primary-500' : ''}`}
+                  className={`bg-white/5 backdrop-blur-sm border rounded-2xl p-8 relative ${service.popular ? 'border-[#56e39f]' : 'border-white/10'}`}
                 >
                   {service.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                      <div className="bg-primary-500 text-white px-4 py-1 rounded-full text-sm font-medium">
+                      <div className="bg-[#56e39f] text-[#0f1729] px-4 py-1 rounded-full text-sm font-medium">
                         Most Popular
                       </div>
                     </div>
                   )}
 
-                  <div className="flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-2xl mb-6">
-                    <div className="text-primary-600 dark:text-primary-400">
+                  <div className="flex items-center justify-center w-16 h-16 bg-[#56e39f]/10 rounded-2xl mb-6">
+                    <div className="text-[#56e39f]">
                       {service.icon}
                     </div>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 mb-2">
+                  <h3 className="text-2xl font-bold text-white mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-primary-600 dark:text-primary-400 font-medium mb-4">
+                  <p className="text-[#56e39f] font-medium mb-4">
                     {service.subtitle}
                   </p>
-                  <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+                  <p className="text-gray-300 mb-6">
                     {service.description}
                   </p>
 
                   <div className="mb-6">
                     <div className="flex items-baseline">
-                      <span className="text-4xl font-bold text-neutral-900 dark:text-neutral-50">
+                      <span className="text-4xl font-bold text-white">
                         {formatCurrencyFromCents(service.price)}
                       </span>
-                      <span className="text-neutral-500 dark:text-neutral-400 ml-2">
+                      <span className="text-gray-400 ml-2">
                         {service.interval === 'one_time' ? 'One-time' : `/${service.interval}`}
                       </span>
                     </div>
@@ -248,18 +248,22 @@ export const ServicesPageSimple: React.FC = () => {
                   <ul className="space-y-3 mb-8">
                     {service.features.map((feature, index) => (
                       <li key={index} className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" />
-                        <span className="text-neutral-600 dark:text-neutral-400">{feature}</span>
+                        <CheckCircle className="w-5 h-5 text-[#56e39f] mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
                       </li>
                     ))}
                   </ul>
 
                   <button
-                    className={`btn w-full ${service.popular ? 'btn-primary' : 'btn-outline'}`}
+                    className={`w-full inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-colors ${
+                      service.popular 
+                        ? 'bg-[#56e39f] text-[#0f1729] hover:bg-[#48c98a]' 
+                        : 'border border-[#56e39f]/30 text-[#56e39f] hover:bg-[#56e39f]/10'
+                    }`}
                     onClick={() => navigate('/contact')}
                   >
                     Get Started
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4 ml-2" />
                   </button>
                 </div>
               ))}
@@ -268,35 +272,35 @@ export const ServicesPageSimple: React.FC = () => {
         </section>
 
         {/* Additional Services */}
-        <section className="section">
-          <div className="container">
+        <section className="py-16">
+          <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+              <h2 className="text-4xl font-display font-bold text-white mb-6">
                 Additional Services
               </h2>
-              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                 Specialized pest control solutions for unique situations and ongoing protection.
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
               {additionalServices.map((service, index) => (
-                <div key={index} className="card">
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl mb-4">
-                    <div className="text-primary-600 dark:text-primary-400">
+                <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+                  <div className="flex items-center justify-center w-12 h-12 bg-[#56e39f]/10 rounded-xl mb-4">
+                    <div className="text-[#56e39f]">
                       {service.icon}
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-3">
+                  <h3 className="text-xl font-semibold text-white mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+                  <p className="text-gray-300 mb-4">
                     {service.description}
                   </p>
                   <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-neutral-500 dark:text-neutral-400">
-                        <CheckCircle className="w-4 h-4 text-primary-500 mr-2 flex-shrink-0" />
+                      <li key={idx} className="flex items-center text-sm text-gray-400">
+                        <CheckCircle className="w-4 h-4 text-[#56e39f] mr-2 flex-shrink-0" />
                         {feature}
                       </li>
                     ))}
@@ -308,22 +312,22 @@ export const ServicesPageSimple: React.FC = () => {
         </section>
 
         {/* Pest Types */}
-        <section className="section bg-white dark:bg-neutral-900">
-          <div className="container">
+        <section className="py-16 bg-white/5">
+          <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+              <h2 className="text-4xl font-display font-bold text-white mb-6">
                 Pests We Control
               </h2>
-              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                 We provide effective treatment for a wide range of common household and commercial pests.
               </p>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {pestTypes.map((pest, index) => (
-                <div key={index} className="flex items-center space-x-3 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
-                  <Bug className="w-5 h-5 text-primary-500 flex-shrink-0" />
-                  <span className="text-neutral-900 dark:text-neutral-100 font-medium">
+                <div key={index} className="flex items-center space-x-3 p-4 bg-white/5 border border-white/10 rounded-xl">
+                  <Bug className="w-5 h-5 text-[#56e39f] flex-shrink-0" />
+                  <span className="text-white font-medium">
                     {pest}
                   </span>
                 </div>
@@ -333,13 +337,13 @@ export const ServicesPageSimple: React.FC = () => {
         </section>
 
         {/* Process */}
-        <section className="section">
-          <div className="container">
+        <section className="py-16">
+          <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+              <h2 className="text-4xl font-display font-bold text-white mb-6">
                 Our Process
               </h2>
-              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                 A systematic approach to pest control that ensures effective, long-lasting results.
               </p>
             </div>
@@ -347,13 +351,13 @@ export const ServicesPageSimple: React.FC = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {processSteps.map((step, index) => (
                 <div key={index} className="text-center">
-                  <div className="flex items-center justify-center w-16 h-16 bg-primary-500 text-white rounded-full mb-6 mx-auto font-bold text-xl">
+                  <div className="flex items-center justify-center w-16 h-16 bg-[#56e39f] text-[#0f1729] rounded-full mb-6 mx-auto font-bold text-xl">
                     {step.step}
                   </div>
-                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-3">
+                  <h3 className="text-xl font-semibold text-white mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-neutral-600 dark:text-neutral-400">
+                  <p className="text-gray-300">
                     {step.description}
                   </p>
                 </div>
@@ -363,51 +367,51 @@ export const ServicesPageSimple: React.FC = () => {
         </section>
 
         {/* Why Choose Us */}
-        <section className="section bg-white dark:bg-neutral-900">
-          <div className="container">
+        <section className="py-16 bg-white/5">
+          <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                <h2 className="text-4xl font-display font-bold text-white mb-6">
                   Why Choose Grinnage?
                 </h2>
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
-                    <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl flex-shrink-0">
-                      <Award className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    <div className="flex items-center justify-center w-12 h-12 bg-[#56e39f]/10 rounded-xl flex-shrink-0">
+                      <Award className="w-6 h-6 text-[#56e39f]" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                      <h3 className="text-xl font-semibold text-white mb-2">
                         Licensed & Certified
                       </h3>
-                      <p className="text-neutral-600 dark:text-neutral-400">
+                      <p className="text-gray-300">
                         All technicians are state-licensed and EPA-certified professionals.
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-4">
-                    <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl flex-shrink-0">
-                      <Shield className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    <div className="flex items-center justify-center w-12 h-12 bg-[#56e39f]/10 rounded-xl flex-shrink-0">
+                      <Shield className="w-6 h-6 text-[#56e39f]" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                      <h3 className="text-xl font-semibold text-white mb-2">
                         Safe & Eco-Friendly
                       </h3>
-                      <p className="text-neutral-600 dark:text-neutral-400">
+                      <p className="text-gray-300">
                         We use environmentally responsible treatments safe for families and pets.
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-4">
-                    <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl flex-shrink-0">
-                      <Target className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    <div className="flex items-center justify-center w-12 h-12 bg-[#56e39f]/10 rounded-xl flex-shrink-0">
+                      <Target className="w-6 h-6 text-[#56e39f]" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                      <h3 className="text-xl font-semibold text-white mb-2">
                         Guaranteed Results
                       </h3>
-                      <p className="text-neutral-600 dark:text-neutral-400">
+                      <p className="text-gray-300">
                         100% satisfaction guarantee with follow-up service included.
                       </p>
                     </div>
@@ -415,26 +419,26 @@ export const ServicesPageSimple: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-950 dark:to-accent-950 rounded-2xl p-8">
+              <div className="bg-gradient-to-br from-[#56e39f]/20 to-blue-500/20 border border-[#56e39f]/30 rounded-2xl p-8">
                 <div className="text-center">
-                  <Star className="w-16 h-16 text-primary-500 mx-auto mb-4" />
-                  <h3 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
+                  <Star className="w-16 h-16 text-[#56e39f] mx-auto mb-4" />
+                  <h3 className="text-2xl font-semibold text-white mb-4">
                     20+ Years Experience
                   </h3>
-                  <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+                  <p className="text-gray-300 mb-6">
                     Trusted by over 5,000 Bay Area customers for reliable pest control solutions.
                   </p>
                   <div className="space-y-3">
-                    <div className="flex items-center justify-center text-sm text-neutral-500 dark:text-neutral-400">
-                      <CheckCircle className="w-4 h-4 text-primary-500 mr-2" />
+                    <div className="flex items-center justify-center text-sm text-gray-300">
+                      <CheckCircle className="w-4 h-4 text-[#56e39f] mr-2" />
                       98% Customer Satisfaction Rate
                     </div>
-                    <div className="flex items-center justify-center text-sm text-neutral-500 dark:text-neutral-400">
-                      <CheckCircle className="w-4 h-4 text-primary-500 mr-2" />
+                    <div className="flex items-center justify-center text-sm text-gray-300">
+                      <CheckCircle className="w-4 h-4 text-[#56e39f] mr-2" />
                       24/7 Emergency Service Available
                     </div>
-                    <div className="flex items-center justify-center text-sm text-neutral-500 dark:text-neutral-400">
-                      <CheckCircle className="w-4 h-4 text-primary-500 mr-2" />
+                    <div className="flex items-center justify-center text-sm text-gray-300">
+                      <CheckCircle className="w-4 h-4 text-[#56e39f] mr-2" />
                       Licensed in California, Nevada, Oregon
                     </div>
                   </div>
@@ -445,33 +449,33 @@ export const ServicesPageSimple: React.FC = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="section bg-gradient-to-r from-primary-500 to-primary-600 text-white">
-          <div className="container">
+        <section className="py-16 bg-gradient-to-r from-[#56e39f]/20 to-blue-500/20">
+          <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl font-display font-bold mb-6">
+              <h2 className="text-4xl font-display font-bold text-white mb-6">
                 Ready to Get Started?
               </h2>
-              <p className="text-xl text-primary-100 mb-8">
+              <p className="text-xl text-gray-300 mb-8">
                 Contact us today for a free inspection and customized treatment plan.
                 Professional pest control that protects what matters most.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <button
                   onClick={() => navigate('/contact')}
-                  className="btn bg-white text-primary-600 hover:bg-neutral-100"
+                  className="inline-flex items-center px-6 py-3 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
                 >
-                  <Calendar className="w-5 h-5" />
+                  <Calendar className="w-5 h-5 mr-2" />
                   Schedule Free Inspection
                 </button>
                 <a
                   href="tel:+15551234567"
-                  className="btn border-2 border-white text-white hover:bg-white hover:text-primary-600"
+                  className="inline-flex items-center px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-[#0f1729] transition-colors"
                 >
-                  <Phone className="w-5 h-5" />
+                  <Phone className="w-5 h-5 mr-2" />
                   Call (555) 123-4567
                 </a>
               </div>
-              <p className="text-primary-200 text-sm mt-4">
+              <p className="text-gray-400 text-sm mt-4">
                 Same-day service available • Licensed & insured professionals
               </p>
             </div>
@@ -480,27 +484,27 @@ export const ServicesPageSimple: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-neutral-900 dark:bg-neutral-950 text-neutral-300">
-        <div className="container py-16">
+      <footer className="bg-[#0a0f1a] border-t border-white/10">
+        <div className="container mx-auto px-4 py-16">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <div className="lg:col-span-2">
-              <div className="font-display font-bold text-2xl text-primary-400 mb-4">
+              <div className="font-display font-bold text-2xl text-[#56e39f] mb-4">
                 GRINNAGE
               </div>
-              <p className="text-neutral-400 mb-6 max-w-md">
+              <p className="text-gray-400 mb-6 max-w-md">
                 Professional pest control services since 2003.
                 Protecting Bay Area homes and businesses with safe, effective solutions.
               </p>
               <div className="space-y-3">
                 <div className="flex items-center">
-                  <Phone className="w-4 h-4 text-primary-500 mr-3" />
-                  <a href="tel:+15551234567" className="hover:text-primary-400 transition-colors">
+                  <Phone className="w-4 h-4 text-[#56e39f] mr-3" />
+                  <a href="tel:+15551234567" className="text-gray-300 hover:text-[#56e39f] transition-colors">
                     (555) 123-4567
                   </a>
                 </div>
                 <div className="flex items-center">
-                  <Mail className="w-4 h-4 text-primary-500 mr-3" />
-                  <a href="mailto:info@grinnage.com" className="hover:text-primary-400 transition-colors">
+                  <Mail className="w-4 h-4 text-[#56e39f] mr-3" />
+                  <a href="mailto:info@grinnage.com" className="text-gray-300 hover:text-[#56e39f] transition-colors">
                     info@grinnage.com
                   </a>
                 </div>
@@ -510,33 +514,33 @@ export const ServicesPageSimple: React.FC = () => {
             <div>
               <h4 className="font-semibold text-white mb-4">Quick Links</h4>
               <ul className="space-y-2 text-sm">
-                <li><button onClick={() => navigate('/')} className="hover:text-primary-400 transition-colors">Home</button></li>
-                <li><span className="text-primary-400">Services</span></li>
-                <li><button onClick={() => navigate('/about')} className="hover:text-primary-400 transition-colors">About</button></li>
-                <li><button onClick={() => navigate('/contact')} className="hover:text-primary-400 transition-colors">Contact</button></li>
+                <li><button onClick={() => navigate('/')} className="text-gray-400 hover:text-[#56e39f] transition-colors">Home</button></li>
+                <li><span className="text-[#56e39f]">Services</span></li>
+                <li><button onClick={() => navigate('/about')} className="text-gray-400 hover:text-[#56e39f] transition-colors">About</button></li>
+                <li><button onClick={() => navigate('/contact')} className="text-gray-400 hover:text-[#56e39f] transition-colors">Contact</button></li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-semibold text-white mb-4">Services</h4>
               <ul className="space-y-2 text-sm">
-                <li><span className="hover:text-primary-400 transition-colors">Residential Inspection</span></li>
-                <li><span className="hover:text-primary-400 transition-colors">Residential Treatment</span></li>
-                <li><span className="hover:text-primary-400 transition-colors">Commercial Service</span></li>
-                <li><span className="hover:text-primary-400 transition-colors">Emergency Service</span></li>
+                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Residential Inspection</span></li>
+                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Residential Treatment</span></li>
+                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Commercial Service</span></li>
+                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Emergency Service</span></li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-neutral-800 pt-8 flex flex-col sm:flex-row justify-between items-center">
-            <div className="text-sm text-neutral-500 mb-4 sm:mb-0">
+          <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center">
+            <div className="text-sm text-gray-500 mb-4 sm:mb-0">
               © 2025 Grinnage Exterminating. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
-              <a href="/privacy" className="text-neutral-500 hover:text-primary-400 transition-colors">
+              <a href="/privacy" className="text-gray-500 hover:text-[#56e39f] transition-colors">
                 Privacy Policy
               </a>
-              <a href="/terms" className="text-neutral-500 hover:text-primary-400 transition-colors">
+              <a href="/terms" className="text-gray-500 hover:text-[#56e39f] transition-colors">
                 Terms of Service
               </a>
             </div>

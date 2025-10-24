@@ -102,37 +102,37 @@ export const ContactPageSimple: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+    <div className="min-h-screen bg-gradient-to-b from-[#0f1729] to-[#111827]">
       {/* Modern Header */}
-      <header className="sticky top-0 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 z-50">
+      <header className="sticky top-0 bg-[#0f1729]/80 backdrop-blur-md border-b border-white/10 z-50">
         <div className="container mx-auto flex justify-between items-center py-4">
-          <div className="font-display font-bold text-2xl text-primary-600 dark:text-primary-400">
+          <div className="font-display font-bold text-2xl text-[#56e39f]">
             GRINNAGE
           </div>
           <nav className="hidden md:flex items-center space-x-8">
             {['Services', 'About'].map(item => (
               <button
                 key={item}
-                className="nav-link"
+                className="text-gray-300 hover:text-[#56e39f] transition-colors"
                 onClick={() => navigate(`/${item.toLowerCase()}`)}
               >
                 {item}
               </button>
             ))}
-            <span className="nav-link-active">Contact</span>
+            <span className="text-[#56e39f] font-medium">Contact</span>
           </nav>
           <div className="flex items-center gap-3">
             <button
-              className="btn-secondary"
+              className="px-4 py-2 text-gray-300 hover:text-white border border-white/20 rounded-lg hover:bg-white/5 transition-colors"
               onClick={() => navigate('/login')}
             >
               Client Login
             </button>
             <button
-              className="btn-primary"
+              className="inline-flex items-center px-4 py-2 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
               onClick={() => navigate('/')}
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-4 h-4 mr-2" />
               Back Home
             </button>
           </div>
