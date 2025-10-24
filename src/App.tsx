@@ -1,39 +1,34 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Layout } from './components/layout/Layout';
-import { PortalRoutes } from './routes/PortalRoutes';
-import { HomePage } from './pages/HomePage';
-import { AboutPage } from './pages/AboutPage';
-import { ServicesPage } from './pages/ServicesPage';
-import { ContactPage } from './pages/ContactPage';
-import { ConsultationPage } from './pages/ConsultationPage';
-import { RegisterPage } from './pages/RegisterPage';
-import { LoginPage } from './pages/LoginPage';
-import { AdminLoginPage } from './pages/admin/AdminLoginPage';
-import { CreateAdmin } from './pages/admin/CreateAdmin';
-import { EmergencyAIAgent } from './components/EmergencyAIAgent';
 
+// Simplified App with just the landing page for now
 const App = () => {
-  const [isChatOpen, setIsChatOpen] = React.useState(false);
-
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Layout onChatOpen={() => setIsChatOpen(true)}><HomePage /></Layout>} />
-        <Route path="/about" element={<Layout onChatOpen={() => setIsChatOpen(true)}><AboutPage /></Layout>} />
-        <Route path="/services" element={<Layout onChatOpen={() => setIsChatOpen(true)}><ServicesPage /></Layout>} />
-        <Route path="/contact" element={<Layout onChatOpen={() => setIsChatOpen(true)}><ContactPage /></Layout>} />
-        <Route path="/consultation" element={<Layout onChatOpen={() => setIsChatOpen(true)}><ConsultationPage /></Layout>} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/admin-login" element={<AdminLoginPage />} />
-        <Route path="/create-admin" element={<CreateAdmin />} />
-        
-        {/* Protected Routes */}
-        <Route path="/*" element={<PortalRoutes />} />
-      </Routes>
-      {isChatOpen && <EmergencyAIAgent onClose={() => setIsChatOpen(false)} />}
+      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+        <Routes>
+          <Route path="*" element={
+            <div className="container mx-auto px-4 py-16">
+              <div className="text-center">
+                <h1 className="text-4xl md:text-6xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+                  Grinnage Pest Control
+                </h1>
+                <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
+                  Professional pest control services with modern, client-managed platform.
+                </p>
+                <div className="space-y-4">
+                  <div className="btn-primary inline-flex">
+                    🚧 Under Reconstruction
+                  </div>
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                    Building a streamlined platform for better client experience
+                  </p>
+                </div>
+              </div>
+            </div>
+          } />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 };

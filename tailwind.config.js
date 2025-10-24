@@ -5,33 +5,78 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Modern Fall 2026 Color Palette
         primary: {
-          50: '#edfff7',
-          100: '#d5ffed',
-          200: '#aeffe0',
-          300: '#73ffcd',
-          400: '#33f5b2',
-          500: '#56e39f', // Main brand color from logo
-          600: '#00c87b',
-          700: '#009d64',
-          800: '#067a52',
-          900: '#076445',
+          50: '#f0fdf5',
+          100: '#dcfce8',
+          200: '#bbf7d1',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#22c55e', // Main green - professional pest control
+          600: '#16a34a',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
+          950: '#052e16',
         },
-        dark: {
-          50: '#f7f7f8',
-          100: '#eeeef0',
-          200: '#d9d9dc',
-          300: '#b6b7bc',
-          400: '#8e8f97',
-          500: '#6f707a',
-          600: '#5a5b64',
-          700: '#3f3f45',
-          800: '#313131', // Updated to specified color
-          900: '#1a1a1a',
+        neutral: {
+          50: '#fafafa',
+          100: '#f5f5f5',
+          200: '#e5e5e5',
+          300: '#d4d4d4',
+          400: '#a3a3a3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
+          950: '#0a0a0a',
+        },
+        accent: {
+          50: '#fef3c7',
+          100: '#fde68a',
+          200: '#fcd34d',
+          300: '#fbbf24',
+          400: '#f59e0b',
+          500: '#d97706', // Warm orange accent
+          600: '#b45309',
+          700: '#92400e',
+          800: '#78350f',
+          900: '#451a03',
         }
       },
       fontFamily: {
-        sans: ['Noto Sans JP', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Cabinet Grotesk', 'Inter', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        'xl': '1rem',
+        '2xl': '1.5rem',
+        '3xl': '2rem',
+      },
+      boxShadow: {
+        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        'strong': '0 10px 40px -10px rgba(0, 0, 0, 0.15)',
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'slide-up': 'slideUp 0.3s ease-out',
+        'scale-in': 'scaleIn 0.2s ease-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(10px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        scaleIn: {
+          '0%': { transform: 'scale(0.95)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
       },
     },
   },
