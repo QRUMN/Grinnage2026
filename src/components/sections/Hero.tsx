@@ -1,155 +1,210 @@
 import * as React from 'react';
-import { ArrowRight, Shield, Calendar, Bug, CheckCircle, Clock, Phone, Leaf, Star } from 'lucide-react';
+import { ArrowRight, Shield, Calendar, Bug, CheckCircle, Clock, Phone, Leaf, Star, Sparkles, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../../components/ui/button';
+import { Button } from '../ui/button';
+import { Section, Container } from '../ui/Section';
+import { Card, CardContent } from '../ui/card';
 
 export const Hero: React.FC = () => {
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  const stats = [
+    {
+      icon: CheckCircle,
+      number: "15K+",
+      label: "Satisfied Clients",
+      description: "Customers trust our thorough and reliable service",
+      color: "primary"
+    },
+    {
+      icon: Leaf,
+      number: "17+",
+      label: "Years Experience",
+      description: "Nearly two decades of pest control excellence",
+      color: "success"
+    },
+    {
+      icon: Zap,
+      number: "98%",
+      label: "Success Rate",
+      description: "Proven effectiveness in pest elimination",
+      color: "accent"
+    }
+  ];
+
+  const trustIndicators = [
+    { icon: CheckCircle, text: "Eco-friendly Solutions" },
+    { icon: Clock, text: "24/7 Emergency Service" },
+    { icon: Star, text: "5-Star Rated Service" },
+    { icon: Shield, text: "Licensed & Insured" }
+  ];
 
   return (
-    <div className="relative bg-gradient-to-br from-[#111827] via-[#1a2234] to-[#111827] text-white overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full">
-          <svg width="100%" height="100%" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-10">
-            <g opacity="0.2">
-              <path d="M100,100 L1100,100 L1100,1100 L100,1100 Z" stroke="#56e39f" strokeWidth="1" fill="none" />
-              <path d="M200,200 L1000,200 L1000,1000 L200,1000 Z" stroke="#56e39f" strokeWidth="1" fill="none" />
-              <path d="M300,300 L900,300 L900,900 L300,900 Z" stroke="#56e39f" strokeWidth="1" fill="none" />
-              <path d="M400,400 L800,400 L800,800 L400,800 Z" stroke="#56e39f" strokeWidth="1" fill="none" />
-              <circle cx="600" cy="600" r="500" stroke="#56e39f" strokeWidth="1" fill="none" />
-              <circle cx="600" cy="600" r="400" stroke="#56e39f" strokeWidth="1" fill="none" />
-              <circle cx="600" cy="600" r="300" stroke="#56e39f" strokeWidth="1" fill="none" />
-              <circle cx="600" cy="600" r="200" stroke="#56e39f" strokeWidth="1" fill="none" />
-            </g>
-          </svg>
-        </div>
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#56e39f] rounded-full filter blur-[100px] opacity-20"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#56e39f] rounded-full filter blur-[100px] opacity-20"></div>
+    <Section
+      variant="hero"
+      background="gradient"
+      spacing="xl"
+      fullHeight
+      className="relative text-white overflow-hidden"
+    >
+      {/* Custom dark gradient background for hero */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-primary-400/5 rounded-full blur-2xl animate-float" />
       </div>
 
-      {/* Main hero content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
-          <div className="flex-1 text-center lg:text-left">
-            <div className="inline-flex items-center justify-center mb-3 px-4 py-1.5 bg-[#56e39f]/10 rounded-full">
-              <Bug className="w-4 h-4 mr-2 text-[#56e39f]" />
-              <span className="text-sm font-medium text-[#56e39f]">Eco-Friendly Pest Management</span>
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 bg-gradient-mesh bg-mesh opacity-20" />
+
+      <Container className="relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center min-h-[80vh]">
+          {/* Hero Content */}
+          <div className={`space-y-8 text-center lg:text-left transition-all duration-1000 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            {/* Badge */}
+            <div className="inline-flex items-center px-4 py-2 bg-primary-500/10 border border-primary-500/20 rounded-full backdrop-blur-sm">
+              <Bug className="w-4 h-4 mr-2 text-primary-400" />
+              <span className="text-sm font-medium text-primary-300">Eco-Friendly Pest Management</span>
+              <Sparkles className="w-4 h-4 ml-2 text-primary-400 animate-pulse" />
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
-              Advanced Pest Control
-              <span className="block mt-1 text-[#56e39f] bg-gradient-to-r from-[#56e39f] to-[#48c98a] bg-clip-text text-transparent">for Modern Living</span>
-            </h1>
+            {/* Main Headline */}
+            <div className="space-y-4">
+              <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl xl:text-7xl leading-tight tracking-tight">
+                <span className="block text-white">Advanced Pest Control</span>
+                <span className="block bg-gradient-to-r from-primary-400 via-primary-500 to-accent-400 bg-clip-text text-transparent animate-gradient-x">
+                  for Modern Living
+                </span>
+              </h1>
+              <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                Protecting your space with cutting-edge, eco-friendly pest management solutions.
+                Experience the future of pest control with guaranteed results.
+              </p>
+            </div>
 
-            <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0">
-              Protecting your space with eco-friendly pest management solutions. 
-              Experience the future of pest control today.
-            </p>
-            
+            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button
                 variant="primary"
                 size="lg"
-                onClick={() => navigate('/register')}
-                icon={<ArrowRight className="ml-2 w-5 h-5" />}
-                className="group"
+                onClick={() => navigate('/contact')}
+                icon={<ArrowRight />}
+                iconPosition="right"
+                className="group relative overflow-hidden shadow-glow hover:shadow-glow-lg"
               >
-                <span className="group-hover:mr-1 transition-all">Get Started</span>
+                Get Started Today
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => navigate('/consultation')}
-                icon={<Calendar className="ml-2 w-5 h-5" />}
-                className="border-[#56e39f]/30 text-[#56e39f] hover:bg-[#56e39f]/10"
+                onClick={() => navigate('/services')}
+                icon={<Calendar />}
+                iconPosition="right"
+                className="border-primary-500/30 text-primary-400 hover:bg-primary-500/10 hover:border-primary-400"
               >
                 Free Consultation
               </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                onClick={() => navigate('/services')}
-                icon={<Shield className="ml-2 w-5 h-5" />}
-                className="text-white hover:bg-white/5"
-              >
-                Our Services
-              </Button>
             </div>
 
-            {/* Trust indicators */}
-            <div className="flex flex-wrap gap-x-8 gap-y-3 mt-10 justify-center lg:justify-start">
-              <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-[#56e39f] mr-2" />
-                <span className="text-sm text-gray-300">Eco-friendly Solutions</span>
-              </div>
-              <div className="flex items-center">
-                <Clock className="w-5 h-5 text-[#56e39f] mr-2" />
-                <span className="text-sm text-gray-300">24/7 Emergency Service</span>
-              </div>
-              <div className="flex items-center">
-                <Star className="w-5 h-5 text-[#56e39f] mr-2" />
-                <span className="text-sm text-gray-300">5-Star Rated Service</span>
-              </div>
+            {/* Trust Indicators */}
+            <div className="grid grid-cols-2 gap-4 pt-8 max-w-lg mx-auto lg:mx-0">
+              {trustIndicators.map((indicator, index) => (
+                <div
+                  key={index}
+                  className={`flex items-center space-x-2 transition-all duration-500 ${
+                    isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+                  }`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  <indicator.icon className="w-4 h-4 text-primary-400 flex-shrink-0" />
+                  <span className="text-sm text-gray-300">{indicator.text}</span>
+                </div>
+              ))}
             </div>
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 gap-6 lg:max-w-md w-full">
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden relative">
-              <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#56e39f]/10 rounded-full"></div>
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="p-3 bg-[#56e39f]/20 rounded-xl">
-                    <CheckCircle className="w-6 h-6 text-[#56e39f]" />
-                  </div>
-                  <div className="text-3xl font-bold text-white">15K+</div>
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">Satisfied Clients</h3>
-                <p className="text-gray-400 text-sm">Our customers love our thorough and reliable service</p>
-              </div>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden relative">
-              <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#56e39f]/10 rounded-full"></div>
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="p-3 bg-[#56e39f]/20 rounded-xl">
-                    <Leaf className="w-6 h-6 text-[#56e39f]" />
-                  </div>
-                  <div className="text-3xl font-bold text-white">17+</div>
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">Years Experience</h3>
-                <p className="text-gray-400 text-sm">Nearly two decades of pest control excellence</p>
-              </div>
-            </div>
-
-            {/* Call to action card */}
-            <div className="bg-gradient-to-r from-[#56e39f]/20 to-[#48c98a]/20 backdrop-blur-lg border border-[#56e39f]/30 rounded-2xl p-6 transition-all duration-300">
-              <div className="flex items-center space-x-4">
-                <div className="p-3 bg-[#56e39f]/30 rounded-xl">
-                  <Phone className="w-6 h-6 text-[#56e39f]" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-white">Emergency Service</h3>
-                  <p className="text-gray-300 text-sm">24/7 support when you need it most</p>
-                </div>
-              </div>
-              <Button
-                variant="primary"
-                size="sm"
-                className="w-full mt-4"
-                onClick={() => navigate('/contact')}
+          <div className={`space-y-6 transition-all duration-1000 delay-300 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            {stats.map((stat, index) => (
+              <Card
+                key={index}
+                variant="glass"
+                hover
+                className={`transform transition-all duration-500 ${
+                  isVisible ? 'translate-x-0' : 'translate-x-8'
+                }`}
+                style={{ transitionDelay: `${(index + 1) * 200}ms` }}
               >
-                Contact Us Now
-              </Button>
-            </div>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className={`p-3 rounded-xl ${
+                      stat.color === 'primary' ? 'bg-primary-500/20' :
+                      stat.color === 'success' ? 'bg-success-500/20' :
+                      'bg-accent-500/20'
+                    }`}>
+                      <stat.icon className={`w-6 h-6 ${
+                        stat.color === 'primary' ? 'text-primary-400' :
+                        stat.color === 'success' ? 'text-success-400' :
+                        'text-accent-400'
+                      }`} />
+                    </div>
+                    <div className={`text-3xl font-bold ${
+                      stat.color === 'primary' ? 'text-primary-400' :
+                      stat.color === 'success' ? 'text-success-400' :
+                      'text-accent-400'
+                    }`}>
+                      {stat.number}
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-2">{stat.label}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{stat.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+
+            {/* Emergency CTA Card */}
+            <Card
+              variant="soft"
+              className={`bg-gradient-to-r from-primary-500/20 to-accent-500/20 border-primary-500/30 transform transition-all duration-500 ${
+                isVisible ? 'translate-x-0' : 'translate-x-8'
+              }`}
+              style={{ transitionDelay: '800ms' }}
+            >
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-4 mb-4">
+                  <div className="p-3 bg-primary-500/30 rounded-xl">
+                    <Phone className="w-6 h-6 text-primary-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white">Emergency Service</h3>
+                    <p className="text-gray-300 text-sm">24/7 support when you need it most</p>
+                  </div>
+                </div>
+                <Button
+                  variant="primary"
+                  fullWidth
+                  onClick={() => navigate('/contact')}
+                  className="shadow-lg"
+                >
+                  Contact Us Now
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
-      </div>
-
-      {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#111827] to-transparent"></div>
-    </div>
+      </Container>
+    </Section>
   );
 };

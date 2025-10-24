@@ -2,21 +2,72 @@ import React from 'react';
 import { cn } from '../../lib/utils';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'bordered' | 'elevated';
+  variant?: 'default' | 'bordered' | 'elevated' | 'soft' | 'glass';
+  size?: 'sm' | 'md' | 'lg';
+  hover?: boolean;
+  interactive?: boolean;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = 'default', ...props }, ref) => {
+  ({
+    className,
+    variant = 'default',
+    size = 'md',
+    hover = false,
+    interactive = false,
+    ...props
+  }, ref) => {
+    const baseStyles = [
+      'overflow-hidden transition-all duration-200',
+      'bg-white dark:bg-gray-900'
+    ];
+
+    const variants = {
+      default: [
+        'shadow-sm border border-gray-200 dark:border-gray-800'
+      ],
+      bordered: [
+        'border-2 border-gray-200 dark:border-gray-700'
+      ],
+      elevated: [
+        'shadow-lg border border-gray-100 dark:border-gray-800'
+      ],
+      soft: [
+        'shadow-soft bg-gray-50/50 dark:bg-gray-800/50',
+        'backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50'
+      ],
+      glass: [
+        'backdrop-blur-md bg-white/80 dark:bg-gray-900/80',
+        'border border-gray-200/20 dark:border-gray-700/20',
+        'shadow-lg'
+      ]
+    };
+
+    const sizes = {
+      sm: 'rounded-lg',
+      md: 'rounded-xl',
+      lg: 'rounded-2xl'
+    };
+
+    const hoverStyles = hover ? [
+      'hover:shadow-md hover:-translate-y-1',
+      'hover:border-gray-300 dark:hover:border-gray-600'
+    ] : [];
+
+    const interactiveStyles = interactive ? [
+      'cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
+      'active:scale-[0.98]'
+    ] : [];
+
     return (
       <div
         ref={ref}
         className={cn(
-          'rounded-xl overflow-hidden',
-          {
-            'bg-white dark:bg-dark-800 shadow-sm': variant === 'default',
-            'bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700': variant === 'bordered',
-            'bg-white dark:bg-dark-800 shadow-lg': variant === 'elevated',
-          },
+          baseStyles,
+          variants[variant],
+          sizes[size],
+          hoverStyles,
+          interactiveStyles,
           className
         )}
         {...props}
@@ -33,7 +84,11 @@ export const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('px-6 py-5 border-b border-gray-200 dark:border-dark-700', className)}
+    className={cn(
+      'px-6 py-5 border-b border-gray-200 dark:border-gray-800',
+      'bg-gray-50/50 dark:bg-gray-800/50',
+      className
+    )}
     {...props}
   />
 ));
@@ -46,7 +101,11 @@ export const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn('text-lg font-semibold text-dark-900 dark:text-white', className)}
+    className={cn(
+      'text-lg font-semibold text-gray-900 dark:text-gray-100',
+      'leading-tight tracking-tight',
+      className
+    )}
     {...props}
   />
 ));
@@ -59,7 +118,11 @@ export const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn('text-sm text-dark-600 dark:text-dark-400', className)}
+    className={cn(
+      'text-sm text-gray-600 dark:text-gray-400',
+      'leading-relaxed mt-1',
+      className
+    )}
     {...props}
   />
 ));
@@ -81,7 +144,11 @@ export const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('px-6 py-4 border-t border-gray-200 dark:border-dark-700', className)}
+    className={cn(
+      'px-6 py-4 border-t border-gray-200 dark:border-gray-800',
+      'bg-gray-50/30 dark:bg-gray-800/30',
+      className
+    )}
     {...props}
   />
 ));
