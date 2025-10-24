@@ -7,6 +7,8 @@ import {
 } from 'lucide-react';
 import { useAdminAuth } from '../../lib/auth';
 import { ProtectedRoute } from '../auth/ProtectedRoute';
+import { NotificationBell } from './NotificationBell';
+import { NotificationToast } from './NotificationToast';
 import { cn } from '../../lib/utils';
 
 interface AdminLayoutProps {
@@ -203,10 +205,7 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
             {/* Header Actions */}
             <div className="flex items-center space-x-4">
               {/* Notifications */}
-              <button className="relative p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800">
-                <Bell className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent-500 rounded-full"></span>
-              </button>
+              <NotificationBell />
 
               {/* User Menu */}
               <div className="relative">
@@ -257,6 +256,9 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
           {children}
         </main>
       </div>
+
+      {/* Notification Toasts */}
+      <NotificationToast />
 
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (

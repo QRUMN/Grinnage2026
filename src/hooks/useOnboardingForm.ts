@@ -32,9 +32,18 @@ export const useOnboardingForm = () => {
 
   const onSubmit = async (data: OnboardingFormData) => {
     try {
-      const formData = JSON.parse(JSON.stringify(data));
-      const response = await authApi.register(formData);
-      navigate('/dashboard');
+      const { user, error } = await authApi.register(data);
+      
+      if (error) {
+        console.error('Registration failed:', error);
+        // You might want to show an error toast/notification here
+        return;
+      }
+
+      if (user) {
+        // Registration successful - navigate to appropriate dashboard
+        navigate(data.clientType === 'commercial' ? '/commercial' : '/dashboard');
+      }
     } catch (error) {
       console.error('Registration failed:', error);
     }

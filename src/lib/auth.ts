@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Simple admin authentication system
 // In production, this would integrate with Supabase Auth
 
@@ -162,5 +164,3 @@ export const useAdminAuth = () => {
   };
 };
 
-// Add React import for the hook
-import React from 'react';

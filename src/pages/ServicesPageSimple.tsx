@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import {
   Shield, Bug, Home, Building, Zap, Clock, Star,
   ArrowLeft, Phone, Mail, Calendar, CheckCircle,
-  ArrowRight, Target, Award
+  ArrowRight, Target, Award, Menu, X
 } from 'lucide-react';
 
 export const ServicesPageSimple: React.FC = () => {
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   const services = [
     {
@@ -132,19 +133,73 @@ export const ServicesPageSimple: React.FC = () => {
           </nav>
           <div className="flex items-center gap-3">
             <button
-              className="px-4 py-2 text-gray-300 hover:text-white border border-white/20 rounded-lg hover:bg-white/5 transition-colors"
+              className="hidden md:block px-4 py-2 text-gray-300 hover:text-white border border-white/20 rounded-lg hover:bg-white/5 transition-colors"
               onClick={() => navigate('/admin-login')}
             >
               Admin Login
             </button>
             <button
-              className="px-4 py-2 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
+              className="hidden md:block px-4 py-2 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
               onClick={() => navigate('/contact')}
             >
               Get Quote
             </button>
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 rounded-lg hover:bg-white/5 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 text-gray-300" />
+              ) : (
+                <Menu className="w-6 h-6 text-gray-300" />
+              )}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-[#0f1729]/95 backdrop-blur-md border-t border-white/10">
+            <nav className="container mx-auto py-4 space-y-2">
+              <button
+                onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-[#56e39f] hover:bg-white/5 rounded-lg transition-colors"
+              >
+                Home
+              </button>
+              <div className="px-4 py-3 text-[#56e39f] font-medium">
+                Services
+              </div>
+              <button
+                onClick={() => { navigate('/about'); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-[#56e39f] hover:bg-white/5 rounded-lg transition-colors"
+              >
+                About
+              </button>
+              <button
+                onClick={() => { navigate('/contact'); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-[#56e39f] hover:bg-white/5 rounded-lg transition-colors"
+              >
+                Contact
+              </button>
+              <div className="border-t border-white/10 mt-4 pt-4 space-y-2">
+                <button
+                  onClick={() => { navigate('/admin-login'); setIsMobileMenuOpen(false); }}
+                  className="block w-full text-left px-4 py-3 text-gray-300 hover:text-white border border-white/20 rounded-lg hover:bg-white/5 transition-colors"
+                >
+                  Admin Login
+                </button>
+                <button
+                  onClick={() => { navigate('/contact'); setIsMobileMenuOpen(false); }}
+                  className="block w-full text-left px-4 py-3 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
+                >
+                  Get Quote
+                </button>
+              </div>
+            </nav>
+          </div>
+        )}
       </header>
 
       <main>
@@ -165,7 +220,7 @@ export const ServicesPageSimple: React.FC = () => {
                 <span className="text-sm font-medium text-[#56e39f]">Professional Pest Control Services</span>
               </div>
 
-              <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-white mb-6">
                 Our
                 <span className="text-[#56e39f] block">Services</span>
               </h1>
@@ -175,7 +230,7 @@ export const ServicesPageSimple: React.FC = () => {
                 Safe, effective treatments that protect what matters most to you.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
                 <button
                   className="inline-flex items-center px-6 py-3 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
                   onClick={() => navigate('/contact')}
@@ -204,7 +259,7 @@ export const ServicesPageSimple: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {services.map((service) => (
                 <div
                   key={service.id}
@@ -283,7 +338,7 @@ export const ServicesPageSimple: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {additionalServices.map((service, index) => (
                 <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
                   <div className="flex items-center justify-center w-12 h-12 bg-[#56e39f]/10 rounded-xl mb-4">
@@ -323,7 +378,7 @@ export const ServicesPageSimple: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {pestTypes.map((pest, index) => (
                 <div key={index} className="flex items-center space-x-3 p-4 bg-white/5 border border-white/10 rounded-xl">
                   <Bug className="w-5 h-5 text-[#56e39f] flex-shrink-0" />
@@ -348,7 +403,7 @@ export const ServicesPageSimple: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
               {processSteps.map((step, index) => (
                 <div key={index} className="text-center">
                   <div className="flex items-center justify-center w-16 h-16 bg-[#56e39f] text-[#0f1729] rounded-full mb-6 mx-auto font-bold text-xl">
@@ -369,9 +424,9 @@ export const ServicesPageSimple: React.FC = () => {
         {/* Why Choose Us */}
         <section className="py-16 bg-white/5">
           <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
-                <h2 className="text-4xl font-display font-bold text-white mb-6">
+                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white mb-6">
                   Why Choose Grinnage?
                 </h2>
                 <div className="space-y-6">
@@ -459,7 +514,7 @@ export const ServicesPageSimple: React.FC = () => {
                 Contact us today for a free inspection and customized treatment plan.
                 Professional pest control that protects what matters most.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
                 <button
                   onClick={() => navigate('/contact')}
                   className="inline-flex items-center px-6 py-3 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"

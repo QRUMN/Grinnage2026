@@ -2,13 +2,14 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Phone, Mail, Clock, MapPin, ArrowLeft, Shield, Star,
-  MessageCircle, Calendar, Award, Users
+  MessageCircle, Calendar, Award, Users, Menu, X
 } from 'lucide-react';
 import { ContactForm } from '../components/forms/ContactForm';
 import { ContactFormData } from '../lib/validation/contact';
 
 export const ContactPageSimple: React.FC = () => {
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   // Handle form submission and create CRM lead
   const handleContactSubmit = async (data: ContactFormData) => {
@@ -110,33 +111,97 @@ export const ContactPageSimple: React.FC = () => {
             GRINNAGE
           </div>
           <nav className="hidden md:flex items-center space-x-8">
-            {['Services', 'About'].map(item => (
-              <button
-                key={item}
-                className="text-gray-300 hover:text-[#56e39f] transition-colors"
-                onClick={() => navigate(`/${item.toLowerCase()}`)}
-              >
-                {item}
-              </button>
-            ))}
+            <button
+              className="text-gray-300 hover:text-[#56e39f] transition-colors"
+              onClick={() => navigate('/')}
+            >
+              Home
+            </button>
+            <button
+              className="text-gray-300 hover:text-[#56e39f] transition-colors"
+              onClick={() => navigate('/services')}
+            >
+              Services
+            </button>
+            <button
+              className="text-gray-300 hover:text-[#56e39f] transition-colors"
+              onClick={() => navigate('/about')}
+            >
+              About
+            </button>
             <span className="text-[#56e39f] font-medium">Contact</span>
           </nav>
           <div className="flex items-center gap-3">
             <button
-              className="px-4 py-2 text-gray-300 hover:text-white border border-white/20 rounded-lg hover:bg-white/5 transition-colors"
-              onClick={() => navigate('/login')}
+              className="hidden md:block px-4 py-2 text-gray-300 hover:text-white border border-white/20 rounded-lg hover:bg-white/5 transition-colors"
+              onClick={() => navigate('/admin-login')}
             >
-              Client Login
+              Admin Login
             </button>
             <button
-              className="inline-flex items-center px-4 py-2 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
+              className="hidden md:block inline-flex items-center px-4 py-2 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
               onClick={() => navigate('/')}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back Home
             </button>
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 rounded-lg hover:bg-white/5 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 text-gray-300" />
+              ) : (
+                <Menu className="w-6 h-6 text-gray-300" />
+              )}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-[#0f1729]/95 backdrop-blur-md border-t border-white/10">
+            <nav className="container mx-auto py-4 space-y-2">
+              <button
+                onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-[#56e39f] hover:bg-white/5 rounded-lg transition-colors"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => { navigate('/services'); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-[#56e39f] hover:bg-white/5 rounded-lg transition-colors"
+              >
+                Services
+              </button>
+              <button
+                onClick={() => { navigate('/about'); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-[#56e39f] hover:bg-white/5 rounded-lg transition-colors"
+              >
+                About
+              </button>
+              <div className="px-4 py-3 text-[#56e39f] font-medium">
+                Contact
+              </div>
+              <div className="border-t border-white/10 mt-4 pt-4 space-y-2">
+                <button
+                  onClick={() => { navigate('/admin-login'); setIsMobileMenuOpen(false); }}
+                  className="block w-full text-left px-4 py-3 text-gray-300 hover:text-white border border-white/20 rounded-lg hover:bg-white/5 transition-colors"
+                >
+                  Admin Login
+                </button>
+                <button
+                  onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}
+                  className="inline-flex items-center w-full px-4 py-3 bg-[#56e39f] text-[#0f1729] rounded-lg hover:bg-[#48c98a] transition-colors font-medium"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back Home
+                </button>
+              </div>
+            </nav>
+          </div>
+        )}
       </header>
 
       <main>
@@ -148,7 +213,7 @@ export const ContactPageSimple: React.FC = () => {
                 <MessageCircle className="w-4 h-4 mr-2" />
                 Get In Touch Today
               </div>
-              <h1 className="text-5xl md:text-6xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
                 Contact Our
                 <span className="text-primary-500 block">Expert Team</span>
               </h1>
@@ -156,7 +221,7 @@ export const ContactPageSimple: React.FC = () => {
                 Ready to solve your pest problem? Our licensed professionals are standing by
                 to provide you with a free consultation and customized treatment plan.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
                 <a href="tel:+15551234567" className="btn-primary">
                   <Phone className="w-5 h-5" />
                   Call (555) 123-4567
@@ -173,7 +238,7 @@ export const ContactPageSimple: React.FC = () => {
         {/* Contact Methods */}
         <section className="section bg-white dark:bg-neutral-900">
           <div className="container">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
               {contactInfo.map((info, index) => (
                 <div key={index} className="text-center group">
                   <div className="flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-2xl mb-6 mx-auto group-hover:bg-primary-200 dark:group-hover:bg-primary-800 transition-colors">
@@ -209,7 +274,7 @@ export const ContactPageSimple: React.FC = () => {
         <section className="section">
           <div className="container">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+              <h2 className="text-3xl sm:text-4xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
                 Why Choose Grinnage?
               </h2>
               <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
@@ -217,7 +282,7 @@ export const ContactPageSimple: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
               {whyContactUs.map((benefit, index) => (
                 <div key={index} className="text-center">
                   <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl mb-4 mx-auto">
@@ -267,7 +332,7 @@ export const ContactPageSimple: React.FC = () => {
               <p className="text-xl text-primary-100 mb-8">
                 Don't wait! Our emergency response team is available 24/7 for urgent pest problems.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
                 <a
                   href="tel:+15551234567"
                   className="btn bg-white text-primary-600 hover:bg-neutral-100"

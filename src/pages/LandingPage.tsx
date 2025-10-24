@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight, Shield, Bug, Star, Check, Mail, Phone, Clock,
-  Users, Zap, Leaf, Award, MapPin, Calendar
+  Users, Zap, Leaf, Award, MapPin, Calendar, Menu, X
 } from 'lucide-react';
 import { formatCurrencyFromCents } from '../lib/utils';
 import { defaultServices } from '../lib/stripe';
@@ -10,6 +10,7 @@ import { defaultServices } from '../lib/stripe';
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   // Featured services with pricing
   const featuredServices = [
@@ -73,6 +74,8 @@ export const LandingPage: React.FC = () => {
           <div className="font-display font-bold text-2xl text-primary-600 dark:text-primary-400">
             GRINNAGE
           </div>
+
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {['Services', 'About', 'Contact'].map(item => (
               <button
@@ -84,12 +87,14 @@ export const LandingPage: React.FC = () => {
               </button>
             ))}
           </nav>
-          <div className="flex items-center gap-3">
+
+          {/* Desktop Buttons */}
+          <div className="hidden md:flex items-center gap-3">
             <button
               className="btn-secondary"
-              onClick={() => navigate('/login')}
+              onClick={() => navigate('/admin-login')}
             >
-              Client Login
+              Admin Login
             </button>
             <button
               className="btn-primary"
@@ -98,7 +103,59 @@ export const LandingPage: React.FC = () => {
               Get Quote
             </button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6 text-neutral-600 dark:text-neutral-400" />
+            ) : (
+              <Menu className="w-6 h-6 text-neutral-600 dark:text-neutral-400" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-md">
+            <nav className="container mx-auto py-4 space-y-4">
+              {['Services', 'About', 'Contact'].map(item => (
+                <button
+                  key={item}
+                  className="block w-full text-left py-2 px-4 text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
+                  onClick={() => {
+                    navigate(`/${item.toLowerCase()}`);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  {item}
+                </button>
+              ))}
+              <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800 space-y-3">
+                <button
+                  className="btn-secondary w-full justify-center"
+                  onClick={() => {
+                    navigate('/admin-login');
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Admin Login
+                </button>
+                <button
+                  className="btn-primary w-full justify-center"
+                  onClick={() => {
+                    navigate('/contact');
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Get Quote
+                </button>
+              </div>
+            </nav>
+          </div>
+        )}
       </header>
 
       <main>
@@ -111,15 +168,15 @@ export const LandingPage: React.FC = () => {
                   <Shield className="w-4 h-4 mr-2" />
                   Professional Pest Control Since 2003
                 </div>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6 leading-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6 leading-tight">
                   Protect What
                   <span className="text-primary-500 block">Matters Most</span>
                 </h1>
-                <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-xl">
+                <p className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-xl">
                   Safe, effective pest control solutions for your home and business.
                   Licensed professionals using eco-friendly treatments that work.
                 </p>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <button
                     className="btn-primary"
                     onClick={() => navigate('/contact')}
@@ -179,16 +236,16 @@ export const LandingPage: React.FC = () => {
         <section className="section bg-white dark:bg-neutral-900">
           <div className="container">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
                 Professional Services
               </h2>
-              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+              <p className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
                 Comprehensive pest control solutions tailored to your specific needs.
                 Transparent pricing with no hidden fees.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {featuredServices.map((service, index) => (
                 <div key={service.id} className="card-hover group">
                   <div className="flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-xl mb-6 group-hover:bg-primary-200 dark:group-hover:bg-primary-800 transition-colors">
@@ -250,15 +307,15 @@ export const LandingPage: React.FC = () => {
         <section className="section">
           <div className="container">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
                 Why Choose Grinnage
               </h2>
-              <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+              <p className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
                 Over 20 years of experience protecting homes and businesses with safe, effective solutions.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {benefits.map((benefit, index) => (
                 <div key={index} className="card text-center group">
                   <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl mb-4 mx-auto group-hover:bg-primary-200 dark:group-hover:bg-primary-800 transition-colors">
@@ -279,15 +336,15 @@ export const LandingPage: React.FC = () => {
         <section className="section bg-white dark:bg-neutral-900">
           <div className="container">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-6">
                 What Our Clients Say
               </h2>
-              <p className="text-xl text-neutral-600 dark:text-neutral-400">
+              <p className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400">
                 Real experiences from satisfied customers across the Bay Area.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="card">
                   <div className="flex mb-4">
@@ -320,14 +377,14 @@ export const LandingPage: React.FC = () => {
         <section className="section bg-gradient-to-r from-primary-500 to-primary-600 text-white">
           <div className="container">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-6">
                 Ready to Protect Your Property?
               </h2>
-              <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
                 Get a free inspection and personalized treatment plan.
                 No obligation, just expert advice from certified professionals.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <button
                   className="btn bg-white text-primary-600 hover:bg-neutral-100"
                   onClick={() => navigate('/contact')}
