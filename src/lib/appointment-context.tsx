@@ -330,7 +330,7 @@ export const AppointmentProvider: React.FC<AppointmentProviderProps> = ({ childr
           clientId: 'client_1',
           clientName: 'Sarah Johnson',
           clientEmail: 'sarah@example.com',
-          clientPhone: '(555) 123-4567',
+          clientPhone: '(302) 562-5654',
           serviceType: 'Residential Cleaning',
           date: new Date().toISOString().split('T')[0],
           time: '10:00',

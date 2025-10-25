@@ -192,7 +192,7 @@ export const CreateAdmin = () => {
               {...register('phone')}
               error={errors.phone?.message}
               className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-              placeholder="(555) 123-4567"
+              placeholder="(302) 562-5654"
             />
 
             <div className="relative">

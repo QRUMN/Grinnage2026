@@ -186,11 +186,11 @@ export const LandingPage: React.FC = () => {
                     <ArrowRight className="w-5 h-5" />
                   </button>
                   <a
-                    href="tel:+15551234567"
+                    href="tel:+13025625654"
                     className="btn-outline"
                   >
                     <Phone className="w-5 h-5" />
-                    Call (555) 123-4567
+                    Call (302) 562-5654
                   </a>
                 </div>
 
@@ -393,11 +393,11 @@ export const LandingPage: React.FC = () => {
                   Schedule Free Inspection
                 </button>
                 <a
-                  href="tel:+15551234567"
+                  href="tel:+13025625654"
                   className="btn border-2 border-white text-white hover:bg-white hover:text-primary-600"
                 >
                   <Phone className="w-5 h-5" />
-                  Call (555) 123-4567
+                  Call (302) 562-5654
                 </a>
               </div>
               <p className="text-primary-200 text-sm mt-4">
@@ -424,14 +424,14 @@ export const LandingPage: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex items-center">
                   <Phone className="w-4 h-4 text-primary-500 mr-3" />
-                  <a href="tel:+15551234567" className="hover:text-primary-400 transition-colors">
-                    (555) 123-4567
+                  <a href="tel:+13025625654" className="hover:text-primary-400 transition-colors">
+                    (302) 562-5654
                   </a>
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-4 h-4 text-primary-500 mr-3" />
-                  <a href="mailto:info@grinnage.com" className="hover:text-primary-400 transition-colors">
-                    info@grinnage.com
+                  <a href="mailto:contact@grinnagex.com" className="hover:text-primary-400 transition-colors">
+                    contact@grinnagex.com
                   </a>
                 </div>
                 <div className="flex items-center">

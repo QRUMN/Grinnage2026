@@ -27,7 +27,7 @@ export const PropertyDetailsStep = ({ register, errors, watch }: PropertyDetails
       <Input
         label="Phone Number"
         type="tel"
-        placeholder="(555) 123-4567"
+        placeholder="(302) 562-5654"
         {...register('phone', {
           onChange: (e) => {
             e.target.value = formatPhoneNumber(e.target.value);

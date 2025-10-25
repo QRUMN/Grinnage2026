@@ -9,7 +9,7 @@ const Technicians: React.FC = () => {
     id: 1,
     name: 'Keith Grinnage',
     email: 'keith@grinnage.com',
-    phone: '(555) 123-4567',
+    phone: '(302) 562-5654',
     position: 'Lead Technician & Owner',
     specialty: ['Pest Control', 'Termite Treatment', 'Mosquito Control'],
     status: 'active',

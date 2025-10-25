@@ -66,7 +66,7 @@ export const AddClientForm: React.FC<AddClientFormProps> = ({ onClose, onSubmit 
 
     // Phone validation
     if (formData.phone && !/^\(\d{3}\)\s\d{3}-\d{4}$/.test(formData.phone)) {
-      newErrors.phone = 'Please enter phone in format (555) 123-4567';
+      newErrors.phone = 'Please enter phone in format (302) 562-5654';
     }
 
     setErrors(newErrors);
@@ -245,7 +245,7 @@ export const AddClientForm: React.FC<AddClientFormProps> = ({ onClose, onSubmit 
                         value={formData.phone}
                         onChange={handlePhoneChange('phone')}
                         className={`input w-full ${errors.phone ? 'border-red-500' : ''}`}
-                        placeholder="(555) 123-4567"
+                        placeholder="(302) 562-5654"
                         maxLength={14}
                       />
                       {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
@@ -259,7 +259,7 @@ export const AddClientForm: React.FC<AddClientFormProps> = ({ onClose, onSubmit 
                         value={formData.alternatePhone}
                         onChange={handlePhoneChange('alternatePhone')}
                         className="input w-full"
-                        placeholder="(555) 123-4567"
+                        placeholder="(302) 562-5654"
                         maxLength={14}
                       />
                     </div>
@@ -467,7 +467,7 @@ export const AddClientForm: React.FC<AddClientFormProps> = ({ onClose, onSubmit 
                         value={formData.emergencyPhone}
                         onChange={handlePhoneChange('emergencyPhone')}
                         className="input w-full"
-                        placeholder="(555) 123-4567"
+                        placeholder="(302) 562-5654"
                         maxLength={14}
                       />
                     </div>

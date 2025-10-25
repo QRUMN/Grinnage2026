@@ -51,7 +51,7 @@ export const AdminDashboard: React.FC = () => {
       id: '1',
       name: 'Sarah Johnson',
       email: 'sarah.j@email.com',
-      phone: '(555) 123-4567',
+      phone: '(302) 562-5654',
       status: 'new',
       serviceType: 'Residential Inspection',
       urgency: 'high',

@@ -96,7 +96,7 @@ export const CreateClient = () => {
                     <input
                       type="tel"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-[#56e39f] dark:bg-gray-700 dark:text-white"
-                      placeholder="(555) 123-4567"
+                      placeholder="(302) 562-5654"
                     />
                   </div>
                 </div>

@@ -256,9 +256,9 @@ export const ServicesPageSimple: React.FC = () => {
                   <Calendar className="w-5 h-5 mr-2" />
                   Get Free Quote
                 </button>
-                <a href="tel:+15551234567" className="inline-flex items-center px-6 py-3 border-2 border-white/20 text-white rounded-lg hover:bg-white/5 transition-colors">
+                <a href="tel:+13025625654" className="inline-flex items-center px-6 py-3 border-2 border-white/20 text-white rounded-lg hover:bg-white/5 transition-colors">
                   <Phone className="w-5 h-5 mr-2" />
-                  Call (555) 123-4567
+                  Call (302) 562-5654
                 </a>
               </div>
             </div>
@@ -545,11 +545,11 @@ export const ServicesPageSimple: React.FC = () => {
                   Schedule Free Inspection
                 </button>
                 <a
-                  href="tel:+15551234567"
+                  href="tel:+13025625654"
                   className="inline-flex items-center px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-[#0f1729] transition-colors"
                 >
                   <Phone className="w-5 h-5 mr-2" />
-                  Call (555) 123-4567
+                  Call (302) 562-5654
                 </a>
               </div>
               <p className="text-gray-400 text-sm mt-4">
@@ -575,14 +575,14 @@ export const ServicesPageSimple: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex items-center">
                   <Phone className="w-4 h-4 text-[#56e39f] mr-3" />
-                  <a href="tel:+15551234567" className="text-gray-300 hover:text-[#56e39f] transition-colors">
-                    (555) 123-4567
+                  <a href="tel:+13025625654" className="text-gray-300 hover:text-[#56e39f] transition-colors">
+                    (302) 562-5654
                   </a>
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-4 h-4 text-[#56e39f] mr-3" />
-                  <a href="mailto:info@grinnage.com" className="text-gray-300 hover:text-[#56e39f] transition-colors">
-                    info@grinnage.com
+                  <a href="mailto:contact@grinnagex.com" className="text-gray-300 hover:text-[#56e39f] transition-colors">
+                    contact@grinnagex.com
                   </a>
                 </div>
               </div>

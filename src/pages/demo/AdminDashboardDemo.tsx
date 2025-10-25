@@ -37,7 +37,7 @@ export const AdminDashboardDemo: React.FC = () => {
       id: '1',
       name: 'John Smith',
       email: 'john@example.com',
-      phone: '(555) 123-4567',
+      phone: '(302) 562-5654',
       type: 'residential',
       status: 'active',
       lastService: '2025-05-15',

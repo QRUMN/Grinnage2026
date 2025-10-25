@@ -224,16 +224,16 @@ const defaultContent: SiteContent = {
       {
         type: 'phone',
         title: 'Call Us',
-        content: '(555) 123-4567',
+        content: '(302) 562-5654',
         description: 'Available 24/7 for emergencies',
-        action: 'tel:+15551234567'
+        action: 'tel:+13025625654'
       },
       {
         type: 'email',
         title: 'Email Us',
-        content: 'info@grinnage.com',
+        content: 'contact@grinnagex.com',
         description: 'We respond within 24 hours',
-        action: 'mailto:info@grinnage.com'
+        action: 'mailto:contact@grinnagex.com'
       },
       {
         type: 'address',
@@ -251,8 +251,8 @@ const defaultContent: SiteContent = {
   },
   siteSettings: {
     companyName: 'Grinnage Exterminating',
-    phone: '(555) 123-4567',
-    email: 'info@grinnage.com',
+    phone: '(302) 562-5654',
+    email: 'contact@grinnagex.com',
     serviceArea: 'San Francisco Bay Area',
     metaTitle: 'Professional Pest Control | Grinnage Exterminating',
     metaDescription: 'Professional pest control services in the San Francisco Bay Area. Licensed technicians, guaranteed results, 20+ years experience.'

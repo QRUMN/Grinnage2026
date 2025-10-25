@@ -140,7 +140,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             type="tel"
             {...register('phone')}
             className={cn('input', errors.phone && 'border-red-500 focus:ring-red-500')}
-            placeholder="(555) 123-4567"
+            placeholder="(302) 562-5654"
           />
           {errors.phone && (
             <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>

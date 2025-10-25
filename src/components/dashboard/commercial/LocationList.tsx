@@ -7,7 +7,7 @@ const locations = [
     id: '1',
     name: 'Main Office',
     address: '123 Business Ave, Suite 100',
-    phone: '(555) 123-4567',
+    phone: '(302) 562-5654',
     lastService: '2024-03-01'
   },
   {

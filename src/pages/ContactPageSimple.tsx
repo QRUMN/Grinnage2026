@@ -52,16 +52,16 @@ export const ContactPageSimple: React.FC = () => {
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Call Us",
-      content: "(555) 123-4567",
+      content: "(302) 562-5654",
       description: "Available 24/7 for emergencies",
-      action: "tel:+15551234567"
+      action: "tel:+13025625654"
     },
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email Us",
-      content: "info@grinnage.com",
+      content: "contact@grinnagex.com",
       description: "We respond within 24 hours",
-      action: "mailto:info@grinnage.com"
+      action: "mailto:contact@grinnagex.com"
     },
     {
       icon: <MapPin className="w-6 h-6" />,
@@ -222,9 +222,9 @@ export const ContactPageSimple: React.FC = () => {
                 to provide you with a free consultation and customized treatment plan.
               </p>
               <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
-                <a href="tel:+15551234567" className="btn-primary">
+                <a href="tel:+13025625654" className="btn-primary">
                   <Phone className="w-5 h-5" />
-                  Call (555) 123-4567
+                  Call (302) 562-5654
                 </a>
                 <a href="#contact-form" className="btn-outline">
                   <MessageCircle className="w-5 h-5" />
@@ -334,7 +334,7 @@ export const ContactPageSimple: React.FC = () => {
               </p>
               <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
                 <a
-                  href="tel:+15551234567"
+                  href="tel:+13025625654"
                   className="btn bg-white text-primary-600 hover:bg-neutral-100"
                 >
                   <Phone className="w-5 h-5" />
@@ -368,14 +368,14 @@ export const ContactPageSimple: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex items-center">
                   <Phone className="w-4 h-4 text-primary-500 mr-3" />
-                  <a href="tel:+15551234567" className="hover:text-primary-400 transition-colors">
-                    (555) 123-4567
+                  <a href="tel:+13025625654" className="hover:text-primary-400 transition-colors">
+                    (302) 562-5654
                   </a>
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-4 h-4 text-primary-500 mr-3" />
-                  <a href="mailto:info@grinnage.com" className="hover:text-primary-400 transition-colors">
-                    info@grinnage.com
+                  <a href="mailto:contact@grinnagex.com" className="hover:text-primary-400 transition-colors">
+                    contact@grinnagex.com
                   </a>
                 </div>
               </div>

@@ -53,7 +53,7 @@ export const ProfileSettings = () => {
                 <input
                   type="tel"
                   className="pl-10 block w-full rounded-lg border-gray-300 dark:border-dark-700 bg-white dark:bg-dark-900 text-dark-900 dark:text-white focus:ring-mint-500 focus:border-mint-500"
-                  placeholder="(555) 123-4567"
+                  placeholder="(302) 562-5654"
                 />
               </div>
             </div>

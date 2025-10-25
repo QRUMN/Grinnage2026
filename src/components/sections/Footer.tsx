@@ -121,14 +121,14 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center">
                 <Phone className="w-5 h-5 text-[#56e39f] mr-3 flex-shrink-0" />
-                <a href="tel:+18005551234" className="text-gray-400 hover:text-[#56e39f] transition-colors">
-                  (800) 555-1234
+                <a href="tel:+13025625654" className="text-gray-400 hover:text-[#56e39f] transition-colors">
+                  (302) 562-5654
                 </a>
               </li>
               <li className="flex items-center">
                 <Mail className="w-5 h-5 text-[#56e39f] mr-3 flex-shrink-0" />
-                <a href="mailto:info@grinnage.com" className="text-gray-400 hover:text-[#56e39f] transition-colors">
-                  info@grinnage.com
+                <a href="mailto:contact@grinnagex.com" className="text-gray-400 hover:text-[#56e39f] transition-colors">
+                  contact@grinnagex.com
                 </a>
               </li>
             </ul>

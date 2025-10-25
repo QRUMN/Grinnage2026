@@ -13,7 +13,7 @@ const organizations = [
     contact: {
       name: 'John Smith',
       email: 'john@techsolutions.com',
-      phone: '(555) 123-4567'
+      phone: '(302) 562-5654'
     },
     address: '123 Business Ave, Suite 100, City, ST 12345',
     lastService: '2024-03-01T10:00:00Z',

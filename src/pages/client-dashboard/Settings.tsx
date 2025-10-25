@@ -99,7 +99,7 @@ const Settings: React.FC = () => {
                         <label className="block text-sm text-gray-400 mb-1">Phone Number</label>
                         <input 
                           type="tel" 
-                          value="(555) 123-4567"
+                          value="(302) 562-5654"
                           className="w-full rounded-lg border border-white/10 bg-white/5 p-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#56e39f]/50"
                         />
                       </div>
