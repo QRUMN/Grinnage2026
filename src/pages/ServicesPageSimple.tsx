@@ -12,53 +12,70 @@ export const ServicesPageSimple: React.FC = () => {
 
   const services = [
     {
-      id: 'residential-inspection',
-      title: 'Residential Inspection',
-      subtitle: 'Comprehensive Home Assessment',
-      price: 8999, // in cents
-      interval: 'one_time',
-      icon: <Home className="w-8 h-8" />,
-      description: 'Thorough property inspection to identify pest issues and prevention opportunities.',
-      features: [
-        'Complete interior and exterior inspection',
-        'Detailed written report with findings',
-        'Treatment recommendations',
-        'Prevention strategy plan',
-        'Follow-up consultation included'
-      ],
-      popular: false
-    },
-    {
-      id: 'residential-treatment',
-      title: 'Residential Treatment',
-      subtitle: 'Complete Pest Elimination',
-      price: 19999, // in cents
-      interval: 'one_time',
+      id: 'advanced-guard',
+      title: 'Advanced Guard',
+      subtitle: 'Comprehensive pest protection with regular inspections and preventive treatments',
+      price: 12000, // in cents
+      interval: 'quarter',
       icon: <Shield className="w-8 h-8" />,
-      description: 'Professional pest treatment using safe, effective methods for your home.',
+      description: 'Complete pest protection with quarterly service and preventive treatments.',
       features: [
-        'Targeted pest elimination',
-        'Eco-friendly treatment options',
-        'Interior and exterior application',
-        'Safe for family and pets',
-        '30-day service guarantee'
+        'Quarterly inspections',
+        'All pest coverage',
+        'Preventive treatments',
+        'Priority service',
+        'Ongoing protection guarantee'
       ],
       popular: true
     },
     {
-      id: 'commercial-service',
-      title: 'Commercial Service',
-      subtitle: 'Business Pest Management',
-      price: 7999, // in cents
-      interval: 'month',
-      icon: <Building className="w-8 h-8" />,
-      description: 'Ongoing pest control solutions designed for commercial properties.',
+      id: 'same-day-service',
+      title: 'Same Day Service',
+      subtitle: 'Urgent pest control response for immediate issues with guaranteed results',
+      price: 22500, // in cents
+      interval: 'one_time',
+      icon: <Zap className="w-8 h-8" />,
+      description: 'Emergency pest control when you need it most - same day response guaranteed.',
       features: [
-        'Monthly scheduled service',
-        'Customized treatment plans',
-        'Compliance documentation',
-        'Emergency response available',
-        'Dedicated account manager'
+        'Same-day response',
+        'Emergency treatment',
+        'Targeted solutions',
+        'Expert technicians',
+        'Guaranteed results'
+      ],
+      popular: false
+    },
+    {
+      id: 'wildlife-control',
+      title: 'Wildlife Control',
+      subtitle: 'Humane wildlife removal and exclusion services for all types of unwanted animals',
+      price: 0, // Free estimate
+      interval: 'estimate',
+      icon: <Target className="w-8 h-8" />,
+      description: 'Professional wildlife removal with humane methods and prevention strategies.',
+      features: [
+        'Free inspection',
+        'Humane removal',
+        'Entry prevention',
+        'Damage repair consultation',
+        'Long-term exclusion'
+      ],
+      popular: false
+    },
+    {
+      id: 'wood-eating-pest',
+      title: 'Wood Eating Pest',
+      subtitle: 'Termite and wood-destroying insect treatment with lasting protection',
+      price: 0, // Free estimate
+      interval: 'estimate',
+      icon: <Bug className="w-8 h-8" />,
+      description: 'Comprehensive termite and wood-destroying insect protection for your property.',
+      features: [
+        'Free inspection',
+        'Custom treatment plan',
+        'Barrier protection',
+        'Monitoring stations',
+        'Ongoing monitoring'
       ],
       popular: false
     }
@@ -66,22 +83,22 @@ export const ServicesPageSimple: React.FC = () => {
 
   const additionalServices = [
     {
-      title: 'Termite Control',
-      description: 'Specialized termite inspection, treatment, and prevention services.',
+      title: 'Rodent Control',
+      description: 'Effective solutions for mice, rats, and other rodent infestations.',
+      icon: <Target className="w-6 h-6" />,
+      features: ['Complete inspection', 'Exclusion services', 'Bait stations', 'Ongoing monitoring']
+    },
+    {
+      title: 'Bed Bug Treatment',
+      description: 'Specialized heat treatments and targeted solutions for bed bug elimination.',
       icon: <Bug className="w-6 h-6" />,
-      features: ['Wood-destroying insect inspection', 'Liquid and bait treatments', 'Damage repair consultation']
+      features: ['Heat treatment', 'Chemical applications', 'Follow-up inspections', 'Prevention education']
     },
     {
-      title: 'Emergency Service',
-      description: '24/7 emergency pest control for urgent situations.',
-      icon: <Zap className="w-6 h-6" />,
-      features: ['Same-day response', 'After-hours availability', 'Rapid treatment solutions']
-    },
-    {
-      title: 'Preventive Maintenance',
-      description: 'Ongoing protection plans to prevent future infestations.',
-      icon: <Clock className="w-6 h-6" />,
-      features: ['Quarterly treatments', 'Seasonal adjustments', 'Unlimited service calls']
+      title: 'Mosquito Control',
+      description: 'Yard treatments to reduce mosquito populations and protect your outdoor spaces.',
+      icon: <Shield className="w-6 h-6" />,
+      features: ['Property inspection', 'Breeding site elimination', 'Targeted treatments', 'Seasonal programs']
     }
   ];
 
@@ -114,6 +131,7 @@ export const ServicesPageSimple: React.FC = () => {
   ];
 
   const formatCurrencyFromCents = (cents: number): string => {
+    if (cents === 0) return 'Free Estimate';
     return `$${(cents / 100).toFixed(0)}`;
   };
 
@@ -294,9 +312,13 @@ export const ServicesPageSimple: React.FC = () => {
                       <span className="text-4xl font-bold text-white">
                         {formatCurrencyFromCents(service.price)}
                       </span>
-                      <span className="text-gray-400 ml-2">
-                        {service.interval === 'one_time' ? 'One-time' : `/${service.interval}`}
-                      </span>
+                      {service.price > 0 && (
+                        <span className="text-gray-400 ml-2">
+                          {service.interval === 'one_time' ? 'One-time' :
+                           service.interval === 'quarter' ? 'per quarter' :
+                           service.interval === 'estimate' ? '' : `/${service.interval}`}
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -579,10 +601,10 @@ export const ServicesPageSimple: React.FC = () => {
             <div>
               <h4 className="font-semibold text-white mb-4">Services</h4>
               <ul className="space-y-2 text-sm">
-                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Residential Inspection</span></li>
-                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Residential Treatment</span></li>
-                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Commercial Service</span></li>
-                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Emergency Service</span></li>
+                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Advanced Guard</span></li>
+                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Same Day Service</span></li>
+                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Wildlife Control</span></li>
+                <li><span className="text-gray-400 hover:text-[#56e39f] transition-colors">Wood Eating Pest</span></li>
               </ul>
             </div>
           </div>
