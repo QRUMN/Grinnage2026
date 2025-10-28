@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,48 +6,61 @@
 
 @layer base {
   * {
-    @apply border-neutral-200 dark:border-neutral-800;
+    @apply border-dark-border;
   }
 
   html {
     @apply scroll-smooth;
+    color-scheme: dark;
   }
 
   body {
-    @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50
-           font-sans antialiased;
+    @apply bg-dark-bg text-gray-100 font-sans antialiased;
+    background: linear-gradient(to bottom, #0a0b0f, #1a1b26);
+    min-height: 100vh;
+    letter-spacing: 0.02em;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-semibold tracking-tight;
+    @apply font-display font-semibold tracking-tight text-white;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Default dark theme */
+  :root {
+    color-scheme: dark;
+    --magnetic-x: 0px;
+    --magnetic-y: 0px;
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
   }
 }
 
 @layer components {
-  /* Modern Button Components */
+  /* Modern Neon Button Components */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl
-           font-medium transition-all duration-200 disabled:opacity-50
-           disabled:cursor-not-allowed focus:outline-none focus:ring-2
-           focus:ring-offset-2 focus:ring-offset-neutral-50 dark:focus:ring-offset-neutral-950;
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl
+           font-medium transition-all duration-300 disabled:opacity-50
+           disabled:cursor-not-allowed focus:outline-none overflow-hidden
+           before:absolute before:inset-0 before:transition-opacity before:duration-300;
   }
 
   .btn-primary {
-    @apply btn bg-primary-500 text-white hover:bg-primary-600
-           shadow-soft hover:shadow-md focus:ring-primary-500
-           active:scale-[0.98];
+    @apply btn bg-neon-green text-dark-bg hover:bg-neon-green-dark
+           shadow-glow hover:shadow-glow-lg
+           before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent
+           before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700;
   }
 
   .btn-secondary {
-    @apply btn bg-neutral-100 text-neutral-900 hover:bg-neutral-200
-           dark:bg-neutral-800 dark:text-neutral-100 dark:hover:bg-neutral-700
-           shadow-soft hover:shadow-md focus:ring-neutral-500;
+    @apply btn bg-dark-surface/80 text-gray-100 hover:bg-dark-hover
+           backdrop-blur-sm border border-dark-border hover:border-neon-green/30
+           hover:shadow-glow;
   }
 
   .btn-outline {
-    @apply btn border-2 border-primary-200 text-primary-600 hover:bg-primary-50
-           dark:border-primary-800 dark:text-primary-400 dark:hover:bg-primary-950
-           focus:ring-primary-500;
+    @apply btn border-2 border-neon-green/50 text-neon-green hover:bg-neon-green/10
+           hover:border-neon-green hover:shadow-glow backdrop-blur-sm;
   }
 
   /* Modern Input Components */
@@ -64,43 +77,56 @@
     @apply block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2;
   }
 
-  /* Modern Card Components */
+  /* Modern Glassmorphic Card Components */
   .card {
-    @apply bg-white dark:bg-neutral-900 rounded-2xl shadow-soft
-           border border-neutral-200 dark:border-neutral-800 p-6;
+    @apply bg-dark-surface/40 backdrop-blur-md rounded-2xl
+           border border-dark-border p-6;
   }
 
   .card-hover {
-    @apply card hover:shadow-md transition-all duration-300
-           hover:-translate-y-1 cursor-pointer;
+    @apply card hover:shadow-glow transition-all duration-300
+           hover:-translate-y-1 cursor-pointer hover:bg-dark-surface/60
+           hover:border-neon-green/30 hover:scale-[1.02];
+  }
+  
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl p-6
+           bg-gradient-to-br from-dark-surface/20 to-dark-surface/40
+           backdrop-blur-xl border border-neon-green/20
+           shadow-lg hover:shadow-glow
+           before:absolute before:inset-0 before:-translate-x-full 
+           before:bg-gradient-to-r before:from-transparent before:via-neon-green/10 before:to-transparent
+           hover:before:translate-x-full before:transition-transform before:duration-1000;
   }
 
   /* Navigation Components */
   .nav-link {
-    @apply px-4 py-2 rounded-lg text-neutral-600 dark:text-neutral-400
-           hover:text-neutral-900 dark:hover:text-neutral-100
-           hover:bg-neutral-100 dark:hover:bg-neutral-800
-           transition-all duration-200 font-medium;
+    @apply relative px-4 py-2 rounded-lg text-gray-300
+           hover:text-neon-green transition-all duration-300 font-medium
+           after:content-[''] after:absolute after:bottom-0 after:left-1/2 
+           after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-neon-green 
+           after:transition-all after:duration-300 hover:after:w-full;
   }
 
   .nav-link-active {
-    @apply nav-link bg-primary-50 text-primary-600
-           dark:bg-primary-950 dark:text-primary-400;
+    @apply nav-link text-neon-green
+           bg-neon-green/10 after:w-full;
   }
 
   /* Modern Badge Components */
   .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
+           backdrop-blur-sm border;
   }
 
   .badge-success {
-    @apply badge bg-primary-100 text-primary-800
-           dark:bg-primary-900 dark:text-primary-200;
+    @apply badge bg-neon-green/20 text-neon-green
+           border-neon-green/30;
   }
 
   .badge-warning {
-    @apply badge bg-accent-100 text-accent-800
-           dark:bg-accent-900 dark:text-accent-200;
+    @apply badge bg-accent-500/20 text-accent-400
+           border-accent-500/30;
   }
 
   /* Layout Components */
@@ -123,19 +149,50 @@
   }
 }
 
+@layer utilities {
+  /* Glassmorphism utilities */
+  .glass {
+    @apply backdrop-blur-md bg-dark-surface/40 border border-dark-border;
+  }
+  
+  .glass-dark {
+    @apply backdrop-blur-xl bg-dark-bg/60 border border-neon-green/20;
+  }
+  
+  /* Neon glow utilities */
+  .neon-text {
+    @apply text-neon-green drop-shadow-[0_0_10px_rgba(57,255,20,0.5)];
+  }
+  
+  .neon-border {
+    @apply border-neon-green shadow-[0_0_20px_rgba(57,255,20,0.3)];
+  }
+  
+  /* 3D hover effect */
+  .hover-3d {
+    @apply transition-transform duration-300;
+    transform-style: preserve-3d;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-neon-green to-accent-500 bg-clip-text text-transparent;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  @apply w-2;
+  @apply w-2 h-2;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  @apply bg-dark-bg;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  @apply bg-neon-green/20 rounded-full hover:bg-neon-green/40;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-gray-500;
+::-webkit-scrollbar-corner {
+  @apply bg-dark-bg;
 }

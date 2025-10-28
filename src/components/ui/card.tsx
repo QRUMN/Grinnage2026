@@ -18,28 +18,30 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     ...props
   }, ref) => {
     const baseStyles = [
-      'overflow-hidden transition-all duration-200',
-      'bg-white dark:bg-gray-900'
+      'relative overflow-hidden transition-all duration-300',
+      'bg-dark-surface/40'
     ];
 
     const variants = {
       default: [
-        'shadow-sm border border-gray-200 dark:border-gray-800'
+        'backdrop-blur-md border border-dark-border shadow-sm'
       ],
       bordered: [
-        'border-2 border-gray-200 dark:border-gray-700'
+        'border-2 border-neon-green/30 shadow-glow'
       ],
       elevated: [
-        'shadow-lg border border-gray-100 dark:border-gray-800'
+        'backdrop-blur-lg shadow-glow-lg border border-neon-green/20',
+        'before:absolute before:inset-0 before:-z-10 before:bg-gradient-to-br before:from-dark-surface/60 before:to-dark-bg/60'
       ],
       soft: [
-        'shadow-soft bg-gray-50/50 dark:bg-gray-800/50',
-        'backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50'
+        'backdrop-blur-sm bg-dark-surface/20 border border-dark-border/50'
       ],
       glass: [
-        'backdrop-blur-md bg-white/80 dark:bg-gray-900/80',
-        'border border-gray-200/20 dark:border-gray-700/20',
-        'shadow-lg'
+        'backdrop-blur-xl bg-gradient-to-br from-dark-surface/30 to-dark-bg/40',
+        'border border-neon-green/20 shadow-lg',
+        'before:absolute before:inset-0 before:-translate-x-full',
+        'before:bg-gradient-to-r before:from-transparent before:via-neon-green/5 before:to-transparent',
+        'hover:before:translate-x-full before:transition-transform before:duration-1000'
       ]
     };
 
@@ -50,13 +52,15 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     };
 
     const hoverStyles = hover ? [
-      'hover:shadow-md hover:-translate-y-1',
-      'hover:border-gray-300 dark:hover:border-gray-600'
+      'hover:shadow-glow hover:-translate-y-1',
+      'hover:border-neon-green/30 hover:bg-dark-surface/60',
+      'hover:scale-[1.02]'
     ] : [];
 
     const interactiveStyles = interactive ? [
-      'cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
-      'active:scale-[0.98]'
+      'cursor-pointer focus:outline-none focus:ring-2 focus:ring-neon-green/50 focus:ring-offset-2 focus:ring-offset-dark-bg',
+      'active:scale-[0.98]',
+      'hover:animate-neon-pulse'
     ] : [];
 
     return (

@@ -114,20 +114,25 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex">
+    <div className="min-h-screen bg-dark-bg flex">
       {/* Sidebar */}
       <div className={cn(
-        "fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0",
+        "fixed inset-y-0 left-0 z-50 w-64 glass-dark border-r border-neon-green/20 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0",
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between h-16 px-6 border-b border-neutral-200 dark:border-neutral-800">
-          <div className="font-display font-bold text-xl text-primary-600 dark:text-primary-400">
-            Grinnage Exterminating
+        <div className="flex items-center justify-between h-16 px-6 border-b border-neon-green/20">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-neon-green/20 flex items-center justify-center shadow-glow">
+              <Shield className="w-5 h-5 text-neon-green" />
+            </div>
+            <span className="font-display font-bold text-lg text-white">
+              Admin
+            </span>
           </div>
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
+            className="lg:hidden p-2 rounded-lg hover:bg-dark-hover text-gray-400 hover:text-neon-green transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -140,10 +145,10 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
               key={item.id}
               onClick={() => handleNavigation(item.path)}
               className={cn(
-                "w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-colors",
+                "w-full flex items-center justify-between px-3 py-3 rounded-xl text-left transition-all duration-300",
                 isActivePath(item.path)
-                  ? "bg-primary-50 dark:bg-primary-950 text-primary-600 dark:text-primary-400"
-                  : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100"
+                  ? "bg-neon-green/20 text-neon-green border border-neon-green/30 shadow-glow"
+                  : "text-gray-300 hover:bg-dark-surface/40 hover:text-neon-green border border-transparent hover:border-neon-green/20"
               )}
             >
               <div className="flex items-center">
@@ -151,7 +156,7 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
                 <span className="ml-3 font-medium">{item.label}</span>
               </div>
               {item.badge && (
-                <span className="bg-accent-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+                <span className="bg-neon-green text-dark-bg text-xs font-bold px-2 py-1 rounded-full shadow-glow">
                   {item.badge}
                 </span>
               )}
@@ -160,16 +165,16 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
         </nav>
 
         {/* Admin Info */}
-        <div className="p-4 border-t border-neutral-200 dark:border-neutral-800">
-          <div className="flex items-center">
-            <div className="flex items-center justify-center w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-full">
-              <Shield className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+        <div className="p-4 border-t border-neon-green/20">
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-dark-surface/40 border border-dark-border">
+            <div className="flex items-center justify-center w-10 h-10 bg-neon-green/20 rounded-lg shadow-glow">
+              <Shield className="w-5 h-5 text-neon-green" />
             </div>
-            <div className="ml-3 flex-1">
-              <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-white">
                 {user?.name}
               </p>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400 capitalize">
+              <p className="text-xs text-gray-400 capitalize">
                 {user?.role?.replace('_', ' ')}
               </p>
             </div>
@@ -180,12 +185,12 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col lg:ml-0">
         {/* Top Header */}
-        <header className="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 h-16">
+        <header className="glass-dark border-b border-neon-green/20 h-16">
           <div className="flex items-center justify-between h-full px-6">
             {/* Mobile Menu Button */}
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
+              className="lg:hidden p-2 rounded-lg hover:bg-dark-hover text-gray-400 hover:text-neon-green transition-colors"
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -193,11 +198,14 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
             {/* Search Bar */}
             <div className="hidden md:flex items-center flex-1 max-w-md mx-6">
               <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-neutral-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
                 <input
                   type="text"
                   placeholder="Search clients, leads, appointments..."
-                  className="w-full pl-10 pr-4 py-2 border border-neutral-200 dark:border-neutral-700 rounded-xl bg-neutral-50 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full pl-10 pr-4 py-2.5 bg-dark-surface/60 backdrop-blur-sm border border-dark-border 
+                           rounded-xl text-white placeholder-gray-500 
+                           focus:outline-none focus:ring-2 focus:ring-neon-green/30 focus:border-neon-green/50
+                           transition-all duration-300"
                 />
               </div>
             </div>
@@ -211,35 +219,35 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
               <div className="relative">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center space-x-2 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                  className="flex items-center space-x-2 p-2 rounded-lg hover:bg-dark-hover text-gray-300 hover:text-neon-green transition-colors"
                 >
-                  <div className="flex items-center justify-center w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-full">
-                    <Shield className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                  <div className="flex items-center justify-center w-8 h-8 bg-neon-green/20 rounded-lg shadow-glow">
+                    <Shield className="w-4 h-4 text-neon-green" />
                   </div>
-                  <ChevronDown className="w-4 h-4 text-neutral-400" />
+                  <ChevronDown className="w-4 h-4" />
                 </button>
 
                 {/* User Dropdown */}
                 {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-neutral-800 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-700 py-2 z-50">
-                    <div className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-700">
-                      <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                  <div className="absolute right-0 mt-2 w-56 glass-dark border border-neon-green/20 rounded-xl shadow-glow py-2 z-50">
+                    <div className="px-4 py-3 border-b border-neon-green/20">
+                      <p className="text-sm font-semibold text-white">
                         {user?.name}
                       </p>
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                      <p className="text-xs text-gray-400">
                         {user?.email}
                       </p>
                     </div>
                     <button
                       onClick={() => handleNavigation('/admin/settings')}
-                      className="w-full flex items-center px-4 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-gray-300 hover:text-neon-green hover:bg-dark-surface/40 transition-all"
                     >
                       <Settings className="w-4 h-4 mr-3" />
                       Settings
                     </button>
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-error-400 hover:bg-dark-surface/40 transition-all"
                     >
                       <LogOut className="w-4 h-4 mr-3" />
                       Sign Out
@@ -252,7 +260,7 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-6 bg-dark-bg">
           {children}
         </main>
       </div>
@@ -263,7 +271,7 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-dark-bg/80 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}

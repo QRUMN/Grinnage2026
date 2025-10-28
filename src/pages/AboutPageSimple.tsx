@@ -1,13 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Shield, Award, Users, Target, ArrowLeft, CheckCircle,
-  Star, Phone, Mail, Calendar, Menu, X, User, Leaf,
-  Heart, Zap, Building
+  Shield, Award, ArrowLeft, CheckCircle, Star, Phone, Mail, Calendar, Menu, X,
+  User, Leaf, Heart, Zap, MapPin, Clock
 } from 'lucide-react';
-import { Button } from '../components/ui/button';
-import { Section, Container, SectionHeader } from '../components/ui/Section';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 
 export const AboutPageSimple: React.FC = () => {
   const navigate = useNavigate();
@@ -17,14 +13,12 @@ export const AboutPageSimple: React.FC = () => {
     {
       name: "Keith Grinnage",
       role: "CEO & Operator",
-      image: "/images/keith-grinnage.jpg", // Placeholder path
       description: "With over 17 years of experience in pest control, Keith leads our team with expertise and dedication to customer satisfaction.",
       experience: "17+ years"
     },
     {
       name: "Dawson Grinnage",
       role: "Social Media Manager",
-      image: "/images/dawson-grinnage.jpg", // Placeholder path
       description: "Managing our digital presence and ensuring our clients stay informed about the latest pest control solutions and company updates.",
       experience: "Digital Marketing Expert"
     }
@@ -34,26 +28,26 @@ export const AboutPageSimple: React.FC = () => {
     {
       icon: <Award className="w-8 h-8" />,
       title: "Excellence",
-      description: "Delivering superior pest control solutions with unmatched expertise and professionalism.",
-      color: "primary"
+      description: "Delivering superior pest control solutions with unmatched expertise.",
+      color: "neon"
     },
     {
       icon: <Leaf className="w-8 h-8" />,
       title: "Sustainability",
-      description: "Committed to eco-friendly practices that protect both your space and the environment.",
-      color: "success"
+      description: "Eco-friendly practices that protect your space and the environment.",
+      color: "cyan"
     },
     {
       icon: <Heart className="w-8 h-8" />,
       title: "Customer Focus",
-      description: "Building lasting relationships through exceptional service and transparent communication.",
-      color: "accent"
+      description: "Building lasting relationships through exceptional service.",
+      color: "neon"
     },
     {
       icon: <Zap className="w-8 h-8" />,
       title: "Innovation",
-      description: "Continuously evolving our methods to provide cutting-edge pest control solutions.",
-      color: "purple"
+      description: "Continuously evolving with cutting-edge pest control methods.",
+      color: "cyan"
     }
   ];
 
@@ -65,311 +59,436 @@ export const AboutPageSimple: React.FC = () => {
     { name: "7B Certification", description: "Specialized treatment certification" }
   ];
 
-  const getValueColor = (color: string) => {
-    switch (color) {
-      case 'primary': return 'bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400';
-      case 'success': return 'bg-success-100 dark:bg-success-900/30 text-success-600 dark:text-success-400';
-      case 'accent': return 'bg-accent-100 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400';
-      case 'purple': return 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400';
-      default: return 'bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400';
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
-      {/* Header */}
-      <header className="sticky top-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 z-50">
-        <Container>
-          <div className="flex justify-between items-center py-4">
-            <div className="font-display font-bold text-2xl text-primary-600 dark:text-primary-400">
+    <div className="min-h-screen bg-dark-bg">
+      {/* Glass Navbar */}
+      <header className="sticky top-0 glass-dark border-b border-neon-green/20 z-50">
+        <div className="container mx-auto flex justify-between items-center py-4">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-green to-neon-green-dark flex items-center justify-center shadow-glow">
+                <Shield className="w-6 h-6 text-dark-bg" />
+              </div>
+              <div className="absolute inset-0 w-10 h-10 rounded-full bg-neon-green blur-md opacity-50 animate-neon-pulse" />
+            </div>
+            <span className="font-display font-bold text-xl text-white tracking-tight">
               Grinnage Exterminating
-            </div>
-            <nav className="hidden md:flex items-center space-x-8">
-              <button onClick={() => navigate('/')} className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Home</button>
-              <button onClick={() => navigate('/services')} className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Services</button>
-              <span className="text-primary-600 dark:text-primary-400 font-medium">About</span>
-              <button onClick={() => navigate('/contact')} className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Contact</button>
-            </nav>
-            <div className="flex items-center gap-3">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => navigate('/admin-login')}
-                className="hidden md:inline-flex"
-              >
-                Admin Login
-              </Button>
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={() => navigate('/contact')}
-                className="hidden md:inline-flex"
-              >
-                Get Quote
-              </Button>
-              {/* Mobile Menu Button */}
-              <button
-                className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              >
-                {isMobileMenuOpen ? (
-                  <X className="w-6 h-6 text-gray-600 dark:text-gray-300" />
-                ) : (
-                  <Menu className="w-6 h-6 text-gray-600 dark:text-gray-300" />
-                )}
-              </button>
-            </div>
+            </span>
           </div>
 
-          {/* Mobile Navigation */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-800">
-              <nav className="py-4 space-y-2">
-                <button
-                  onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}
-                  className="block w-full text-left px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
-                >
-                  Home
-                </button>
-                <button
-                  onClick={() => { navigate('/services'); setIsMobileMenuOpen(false); }}
-                  className="block w-full text-left px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
-                >
-                  Services
-                </button>
-                <div className="px-4 py-3 text-primary-600 dark:text-primary-400 font-medium">
-                  About
-                </div>
-                <button
-                  onClick={() => { navigate('/contact'); setIsMobileMenuOpen(false); }}
-                  className="block w-full text-left px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
-                >
-                  Contact
-                </button>
-                <div className="border-t border-gray-200 dark:border-gray-800 mt-4 pt-4 space-y-2">
-                  <Button
-                    variant="outline"
-                    fullWidth
-                    onClick={() => { navigate('/admin-login'); setIsMobileMenuOpen(false); }}
-                  >
-                    Admin Login
-                  </Button>
-                  <Button
-                    variant="primary"
-                    fullWidth
-                    onClick={() => { navigate('/contact'); setIsMobileMenuOpen(false); }}
-                  >
-                    Get Quote
-                  </Button>
-                </div>
-              </nav>
-            </div>
-          )}
-        </Container>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            <button onClick={() => navigate('/')} className="text-gray-300 hover:text-neon-green transition-all duration-300 font-medium relative
+                     after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 
+                     after:bg-neon-green after:shadow-glow after:transition-all after:duration-300 hover:after:w-full">
+              Home
+            </button>
+            <button onClick={() => navigate('/services')} className="text-gray-300 hover:text-neon-green transition-all duration-300 font-medium relative
+                     after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 
+                     after:bg-neon-green after:shadow-glow after:transition-all after:duration-300 hover:after:w-full">
+              Services
+            </button>
+            <span className="text-neon-green font-medium relative
+                         after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 
+                         after:bg-neon-green after:shadow-glow">
+              About
+            </span>
+            <button onClick={() => navigate('/contact')} className="text-gray-300 hover:text-neon-green transition-all duration-300 font-medium relative
+                     after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 
+                     after:bg-neon-green after:shadow-glow after:transition-all after:duration-300 hover:after:w-full">
+              Contact
+            </button>
+          </nav>
+
+          {/* CTA Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            <button
+              className="px-4 py-2 text-gray-300 hover:text-neon-green backdrop-blur-sm border border-dark-border 
+                       rounded-lg hover:border-neon-green/30 transition-all duration-300"
+              onClick={() => navigate('/admin-login')}
+            >
+              Admin
+            </button>
+            <button
+              className="px-6 py-2.5 bg-neon-green text-dark-bg rounded-lg font-semibold
+                       shadow-glow hover:shadow-glow-lg hover:scale-105 active:scale-95
+                       transition-all duration-300"
+              onClick={() => navigate('/contact')}
+            >
+              Get Quote
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-gray-300 hover:text-neon-green transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden glass-dark border-t border-neon-green/20">
+            <nav className="container py-4 space-y-2">
+              <button onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-neon-green hover:bg-dark-surface/40 rounded-lg transition-all">
+                Home
+              </button>
+              <button onClick={() => { navigate('/services'); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-neon-green hover:bg-dark-surface/40 rounded-lg transition-all">
+                Services
+              </button>
+              <div className="px-4 py-3 text-neon-green font-medium bg-neon-green/10 rounded-lg">
+                About
+              </div>
+              <button onClick={() => { navigate('/contact'); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-neon-green hover:bg-dark-surface/40 rounded-lg transition-all">
+                Contact
+              </button>
+            </nav>
+          </div>
+        )}
       </header>
 
       <main>
         {/* Hero Section */}
-        <Section spacing="xl" background="gradient">
-          <Container className="text-center">
-            <button
-              onClick={() => navigate('/')}
-              className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-8"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Home
-            </button>
+        <section className="relative py-24 overflow-hidden">
+          {/* Background Glows */}
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <div className="absolute top-20 left-1/4 w-96 h-96 bg-neon-green rounded-full mix-blend-screen filter blur-3xl animate-float-slow" />
+            <div className="absolute top-40 right-1/4 w-[500px] h-[500px] bg-accent-500 rounded-full mix-blend-screen filter blur-3xl animate-float" />
+          </div>
 
-            <div className="inline-flex items-center px-4 py-2 bg-primary-100 dark:bg-primary-900/30 border border-primary-200 dark:border-primary-800 rounded-full mb-6">
-              <Building className="w-4 h-4 mr-2 text-primary-600 dark:text-primary-400" />
-              <span className="text-sm font-medium text-primary-700 dark:text-primary-300">About Our Company</span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-gray-900 dark:text-gray-100 mb-6 tracking-tight">
-              About
-              <span className="block text-primary-600 dark:text-primary-400">Grinnage Extermination</span>
-            </h1>
-
-            <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Leading the industry in innovative and eco-friendly pest control solutions since 2007.
-              We're committed to protecting your space while preserving our environment.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={() => navigate('/contact')}
-                icon={<Calendar />}
-                iconPosition="right"
+          <div className="container relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <button
+                onClick={() => navigate('/')}
+                className="inline-flex items-center gap-2 text-gray-400 hover:text-neon-green transition-colors mb-8"
               >
-                Get Free Consultation
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => navigate('/services')}
-                icon={<Shield />}
-                iconPosition="right"
-              >
-                Our Services
-              </Button>
+                <ArrowLeft className="w-4 h-4" />
+                Back to Home
+              </button>
+
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neon-green/20 border border-neon-green/30 
+                            rounded-full backdrop-blur-sm shadow-glow mb-6">
+                <Shield className="w-4 h-4 text-neon-green" />
+                <span className="text-sm font-semibold text-neon-green">About Our Company</span>
+              </div>
+
+              <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight">
+                About
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-accent-500">
+                  Grinnage Exterminating
+                </span>
+              </h1>
+
+              <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Leading the industry in innovative and eco-friendly pest control solutions since 2007.
+                We're committed to protecting your space while preserving our environment.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  className="px-8 py-4 bg-neon-green text-dark-bg rounded-xl font-bold
+                           shadow-glow hover:shadow-glow-lg hover:scale-105 transition-all duration-300"
+                  onClick={() => navigate('/contact')}
+                >
+                  <Calendar className="w-5 h-5 inline mr-2" />
+                  Get Free Consultation
+                </button>
+                <button
+                  className="px-8 py-4 backdrop-blur-sm border-2 border-neon-green/50 text-neon-green rounded-xl 
+                           font-bold hover:bg-neon-green/10 hover:border-neon-green hover:shadow-glow
+                           transition-all duration-300"
+                  onClick={() => navigate('/services')}
+                >
+                  <Shield className="w-5 h-5 inline mr-2" />
+                  Our Services
+                </button>
+              </div>
             </div>
-          </Container>
-        </Section>
+          </div>
+        </section>
 
         {/* Our Team Section */}
-        <Section spacing="lg" background="transparent">
-          <Container>
-            <SectionHeader
-              subtitle="Meet Our Team"
-              title="The People Behind Our Success"
-              description="Our experienced professionals are dedicated to providing exceptional pest control services with expertise and care."
-              centered
-            />
+        <section className="relative py-24">
+          <div className="container">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neon-green/20 border border-neon-green/30 
+                            rounded-full backdrop-blur-sm shadow-glow mb-6">
+                <User className="w-4 h-4 text-neon-green" />
+                <span className="text-sm font-semibold text-neon-green">Meet Our Team</span>
+              </div>
 
-            <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+                The People Behind Our Success
+              </h2>
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                Our experienced professionals are dedicated to providing exceptional pest control services.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {teamMembers.map((member, index) => (
-                <Card key={index} variant="elevated" hover className="text-center">
-                  <CardContent className="p-8">
-                    <div className="flex items-center justify-center w-24 h-24 bg-primary-100 dark:bg-primary-900/30 rounded-full mx-auto mb-6">
-                      <User className="w-12 h-12 text-primary-600 dark:text-primary-400" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                      {member.name}
-                    </h3>
-                    <p className="text-primary-600 dark:text-primary-400 font-semibold mb-2">
-                      {member.role}
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 font-medium">
-                      {member.experience}
-                    </p>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                      {member.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                <div
+                  key={index}
+                  className="backdrop-blur-xl bg-gradient-to-br from-dark-surface/30 to-dark-bg/40
+                           border border-neon-green/20 rounded-3xl p-8 shadow-lg text-center
+                           hover:shadow-glow hover:-translate-y-2 hover:border-neon-green/40
+                           transition-all duration-500 animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-neon-green/20 
+                                flex items-center justify-center text-neon-green shadow-glow">
+                    <User className="w-12 h-12" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    {member.name}
+                  </h3>
+                  <p className="text-neon-green font-semibold mb-2">
+                    {member.role}
+                  </p>
+                  <p className="text-sm text-gray-400 mb-4 font-medium">
+                    {member.experience}
+                  </p>
+                  <p className="text-gray-300 leading-relaxed">
+                    {member.description}
+                  </p>
+                </div>
               ))}
             </div>
-          </Container>
-        </Section>
+          </div>
+        </section>
 
         {/* Our Values Section */}
-        <Section spacing="lg" background="gray">
-          <Container>
-            <SectionHeader
-              subtitle="Our Values"
-              title="What Drives Our Mission"
-              description="These core principles guide everything we do and ensure we deliver exceptional service to every client."
-              centered
-            />
+        <section className="relative py-24 overflow-hidden">
+          {/* Background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-surface/50 to-transparent" />
+
+          <div className="container relative z-10">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neon-green/20 border border-neon-green/30 
+                            rounded-full backdrop-blur-sm shadow-glow mb-6">
+                <Heart className="w-4 h-4 text-neon-green" />
+                <span className="text-sm font-semibold text-neon-green">Our Values</span>
+              </div>
+
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+                What Drives Our Mission
+              </h2>
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                These core principles guide everything we do and ensure exceptional service.
+              </p>
+            </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {values.map((value, index) => (
-                <Card key={index} variant="soft" hover className="text-center h-full">
-                  <CardContent className="p-6">
-                    <div className={`flex items-center justify-center w-16 h-16 rounded-2xl mx-auto mb-4 ${getValueColor(value.color)}`}>
-                      {value.icon}
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3">
-                      {value.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                      {value.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                <div
+                  key={index}
+                  className="backdrop-blur-xl bg-gradient-to-br from-dark-surface/30 to-dark-bg/40
+                           border border-neon-green/20 rounded-2xl p-6 text-center
+                           hover:shadow-glow hover:-translate-y-1 hover:border-neon-green/40 hover:scale-105
+                           transition-all duration-500 animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className={`w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center
+                                ${value.color === 'neon' ? 'bg-neon-green/20 text-neon-green shadow-glow' : 'bg-accent-500/20 text-accent-400 shadow-glow-cyan'}`}>
+                    {value.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">
+                    {value.title}
+                  </h3>
+                  <p className="text-gray-300 leading-relaxed">
+                    {value.description}
+                  </p>
+                </div>
               ))}
             </div>
-          </Container>
-        </Section>
+          </div>
+        </section>
 
         {/* Certifications Section */}
-        <Section spacing="lg" background="transparent">
-          <Container>
-            <SectionHeader
-              subtitle="Our Certifications"
-              title="Licensed & Certified Professionals"
-              description="We maintain the highest industry standards with comprehensive certifications and ongoing training."
-              centered
-            />
+        <section className="relative py-24">
+          <div className="container">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neon-green/20 border border-neon-green/30 
+                            rounded-full backdrop-blur-sm shadow-glow mb-6">
+                <Award className="w-4 h-4 text-neon-green" />
+                <span className="text-sm font-semibold text-neon-green">Our Certifications</span>
+              </div>
+
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+                Licensed & Certified Professionals
+              </h2>
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                We maintain the highest industry standards with comprehensive certifications.
+              </p>
+            </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {certifications.map((cert, index) => (
-                <Card key={index} variant="bordered" hover className="text-center">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-center w-12 h-12 bg-success-100 dark:bg-success-900/30 rounded-xl mx-auto mb-4">
-                      <CheckCircle className="w-6 h-6 text-success-600 dark:text-success-400" />
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
-                      {cert.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {cert.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                <div
+                  key={index}
+                  className="backdrop-blur-xl bg-gradient-to-br from-dark-surface/30 to-dark-bg/40
+                           border border-neon-green/20 rounded-2xl p-6 text-center
+                           hover:shadow-glow hover:-translate-y-1 hover:border-neon-green/40
+                           transition-all duration-500 animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="w-12 h-12 rounded-xl bg-neon-green/20 flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle className="w-6 h-6 text-neon-green" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">
+                    {cert.name}
+                  </h3>
+                  <p className="text-sm text-gray-400">
+                    {cert.description}
+                  </p>
+                </div>
               ))}
             </div>
-          </Container>
-        </Section>
+          </div>
+        </section>
 
         {/* CTA Section */}
-        <Section variant="cta" spacing="lg">
-          <Container className="text-center">
-            <div className="max-w-3xl mx-auto">
-              <Star className="w-16 h-16 text-white mx-auto mb-6 opacity-80" />
-              <h2 className="text-3xl sm:text-4xl font-display font-bold text-white mb-6">
-                Ready to work with us?
-              </h2>
-              <p className="text-xl text-white/90 mb-8 leading-relaxed">
-                Contact us today for a free consultation about your pest control needs
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  onClick={() => navigate('/contact')}
-                  icon={<Calendar />}
-                  iconPosition="right"
-                  className="bg-white text-primary-600 hover:bg-gray-100"
-                >
-                  Get Free Consultation
-                </Button>
-                <a
-                  href="tel:+13025625654"
-                  className="inline-flex items-center justify-center px-8 py-3 text-lg font-medium text-white border-2 border-white rounded-lg hover:bg-white hover:text-primary-600 transition-colors"
-                >
-                  <Phone className="w-5 h-5 mr-2" />
-                  (302) 562-5654
-                </a>
-              </div>
-            </div>
-          </Container>
-        </Section>
+        <section className="relative py-24 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-neon-green/10 via-dark-surface to-accent-500/10" />
 
-        {/* Contact Info Footer */}
-        <Section spacing="sm" background="gray">
-          <Container>
-            <div className="text-center max-w-2xl mx-auto">
-              <div className="space-y-4">
-                <div className="flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-primary-500 mr-3" />
-                  <a href="tel:+13025625654" className="text-lg font-medium text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+          <div className="container relative z-10">
+            <div className="max-w-4xl mx-auto">
+              <div className="backdrop-blur-xl bg-dark-surface/40 border-2 border-neon-green/30 
+                            rounded-3xl p-12 shadow-glow-xl text-center relative overflow-hidden">
+                {/* Animated Glow */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-neon-green/10 to-transparent
+                              -translate-x-full animate-shimmer" style={{ animationDuration: '3s', animationIterationCount: 'infinite' }} />
+
+                <Star className="w-16 h-16 text-neon-green mx-auto mb-6 drop-shadow-[0_0_20px_rgba(57,255,20,0.6)]" />
+                
+                <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6 relative z-10">
+                  Ready to Work With Us?
+                </h2>
+                <p className="text-xl text-gray-300 mb-8 relative z-10">
+                  Contact us today for a free consultation about your pest control needs.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                  <button
+                    onClick={() => navigate('/contact')}
+                    className="px-8 py-4 bg-neon-green text-dark-bg rounded-xl font-bold text-lg
+                             shadow-glow hover:shadow-glow-xl hover:scale-105 active:scale-95
+                             transition-all duration-300"
+                  >
+                    <Calendar className="w-5 h-5 inline mr-2" />
+                    Get Free Consultation
+                  </button>
+
+                  <a
+                    href="tel:+13025625654"
+                    className="px-8 py-4 backdrop-blur-sm border-2 border-neon-green/50 text-neon-green rounded-xl 
+                             font-bold text-lg hover:bg-neon-green/10 hover:border-neon-green hover:shadow-glow
+                             transition-all duration-300"
+                  >
+                    <Phone className="w-5 h-5 inline mr-2" />
                     (302) 562-5654
                   </a>
                 </div>
-                <div className="flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-primary-500 mr-3" />
-                  <a href="mailto:contact@grinnagex.com" className="text-lg font-medium text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Modern Footer */}
+      <footer className="relative backdrop-blur-md bg-dark-surface/20 border-t border-neon-green/20">
+        <div className="container py-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {/* Company Info */}
+            <div className="lg:col-span-2">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-green to-neon-green-dark flex items-center justify-center shadow-glow">
+                  <Shield className="w-6 h-6 text-dark-bg" />
+                </div>
+                <span className="font-display font-bold text-2xl text-white">
+                  Grinnage Exterminating
+                </span>
+              </div>
+              <p className="text-gray-400 mb-6 max-w-md leading-relaxed">
+                Professional pest control services since 2007.
+                Protecting homes and businesses with eco-friendly solutions.
+              </p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <Phone className="w-4 h-4 text-neon-green" />
+                  <a href="tel:+13025625654" className="text-gray-300 hover:text-neon-green transition-colors">
+                    (302) 562-5654
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail className="w-4 h-4 text-neon-green" />
+                  <a href="mailto:contact@grinnagex.com" className="text-gray-300 hover:text-neon-green transition-colors">
                     contact@grinnagex.com
                   </a>
                 </div>
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-4 h-4 text-neon-green" />
+                  <span className="text-gray-300">Serving all of Delaware</span>
+                </div>
               </div>
             </div>
-          </Container>
-        </Section>
-      </main>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="font-semibold text-white mb-4">Quick Links</h4>
+              <ul className="space-y-2">
+                <li>
+                  <button onClick={() => navigate('/')} className="text-gray-400 hover:text-neon-green transition-colors">
+                    Home
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => navigate('/services')} className="text-gray-400 hover:text-neon-green transition-colors">
+                    Services
+                  </button>
+                </li>
+                <li>
+                  <span className="text-neon-green">About</span>
+                </li>
+                <li>
+                  <button onClick={() => navigate('/contact')} className="text-gray-400 hover:text-neon-green transition-colors">
+                    Contact
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h4 className="font-semibold text-white mb-4">Services</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>Pest Inspection</li>
+                <li>Pest Treatment</li>
+                <li>Termite Control</li>
+                <li>Emergency Service</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-dark-border pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="text-sm text-gray-500">
+              © {new Date().getFullYear()} Grinnage Exterminating. All rights reserved.
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-neon-green/20 border border-neon-green/30 rounded-full">
+                <div className="w-2 h-2 bg-neon-green rounded-full animate-neon-pulse" />
+                <span className="text-xs font-semibold text-neon-green">Available 24/7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

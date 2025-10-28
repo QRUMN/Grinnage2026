@@ -5,10 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import {
   Lock, User, Eye, EyeOff, ArrowLeft, Shield,
-  AlertCircle, CheckCircle
+  AlertCircle
 } from 'lucide-react';
 import { useAdminAuth } from '../lib/auth';
-import { cn } from '../lib/utils';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -30,12 +29,11 @@ export const AdminLogin: React.FC = () => {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: 'admin@grinnage.com', // Pre-filled for demo
+      email: 'admin@grinnage.com',
       password: 'admin123'
     }
   });
 
-  // Redirect if already authenticated
   React.useEffect(() => {
     if (isAuthenticated) {
       navigate('/admin');
@@ -55,163 +53,148 @@ export const AdminLogin: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        {/* Back to Home */}
+    <div className="min-h-screen bg-dark-bg flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Background Glow Effects */}
+      <div className="absolute inset-0 opacity-30 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-green rounded-full mix-blend-screen filter blur-3xl animate-float-slow" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-500 rounded-full mix-blend-screen filter blur-3xl animate-float" />
+      </div>
+
+      <div className="w-full max-w-md relative z-10">
+        {/* Back Button */}
         <div className="mb-8">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+            className="flex items-center gap-2 text-gray-400 hover:text-neon-green transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft className="w-4 h-4" />
             Back to Website
           </button>
         </div>
 
         {/* Login Card */}
-        <div className="card">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-2xl mb-4 mx-auto">
-              <Shield className="w-8 h-8 text-primary-600 dark:text-primary-400" />
-            </div>
-            <h1 className="text-3xl font-display font-bold text-neutral-900 dark:text-neutral-50 mb-2">
-              Admin Portal
-            </h1>
-            <p className="text-neutral-600 dark:text-neutral-400">
-              Sign in to manage your pest control business
-            </p>
-          </div>
+        <div className="backdrop-blur-xl bg-gradient-to-br from-dark-surface/40 to-dark-bg/60
+                      border border-neon-green/20 rounded-3xl p-8 shadow-glow-lg relative overflow-hidden">
+          {/* Animated Border Glow */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-neon-green via-accent-500 to-neon-green 
+                        opacity-20 blur-xl animate-spin" style={{ animationDuration: '8s' }} />
 
-          {/* Demo Credentials Info */}
-          <div className="mb-6 p-4 bg-primary-50 dark:bg-primary-950 border border-primary-200 dark:border-primary-800 rounded-xl">
-            <div className="flex items-start">
-              <CheckCircle className="w-5 h-5 text-primary-600 dark:text-primary-400 mr-3 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="text-sm font-medium text-primary-800 dark:text-primary-200 mb-1">
-                  Demo Credentials
-                </p>
-                <p className="text-sm text-primary-700 dark:text-primary-300">
-                  <strong>Email:</strong> admin@grinnage.com<br />
-                  <strong>Password:</strong> admin123
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Login Form */}
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* Email Field */}
-            <div>
-              <label className="label">
-                Email Address
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="h-5 w-5 text-neutral-400" />
+          <div className="relative z-10">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <div className="relative inline-flex items-center justify-center mb-4">
+                <div className="w-16 h-16 bg-neon-green/20 rounded-2xl flex items-center justify-center shadow-glow">
+                  <Shield className="w-8 h-8 text-neon-green" />
                 </div>
-                <input
-                  type="email"
-                  {...register('email')}
-                  className={cn(
-                    'input pl-10',
-                    errors.email && 'border-red-500 focus:ring-red-500'
-                  )}
-                  placeholder="Enter your email"
-                />
+                <div className="absolute inset-0 w-16 h-16 rounded-2xl bg-neon-green blur-md opacity-30 animate-neon-pulse" />
               </div>
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-              )}
+              
+              <h1 className="text-3xl font-display font-bold text-white mb-2">
+                Admin Portal
+              </h1>
+              <p className="text-gray-400">
+                Sign in to access the dashboard
+              </p>
             </div>
 
-            {/* Password Field */}
-            <div>
-              <label className="label">
-                Password
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-neutral-400" />
-                </div>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  {...register('password')}
-                  className={cn(
-                    'input pl-10 pr-10',
-                    errors.password && 'border-red-500 focus:ring-red-500'
-                  )}
-                  placeholder="Enter your password"
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-neutral-400 hover:text-neutral-600" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-neutral-400 hover:text-neutral-600" />
-                  )}
-                </button>
-              </div>
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
-              )}
+            {/* Demo Credentials Notice */}
+            <div className="mb-6 p-4 bg-neon-green/10 border border-neon-green/30 rounded-xl">
+              <p className="text-sm text-neon-green font-medium mb-1">Demo Credentials</p>
+              <p className="text-xs text-gray-400">admin@grinnage.com / admin123</p>
             </div>
 
-            {/* Login Error */}
+            {/* Error Message */}
             {loginError && (
-              <div className="flex items-center p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
-                <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 mr-3" />
-                <p className="text-red-700 dark:text-red-400 text-sm">
-                  {loginError}
-                </p>
+              <div className="mb-6 p-4 bg-error-500/10 border border-error-500/30 rounded-xl flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-error-400 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-error-400">{loginError}</p>
               </div>
             )}
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="btn-primary w-full justify-center"
-            >
-              {isLoading ? (
-                <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
-                  Signing in...
-                </>
-              ) : (
-                <>
-                  <Shield className="w-5 h-5" />
-                  Sign In to Admin Panel
-                </>
-              )}
-            </button>
-          </form>
+            {/* Login Form */}
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              {/* Email Field */}
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Email Address
+                </label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
+                  <input
+                    type="email"
+                    {...register('email')}
+                    className="w-full pl-10 pr-4 py-3 bg-dark-surface/60 backdrop-blur-sm border border-dark-border 
+                             rounded-xl text-white placeholder-gray-500
+                             focus:outline-none focus:ring-2 focus:ring-neon-green/30 focus:border-neon-green/50
+                             transition-all duration-300"
+                    placeholder="admin@grinnage.com"
+                  />
+                </div>
+                {errors.email && (
+                  <p className="mt-1 text-sm text-error-400">{errors.email.message}</p>
+                )}
+              </div>
 
-          {/* Footer */}
-          <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800">
-            <p className="text-center text-sm text-neutral-500 dark:text-neutral-400">
-              Secure admin access for Grinnage Exterminating
-            </p>
-            <p className="text-center text-xs text-neutral-400 dark:text-neutral-500 mt-2">
+              {/* Password Field */}
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Password
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    {...register('password')}
+                    className="w-full pl-10 pr-12 py-3 bg-dark-surface/60 backdrop-blur-sm border border-dark-border 
+                             rounded-xl text-white placeholder-gray-500
+                             focus:outline-none focus:ring-2 focus:ring-neon-green/30 focus:border-neon-green/50
+                             transition-all duration-300"
+                    placeholder="Enter your password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-neon-green transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                </div>
+                {errors.password && (
+                  <p className="mt-1 text-sm text-error-400">{errors.password.message}</p>
+                )}
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full py-4 bg-neon-green text-dark-bg rounded-xl font-bold text-lg
+                         shadow-glow hover:shadow-glow-xl hover:scale-105 active:scale-95
+                         transition-all duration-300 relative overflow-hidden disabled:opacity-50
+                         before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent 
+                         before:via-white/30 before:to-transparent before:translate-x-[-100%] 
+                         hover:before:translate-x-[100%] before:transition-transform before:duration-700
+                         flex items-center justify-center gap-2"
+              >
+                {isLoading ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-dark-bg border-t-transparent rounded-full animate-spin" />
+                    Signing In...
+                  </>
+                ) : (
+                  <>
+                    <Shield className="w-5 h-5" />
+                    Sign In
+                  </>
+                )}
+              </button>
+            </form>
+
+            {/* Additional Info */}
+            <div className="mt-6 text-center text-sm text-gray-400">
               Protected by enterprise-grade security
-            </p>
+            </div>
           </div>
-        </div>
-
-        {/* Help Text */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
-            Need help? Contact{' '}
-            <a
-              href="mailto:support@grinnage.com"
-              className="text-primary-600 dark:text-primary-400 hover:underline"
-            >
-              support@grinnage.com
-            </a>
-          </p>
         </div>
       </div>
     </div>

@@ -34,16 +34,16 @@ export const Section = React.forwardRef<HTMLElement, SectionProps>(
 
     const backgroundStyles = {
       transparent: '',
-      gray: 'bg-gray-50 dark:bg-gray-900',
-      primary: 'bg-primary-50 dark:bg-primary-950',
+      gray: 'bg-dark-surface/20',
+      primary: 'bg-dark-surface/40 backdrop-blur-sm',
       gradient: [
-        'bg-gradient-to-br from-primary-50 via-white to-accent-50',
-        'dark:from-primary-950 dark:via-gray-900 dark:to-accent-950'
+        'bg-gradient-to-br from-dark-bg via-dark-surface to-dark-card',
+        'relative overflow-hidden'
       ],
       mesh: [
-        'bg-gray-50 dark:bg-gray-900',
-        'bg-gradient-mesh bg-mesh',
-        'relative overflow-hidden'
+        'bg-gradient-to-br from-dark-bg to-dark-surface',
+        'relative overflow-hidden',
+        'before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_50%,rgba(57,255,20,0.05),transparent_50%)]'
       ]
     };
 
@@ -52,18 +52,17 @@ export const Section = React.forwardRef<HTMLElement, SectionProps>(
       feature: 'relative overflow-hidden',
       hero: [
         'relative overflow-hidden',
-        'before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:to-white/10',
-        'dark:before:to-gray-900/10'
+        'before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:to-dark-bg/50'
       ],
       testimonial: [
-        'relative',
+        'relative overflow-hidden',
         'before:absolute before:inset-0 before:bg-gradient-to-r',
-        'before:from-primary-500/5 before:via-transparent before:to-accent-500/5'
+        'before:from-neon-green/5 before:via-transparent before:to-accent-500/5'
       ],
       cta: [
         'relative overflow-hidden',
-        'bg-gradient-to-r from-primary-600 to-primary-700',
-        'dark:from-primary-700 dark:to-primary-800'
+        'bg-gradient-to-r from-neon-green/90 to-neon-green-dark',
+        'shadow-glow-xl'
       ]
     };
 
@@ -82,10 +81,10 @@ export const Section = React.forwardRef<HTMLElement, SectionProps>(
         {/* Decorative elements for specific variants */}
         {variant === 'hero' && (
           <>
-            <div className="absolute top-0 left-0 w-full h-full opacity-30">
-              <div className="absolute top-20 left-1/4 w-72 h-72 bg-primary-200 dark:bg-primary-800 rounded-full mix-blend-multiply filter blur-xl animate-float" />
-              <div className="absolute top-40 right-1/4 w-96 h-96 bg-accent-200 dark:bg-accent-800 rounded-full mix-blend-multiply filter blur-xl animate-float" style={{ animationDelay: '2s' }} />
-              <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-primary-300 dark:bg-primary-700 rounded-full mix-blend-multiply filter blur-xl animate-float" style={{ animationDelay: '4s' }} />
+            <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+              <div className="absolute top-20 left-1/4 w-72 h-72 bg-neon-green rounded-full mix-blend-screen filter blur-3xl animate-float-slow" />
+              <div className="absolute top-40 right-1/4 w-96 h-96 bg-accent-500 rounded-full mix-blend-screen filter blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+              <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-neon-cyan rounded-full mix-blend-screen filter blur-3xl animate-float-fast" style={{ animationDelay: '4s' }} />
             </div>
           </>
         )}
@@ -182,8 +181,9 @@ export const SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderProps
       >
         {badge && (
           <div className={cn(
-            'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium',
-            'bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300',
+            'inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold',
+            'bg-neon-green/20 text-neon-green border border-neon-green/30',
+            'backdrop-blur-sm shadow-glow',
             !centered && 'mb-2'
           )}>
             {badge}
@@ -192,7 +192,7 @@ export const SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderProps
 
         {subtitle && (
           <p className={cn(
-            'font-medium text-primary-600 dark:text-primary-400 tracking-wide uppercase',
+            'font-medium text-neon-green tracking-wide uppercase',
             subtitleSizes[size]
           )}>
             {subtitle}
@@ -200,7 +200,7 @@ export const SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderProps
         )}
 
         <h2 className={cn(
-          'font-display font-bold text-gray-900 dark:text-gray-100 tracking-tight',
+          'font-display font-bold text-white tracking-tight',
           titleSizes[size]
         )}>
           {title}
@@ -208,7 +208,7 @@ export const SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderProps
 
         {description && (
           <p className={cn(
-            'text-gray-600 dark:text-gray-400 leading-relaxed',
+            'text-gray-300 leading-relaxed',
             size === 'sm' ? 'text-base md:text-lg' :
             size === 'md' ? 'text-lg md:text-xl' :
             'text-xl md:text-2xl',

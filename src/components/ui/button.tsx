@@ -39,43 +39,42 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary: [
-        'bg-primary-600 hover:bg-primary-700 active:bg-primary-800',
-        'text-white shadow-sm hover:shadow-md',
-        'focus:ring-primary-500',
-        'before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent',
-        'before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700'
+        'bg-neon-green hover:bg-neon-green-dark active:bg-neon-green-dark',
+        'text-dark-bg font-semibold shadow-glow hover:shadow-glow-lg',
+        'focus:ring-2 focus:ring-neon-green/50',
+        'before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent',
+        'before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700',
+        'hover:scale-105 active:scale-95'
       ],
       secondary: [
-        'bg-gray-100 hover:bg-gray-200 active:bg-gray-300',
-        'dark:bg-gray-800 dark:hover:bg-gray-700 dark:active:bg-gray-600',
-        'text-gray-900 dark:text-gray-100',
-        'shadow-sm hover:shadow-md',
-        'focus:ring-gray-500'
+        'bg-dark-surface/80 hover:bg-dark-hover active:bg-dark-hover',
+        'backdrop-blur-sm border border-dark-border',
+        'hover:border-neon-green/30 hover:shadow-glow',
+        'text-gray-100 shadow-sm',
+        'focus:ring-2 focus:ring-neon-green/30'
       ],
       outline: [
-        'border-2 border-primary-600 hover:border-primary-700',
-        'text-primary-600 hover:text-primary-700 active:text-primary-800',
-        'hover:bg-primary-50 active:bg-primary-100',
-        'dark:border-primary-400 dark:text-primary-400 dark:hover:text-primary-300',
-        'dark:hover:bg-primary-950 dark:active:bg-primary-900',
-        'focus:ring-primary-500'
+        'border-2 border-neon-green/50 hover:border-neon-green',
+        'text-neon-green hover:text-neon-green-dark',
+        'hover:bg-neon-green/10 active:bg-neon-green/20',
+        'backdrop-blur-sm hover:shadow-glow',
+        'focus:ring-2 focus:ring-neon-green/50'
       ],
       ghost: [
-        'text-gray-700 hover:text-gray-900 active:text-gray-900',
-        'dark:text-gray-300 dark:hover:text-gray-100 dark:active:text-gray-100',
-        'hover:bg-gray-100 active:bg-gray-200',
-        'dark:hover:bg-gray-800 dark:active:bg-gray-700',
-        'focus:ring-gray-500'
+        'text-gray-300 hover:text-neon-green',
+        'hover:bg-dark-surface/40 active:bg-dark-surface/60',
+        'backdrop-blur-sm',
+        'focus:ring-2 focus:ring-neon-green/30'
       ],
       danger: [
         'bg-error-600 hover:bg-error-700 active:bg-error-800',
-        'text-white shadow-sm hover:shadow-md',
-        'focus:ring-error-500'
+        'text-white shadow-glow-cyan hover:shadow-glow-cyan-lg',
+        'focus:ring-2 focus:ring-error-500/50'
       ],
       success: [
         'bg-success-600 hover:bg-success-700 active:bg-success-800',
-        'text-white shadow-sm hover:shadow-md',
-        'focus:ring-success-500'
+        'text-white shadow-glow hover:shadow-glow-lg',
+        'focus:ring-2 focus:ring-success-500/50'
       ]
     };
 

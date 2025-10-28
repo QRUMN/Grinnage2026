@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
 import {
   Users, UserPlus, Calendar, TrendingUp, DollarSign,
-  BarChart3, Clock, Star, Phone, Mail, MapPin,
-  Filter, Search, MoreVertical, CheckCircle,
-  AlertCircle, Timer, Archive
+  BarChart3, Clock, Star, Phone, Mail,
+  CheckCircle, AlertCircle, ArrowRight
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { useNavigate } from 'react-router-dom';
 
 interface Lead {
   id: string;
   name: string;
   email: string;
   phone?: string;
-  status: 'new' | 'contacted' | 'quoted' | 'converted' | 'lost';
+  status: 'new' | 'contacted' | 'quoted' | 'converted';
   serviceType: string;
   urgency: 'low' | 'medium' | 'high' | 'emergency';
-  budget?: string;
-  address?: string;
   message: string;
-  source: string;
   createdAt: string;
 }
 
@@ -32,11 +29,9 @@ interface DashboardStats {
 }
 
 export const AdminDashboard: React.FC = () => {
-  const [selectedTab, setSelectedTab] = useState<'overview' | 'leads' | 'clients'>('overview');
-  const [leadFilter, setLeadFilter] = useState<'all' | 'new' | 'contacted' | 'quoted'>('all');
-  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
-  // Mock data for demo
+  // Mock data
   const stats: DashboardStats = {
     totalLeads: 47,
     newLeads: 8,
@@ -46,7 +41,7 @@ export const AdminDashboard: React.FC = () => {
     activeClients: 34
   };
 
-  const mockLeads: Lead[] = [
+  const recentLeads: Lead[] = [
     {
       id: '1',
       name: 'Sarah Johnson',
@@ -55,10 +50,7 @@ export const AdminDashboard: React.FC = () => {
       status: 'new',
       serviceType: 'Residential Inspection',
       urgency: 'high',
-      budget: '$100-300',
-      address: '123 Oak Street, San Francisco, CA',
       message: 'Found ants in kitchen, need urgent inspection.',
-      source: 'contact_form',
       createdAt: '2025-01-15T10:30:00Z'
     },
     {
@@ -69,10 +61,7 @@ export const AdminDashboard: React.FC = () => {
       status: 'contacted',
       serviceType: 'Commercial Treatment',
       urgency: 'medium',
-      budget: '$500+',
-      address: '456 Business Plaza, Palo Alto, CA',
       message: 'Office building needs quarterly pest control service.',
-      source: 'referral',
       createdAt: '2025-01-14T14:20:00Z'
     },
     {
@@ -82,441 +71,350 @@ export const AdminDashboard: React.FC = () => {
       status: 'quoted',
       serviceType: 'Termite Treatment',
       urgency: 'high',
-      budget: '$300-500',
       message: 'Termites found in basement, need immediate treatment.',
-      source: 'google_ads',
       createdAt: '2025-01-13T09:15:00Z'
+    }
+  ];
+
+  const statCards = [
+    {
+      title: 'Total Leads',
+      value: stats.totalLeads,
+      change: '+12%',
+      icon: <UserPlus className="w-6 h-6" />,
+      color: 'neon',
+      trend: 'up'
+    },
+    {
+      title: 'New Leads',
+      value: stats.newLeads,
+      change: 'today',
+      icon: <AlertCircle className="w-6 h-6" />,
+      color: 'cyan',
+      trend: 'neutral'
+    },
+    {
+      title: 'Conversions',
+      value: stats.conversions,
+      change: '+8%',
+      icon: <CheckCircle className="w-6 h-6" />,
+      color: 'neon',
+      trend: 'up'
+    },
+    {
+      title: 'Revenue',
+      value: `$${stats.revenue.toLocaleString()}`,
+      change: '+23%',
+      icon: <DollarSign className="w-6 h-6" />,
+      color: 'cyan',
+      trend: 'up'
+    },
+    {
+      title: 'Pending Appointments',
+      value: stats.pendingAppointments,
+      change: 'this week',
+      icon: <Calendar className="w-6 h-6" />,
+      color: 'neon',
+      trend: 'neutral'
+    },
+    {
+      title: 'Active Clients',
+      value: stats.activeClients,
+      change: '+15%',
+      icon: <Users className="w-6 h-6" />,
+      color: 'cyan',
+      trend: 'up'
     }
   ];
 
   const getStatusColor = (status: Lead['status']) => {
     switch (status) {
-      case 'new': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
-      case 'contacted': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
-      case 'quoted': return 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200';
-      case 'converted': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-      case 'lost': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
+      case 'new': return 'bg-neon-green/20 text-neon-green border-neon-green/30';
+      case 'contacted': return 'bg-accent-500/20 text-accent-400 border-accent-500/30';
+      case 'quoted': return 'bg-purple-500/20 text-purple-400 border-purple-500/30';
+      case 'converted': return 'bg-success-500/20 text-success-400 border-success-500/30';
+      default: return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
     }
   };
 
-  const getUrgencyIcon = (urgency: Lead['urgency']) => {
+  const getUrgencyColor = (urgency: Lead['urgency']) => {
     switch (urgency) {
-      case 'emergency': return <AlertCircle className="w-4 h-4 text-red-500" />;
-      case 'high': return <Timer className="w-4 h-4 text-orange-500" />;
-      case 'medium': return <Clock className="w-4 h-4 text-yellow-500" />;
-      case 'low': return <Archive className="w-4 h-4 text-green-500" />;
+      case 'emergency': return 'text-error-400';
+      case 'high': return 'text-accent-400';
+      case 'medium': return 'text-neon-cyan';
+      case 'low': return 'text-gray-400';
     }
   };
-
-  const filteredLeads = mockLeads.filter(lead => {
-    const matchesFilter = leadFilter === 'all' || lead.status === leadFilter;
-    const matchesSearch = lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         lead.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         lead.serviceType.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesFilter && matchesSearch;
-  });
-
-  const tabs = [
-    { id: 'overview', label: 'Overview', icon: <BarChart3 className="w-4 h-4" /> },
-    { id: 'leads', label: 'Leads', icon: <UserPlus className="w-4 h-4" /> },
-    { id: 'clients', label: 'Clients', icon: <Users className="w-4 h-4" /> }
-  ];
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-3xl font-display font-bold text-neutral-900 dark:text-neutral-50">
-            Dashboard
-          </h1>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-1">
-            Welcome back! Here's what's happening with your business.
-          </p>
-        </div>
-        <div className="flex items-center space-x-3 mt-4 sm:mt-0">
-          <button className="btn-outline">
-            <Calendar className="w-4 h-4" />
-            Schedule Appointment
-          </button>
-          <button className="btn-primary">
-            <UserPlus className="w-4 h-4" />
-            Add Lead
-          </button>
-        </div>
+    <div className="space-y-8">
+      {/* Page Header */}
+      <div>
+        <h1 className="text-3xl font-display font-bold text-white mb-2">
+          Dashboard Overview
+        </h1>
+        <p className="text-gray-400">
+          Welcome back, Keith. Here's what's happening with your business.
+        </p>
       </div>
 
-      {/* Stats Cards */}
+      {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div className="card">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">Total Leads</p>
-              <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1">
-                {stats.totalLeads}
-              </p>
-              <p className="text-sm text-green-600 dark:text-green-400 mt-1">
-                +8 this week
-              </p>
-            </div>
-            <div className="flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-xl">
-              <UserPlus className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-            </div>
-          </div>
-        </div>
+        {statCards.map((stat, index) => (
+          <div
+            key={index}
+            className="group relative backdrop-blur-xl bg-gradient-to-br from-dark-surface/30 to-dark-bg/40
+                     border border-neon-green/20 rounded-2xl p-6 shadow-lg
+                     hover:shadow-glow hover:-translate-y-1 hover:border-neon-green/40 hover:scale-105
+                     transition-all duration-500 animate-fade-in-up"
+            style={{ animationDelay: `${index * 0.05}s` }}
+          >
+            {/* Shimmer Effect */}
+            <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full
+                          bg-gradient-to-r from-transparent via-neon-green/5 to-transparent
+                          transition-transform duration-1000 pointer-events-none rounded-2xl" />
 
-        <div className="card">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">New Leads</p>
-              <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1">
-                {stats.newLeads}
-              </p>
-              <p className="text-sm text-orange-600 dark:text-orange-400 mt-1">
-                Needs attention
-              </p>
-            </div>
-            <div className="flex items-center justify-center w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-xl">
-              <AlertCircle className="w-6 h-6 text-orange-600 dark:text-orange-400" />
-            </div>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">Monthly Revenue</p>
-              <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1">
-                ${stats.revenue.toLocaleString()}
-              </p>
-              <p className="text-sm text-green-600 dark:text-green-400 mt-1">
-                +12% from last month
-              </p>
-            </div>
-            <div className="flex items-center justify-center w-12 h-12 bg-green-100 dark:bg-green-900 rounded-xl">
-              <DollarSign className="w-6 h-6 text-green-600 dark:text-green-400" />
-            </div>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">Conversions</p>
-              <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1">
-                {stats.conversions}
-              </p>
-              <p className="text-sm text-green-600 dark:text-green-400 mt-1">
-                25.5% conversion rate
-              </p>
-            </div>
-            <div className="flex items-center justify-center w-12 h-12 bg-green-100 dark:bg-green-900 rounded-xl">
-              <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
-            </div>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">Pending Appointments</p>
-              <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1">
-                {stats.pendingAppointments}
-              </p>
-              <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">
-                Next: Tomorrow 2PM
-              </p>
-            </div>
-            <div className="flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-xl">
-              <Calendar className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-            </div>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">Active Clients</p>
-              <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1">
-                {stats.activeClients}
-              </p>
-              <p className="text-sm text-purple-600 dark:text-purple-400 mt-1">
-                98% satisfaction
-              </p>
-            </div>
-            <div className="flex items-center justify-center w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-xl">
-              <Users className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Tabs */}
-      <div className="border-b border-neutral-200 dark:border-neutral-800">
-        <nav className="flex space-x-8">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setSelectedTab(tab.id as any)}
-              className={cn(
-                "flex items-center py-4 px-1 border-b-2 font-medium text-sm transition-colors",
-                selectedTab === tab.id
-                  ? "border-primary-500 text-primary-600 dark:text-primary-400"
-                  : "border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300"
-              )}
-            >
-              {tab.icon}
-              <span className="ml-2">{tab.label}</span>
-              {tab.id === 'leads' && stats.newLeads > 0 && (
-                <span className="ml-2 bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded-full">
-                  {stats.newLeads}
-                </span>
-              )}
-            </button>
-          ))}
-        </nav>
-      </div>
-
-      {/* Lead Management */}
-      {selectedTab === 'leads' && (
-        <div className="space-y-6">
-          {/* Filters */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-neutral-400" />
-                <input
-                  type="text"
-                  placeholder="Search leads..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="input pl-10 w-64"
-                />
+            <div className="flex items-start justify-between mb-4">
+              <div className={cn(
+                "w-12 h-12 rounded-xl flex items-center justify-center shadow-glow",
+                stat.color === 'neon' ? 'bg-neon-green/20 text-neon-green' : 'bg-accent-500/20 text-accent-400'
+              )}>
+                {stat.icon}
               </div>
-              <select
-                value={leadFilter}
-                onChange={(e) => setLeadFilter(e.target.value as any)}
-                className="input"
+              {stat.trend === 'up' && (
+                <div className="flex items-center gap-1 px-2 py-1 bg-success-500/20 border border-success-500/30 rounded-lg">
+                  <TrendingUp className="w-3 h-3 text-success-400" />
+                  <span className="text-xs font-semibold text-success-400">{stat.change}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="mb-1">
+              <div className="text-4xl font-bold text-white font-mono mb-1">
+                {stat.value}
+              </div>
+              <div className="text-sm text-gray-400 font-medium">
+                {stat.title}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Recent Leads & Quick Actions */}
+      <div className="grid lg:grid-cols-3 gap-8">
+        {/* Recent Leads */}
+        <div className="lg:col-span-2">
+          <div className="backdrop-blur-xl bg-gradient-to-br from-dark-surface/30 to-dark-bg/40
+                        border border-neon-green/20 rounded-2xl p-6 shadow-glow">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-1">Recent Leads</h2>
+                <p className="text-sm text-gray-400">{recentLeads.length} new inquiries</p>
+              </div>
+              <button
+                onClick={() => navigate('/admin/leads')}
+                className="px-4 py-2 backdrop-blur-sm border border-neon-green/30 text-neon-green rounded-lg
+                         hover:bg-neon-green/10 hover:shadow-glow transition-all duration-300
+                         flex items-center gap-2"
               >
-                <option value="all">All Leads</option>
-                <option value="new">New</option>
-                <option value="contacted">Contacted</option>
-                <option value="quoted">Quoted</option>
-              </select>
-            </div>
-            <button className="btn-outline">
-              <Filter className="w-4 h-4" />
-              More Filters
-            </button>
-          </div>
-
-          {/* Leads Table */}
-          <div className="card overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-neutral-50 dark:bg-neutral-800">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                      Lead
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                      Service
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                      Urgency
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                      Source
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                      Created
-                    </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-neutral-200 dark:divide-neutral-700">
-                  {filteredLeads.map((lead) => (
-                    <tr key={lead.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                      <td className="px-6 py-4">
-                        <div>
-                          <div className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
-                            {lead.name}
-                          </div>
-                          <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                            {lead.email}
-                          </div>
-                          {lead.phone && (
-                            <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                              {lead.phone}
-                            </div>
-                          )}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="text-sm text-neutral-900 dark:text-neutral-100">
-                          {lead.serviceType}
-                        </div>
-                        {lead.budget && (
-                          <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                            {lead.budget}
-                          </div>
-                        )}
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className={cn("inline-flex px-2 py-1 text-xs font-semibold rounded-full", getStatusColor(lead.status))}>
-                          {lead.status.charAt(0).toUpperCase() + lead.status.slice(1)}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center">
-                          {getUrgencyIcon(lead.urgency)}
-                          <span className="ml-2 text-sm text-neutral-900 dark:text-neutral-100 capitalize">
-                            {lead.urgency}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-neutral-500 dark:text-neutral-400 capitalize">
-                        {lead.source.replace('_', ' ')}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-neutral-500 dark:text-neutral-400">
-                        {new Date(lead.createdAt).toLocaleDateString()}
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <div className="flex items-center justify-end space-x-2">
-                          <button className="p-2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300">
-                            <Phone className="w-4 h-4" />
-                          </button>
-                          <button className="p-2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300">
-                            <Mail className="w-4 h-4" />
-                          </button>
-                          <button className="p-2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300">
-                            <MoreVertical className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Overview Tab Content */}
-      {selectedTab === 'overview' && (
-        <div className="grid lg:grid-cols-2 gap-6">
-          {/* Recent Activity */}
-          <div className="card">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                Recent Activity
-              </h3>
-              <button className="text-sm text-primary-600 dark:text-primary-400 hover:underline">
                 View All
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
+
             <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <div className="flex items-center justify-center w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full">
-                  <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm text-neutral-900 dark:text-neutral-100">
-                    Lead converted to client: <strong>Mike Chen</strong>
+              {recentLeads.map((lead, index) => (
+                <div
+                  key={lead.id}
+                  className="p-4 bg-dark-surface/40 backdrop-blur-sm border border-dark-border rounded-xl
+                           hover:border-neon-green/30 hover:bg-dark-surface/60 transition-all duration-300
+                           cursor-pointer animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                  onClick={() => navigate('/admin/leads')}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="font-semibold text-white">{lead.name}</h3>
+                        <span className={cn(
+                          "px-2 py-0.5 text-xs font-semibold rounded-full border backdrop-blur-sm",
+                          getStatusColor(lead.status)
+                        )}>
+                          {lead.status}
+                        </span>
+                        <span className={cn("text-xs font-medium", getUrgencyColor(lead.urgency))}>
+                          {lead.urgency === 'emergency' && '🚨 '}
+                          {lead.urgency.toUpperCase()}
+                        </span>
+                      </div>
+                      <div className="text-sm text-gray-400 mb-1">{lead.serviceType}</div>
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      {new Date(lead.createdAt).toLocaleDateString()}
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-gray-300 mb-3 line-clamp-2">
+                    {lead.message}
                   </p>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400">2 hours ago</p>
+
+                  <div className="flex items-center gap-4 text-xs text-gray-400">
+                    <div className="flex items-center gap-1">
+                      <Mail className="w-3 h-3" />
+                      {lead.email}
+                    </div>
+                    {lead.phone && (
+                      <div className="flex items-center gap-1">
+                        <Phone className="w-3 h-3" />
+                        {lead.phone}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="flex items-center justify-center w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full">
-                  <UserPlus className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="space-y-6">
+          <div className="backdrop-blur-xl bg-gradient-to-br from-dark-surface/30 to-dark-bg/40
+                        border border-neon-green/20 rounded-2xl p-6 shadow-glow">
+            <h3 className="text-xl font-bold text-white mb-4">Quick Actions</h3>
+            
+            <div className="space-y-3">
+              <button
+                onClick={() => navigate('/admin/clients')}
+                className="w-full p-4 bg-dark-surface/40 backdrop-blur-sm border border-dark-border rounded-xl
+                         hover:border-neon-green/30 hover:bg-dark-surface/60 hover:shadow-glow
+                         transition-all duration-300 text-left group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-neon-green/20 flex items-center justify-center text-neon-green shadow-glow">
+                    <UserPlus className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-white group-hover:text-neon-green transition-colors">
+                      Add New Client
+                    </div>
+                    <div className="text-xs text-gray-400">Create client profile</div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-neon-green group-hover:translate-x-1 transition-all" />
                 </div>
-                <div className="flex-1">
-                  <p className="text-sm text-neutral-900 dark:text-neutral-100">
-                    New lead received: <strong>Sarah Johnson</strong>
-                  </p>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400">4 hours ago</p>
+              </button>
+
+              <button
+                onClick={() => navigate('/admin/appointments')}
+                className="w-full p-4 bg-dark-surface/40 backdrop-blur-sm border border-dark-border rounded-xl
+                         hover:border-neon-green/30 hover:bg-dark-surface/60 hover:shadow-glow
+                         transition-all duration-300 text-left group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-accent-500/20 flex items-center justify-center text-accent-400 shadow-glow-cyan">
+                    <Calendar className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-white group-hover:text-neon-green transition-colors">
+                      Schedule Appointment
+                    </div>
+                    <div className="text-xs text-gray-400">Book new service</div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-neon-green group-hover:translate-x-1 transition-all" />
                 </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="flex items-center justify-center w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full">
-                  <Calendar className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+              </button>
+
+              <button
+                onClick={() => navigate('/admin/content')}
+                className="w-full p-4 bg-dark-surface/40 backdrop-blur-sm border border-dark-border rounded-xl
+                         hover:border-neon-green/30 hover:bg-dark-surface/60 hover:shadow-glow
+                         transition-all duration-300 text-left group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-neon-green/20 flex items-center justify-center text-neon-green shadow-glow">
+                    <BarChart3 className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-white group-hover:text-neon-green transition-colors">
+                      Manage Content
+                    </div>
+                    <div className="text-xs text-gray-400">Edit website content</div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-neon-green group-hover:translate-x-1 transition-all" />
                 </div>
-                <div className="flex-1">
-                  <p className="text-sm text-neutral-900 dark:text-neutral-100">
-                    Appointment scheduled with <strong>Lisa Rodriguez</strong>
-                  </p>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400">6 hours ago</p>
-                </div>
-              </div>
+              </button>
             </div>
           </div>
 
-          {/* Top Services */}
-          <div className="card">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                Top Services
-              </h3>
-              <button className="text-sm text-primary-600 dark:text-primary-400 hover:underline">
-                View Report
-              </button>
-            </div>
+          {/* Performance Summary */}
+          <div className="backdrop-blur-xl bg-gradient-to-br from-dark-surface/30 to-dark-bg/40
+                        border border-neon-green/20 rounded-2xl p-6 shadow-glow">
+            <h3 className="text-xl font-bold text-white mb-4">This Month</h3>
+            
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-neutral-600 dark:text-neutral-400">Residential Inspection</span>
-                <div className="flex items-center">
-                  <div className="w-24 h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full mr-3">
-                    <div className="w-3/4 h-2 bg-primary-500 rounded-full"></div>
-                  </div>
-                  <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100">75%</span>
-                </div>
+                <span className="text-sm text-gray-400">Conversion Rate</span>
+                <span className="text-lg font-bold text-neon-green font-mono">25.5%</span>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-neutral-600 dark:text-neutral-400">Termite Treatment</span>
-                <div className="flex items-center">
-                  <div className="w-24 h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full mr-3">
-                    <div className="w-1/2 h-2 bg-primary-500 rounded-full"></div>
-                  </div>
-                  <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100">50%</span>
-                </div>
+              
+              <div className="w-full bg-dark-surface/60 rounded-full h-2">
+                <div className="bg-gradient-to-r from-neon-green to-accent-500 h-2 rounded-full shadow-glow" 
+                     style={{ width: '25.5%' }} />
               </div>
+
+              <div className="flex items-center justify-between pt-2">
+                <span className="text-sm text-gray-400">Avg Response Time</span>
+                <span className="text-lg font-bold text-accent-400 font-mono">45min</span>
+              </div>
+
               <div className="flex items-center justify-between">
-                <span className="text-sm text-neutral-600 dark:text-neutral-400">Commercial Treatment</span>
-                <div className="flex items-center">
-                  <div className="w-24 h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full mr-3">
-                    <div className="w-1/3 h-2 bg-primary-500 rounded-full"></div>
-                  </div>
-                  <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100">35%</span>
+                <span className="text-sm text-gray-400">Customer Satisfaction</span>
+                <div className="flex items-center gap-1">
+                  <Star className="w-4 h-4 text-neon-green fill-neon-green" />
+                  <span className="text-lg font-bold text-white font-mono">4.9</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      )}
+      </div>
 
-      {/* Clients Tab Placeholder */}
-      {selectedTab === 'clients' && (
-        <div className="card text-center py-12">
-          <Users className="w-16 h-16 text-neutral-400 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
-            Client Management
-          </h3>
-          <p className="text-neutral-600 dark:text-neutral-400 mb-6">
-            Client management system coming soon. Track active clients, service history, and billing.
-          </p>
-          <button className="btn-primary">
-            <Users className="w-4 h-4" />
-            Add Client
-          </button>
+      {/* Recent Activity Timeline */}
+      <div className="backdrop-blur-xl bg-gradient-to-br from-dark-surface/30 to-dark-bg/40
+                    border border-neon-green/20 rounded-2xl p-6 shadow-glow">
+        <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+          <Clock className="w-6 h-6 text-neon-green" />
+          Recent Activity
+        </h2>
+
+        <div className="space-y-4">
+          {[
+            { action: 'New lead submitted', name: 'Sarah Johnson', time: '5 minutes ago', type: 'lead' },
+            { action: 'Appointment scheduled', name: 'Mike Chen', time: '1 hour ago', type: 'appointment' },
+            { action: 'Payment received', name: 'Lisa Rodriguez', time: '3 hours ago', type: 'payment' },
+            { action: 'Service completed', name: 'John Smith', time: '5 hours ago', type: 'service' }
+          ].map((activity, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-4 p-4 bg-dark-surface/40 backdrop-blur-sm border border-dark-border 
+                       rounded-xl hover:border-neon-green/30 hover:bg-dark-surface/60 transition-all duration-300"
+            >
+              <div className={cn(
+                "w-2 h-2 rounded-full",
+                activity.type === 'lead' ? 'bg-neon-green shadow-glow animate-neon-pulse' :
+                activity.type === 'payment' ? 'bg-success-400 shadow-glow' :
+                activity.type === 'appointment' ? 'bg-accent-400 shadow-glow-cyan' :
+                'bg-gray-400'
+              )} />
+              <div className="flex-1">
+                <div className="font-medium text-white">{activity.action}</div>
+                <div className="text-sm text-gray-400">{activity.name}</div>
+              </div>
+              <div className="text-xs text-gray-500">{activity.time}</div>
+            </div>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };
