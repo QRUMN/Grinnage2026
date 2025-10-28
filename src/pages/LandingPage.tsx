@@ -15,21 +15,27 @@ export const LandingPage: React.FC = () => {
   // Featured services with pricing
   const featuredServices = [
     {
-      ...defaultServices[0],
+      name: 'Residential Inspection',
+      description: 'Comprehensive pest inspection and assessment of your property',
+      price: 8999,
       icon: <Shield className="w-8 h-8" />,
-      features: ["Detailed inspection", "Problem ID", "Recommendations"],
+      features: ["Complete inspection", "Written report", "Treatment plan"],
       color: 'neon'
     },
     {
-      ...defaultServices[1],
+      name: 'Residential Treatment',
+      description: 'Professional pest elimination service for your home',
+      price: 19999,
       icon: <Bug className="w-8 h-8" />,
-      features: ["Eco-friendly", "Same-day service", "30-day guarantee"],
+      features: ["Eco-friendly", "Safe for family/pets", "30-day guarantee"],
       color: 'cyan'
     },
     {
-      ...defaultServices[2],
+      name: 'Commercial Service',
+      description: 'Monthly pest control for businesses',
+      price: 7999,
       icon: <Calendar className="w-8 h-8" />,
-      features: ["Regular monitoring", "Priority scheduling", "24/7 support"],
+      features: ["Monthly service", "Compliance docs", "Emergency response"],
       color: 'neon'
     }
   ];
