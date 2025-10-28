@@ -177,9 +177,9 @@ export const LandingPage: React.FC = () => {
           </div>
 
           <div className="container relative z-10 py-20">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left Column - Hero Content */}
-              <div className="space-y-8 text-center lg:text-left">
+            <div className="max-w-4xl mx-auto">
+              {/* Hero Content */}
+              <div className="space-y-8 text-center">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-neon-green/20 border border-neon-green/30 
                               rounded-full backdrop-blur-sm shadow-glow animate-fade-in">
                   <Shield className="w-4 h-4 text-neon-green" />
@@ -193,13 +193,13 @@ export const LandingPage: React.FC = () => {
                   </span>
                 </h1>
 
-                <p className="text-xl text-gray-300 leading-relaxed max-w-xl mx-auto lg:mx-0 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+                <p className="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
                   Protect your property with eco-friendly pest control services. 
                   Safe for your family, tough on pests.
                 </p>
 
                 {/* Quick Benefits */}
-                <div className="grid grid-cols-2 gap-3 max-w-xl mx-auto lg:mx-0 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                <div className="grid grid-cols-2 gap-3 max-w-xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                   {benefits.map((benefit, index) => (
                     <div key={index} className="flex items-center gap-2 text-gray-300">
                       <div className="w-8 h-8 rounded-lg bg-neon-green/20 flex items-center justify-center text-neon-green shadow-glow">
@@ -211,7 +211,7 @@ export const LandingPage: React.FC = () => {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
                   <button
                     className="group px-8 py-4 bg-neon-green text-dark-bg rounded-xl font-bold text-lg
                              shadow-glow hover:shadow-glow-lg hover:scale-105 active:scale-95
@@ -236,35 +236,6 @@ export const LandingPage: React.FC = () => {
                     <Phone className="w-5 h-5" />
                     (302) 562-5654
                   </a>
-                </div>
-              </div>
-
-              {/* Right Column - Floating Logo */}
-              <div className="hidden lg:flex items-center justify-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                <div className="relative">
-                  {/* Main Logo Circle with Glow */}
-                  <div className="relative w-96 h-96 rounded-full border-4 border-neon-green shadow-glow-xl animate-float-slow">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-dark-surface to-dark-card" />
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-neon-green/20 to-transparent" />
-                    
-                    {/* Inner Content */}
-                    <div className="relative h-full flex flex-col items-center justify-center p-12">
-                      <Shield className="w-32 h-32 text-neon-green mb-4 drop-shadow-[0_0_20px_rgba(57,255,20,0.6)]" />
-                      <span className="text-3xl font-display font-bold text-white mb-2">GRINNAGE</span>
-                      <span className="text-lg text-neon-green font-medium">EXTERMINATING</span>
-                      <div className="mt-4 px-4 py-2 bg-neon-green/20 border border-neon-green/30 rounded-full">
-                        <span className="text-sm text-neon-green font-semibold">Family Owned • Minority Owned</span>
-                      </div>
-                    </div>
-
-                    {/* Rotating Border Glow */}
-                    <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-neon-green via-accent-500 to-neon-green 
-                                  opacity-20 blur-lg animate-spin" style={{ animationDuration: '10s' }} />
-                  </div>
-
-                  {/* Floating Accent Circles */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-neon-cyan rounded-full shadow-glow-cyan animate-float-fast" />
-                  <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-neon-green rounded-full shadow-glow animate-float" style={{ animationDelay: '1s' }} />
                 </div>
               </div>
             </div>
