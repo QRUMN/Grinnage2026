@@ -194,7 +194,7 @@ export const AboutPageSimple: React.FC = () => {
                 <button
                   className="px-8 py-4 bg-neon-green text-dark-bg rounded-xl font-bold
                            shadow-glow hover:shadow-glow-lg hover:scale-105 transition-all duration-300"
-                  onClick={() => navigate('/contact')}
+                  onClick={() => navigate('/onboarding')}
                 >
                   <Calendar className="w-5 h-5 inline mr-2" />
                   Get Free Consultation
@@ -376,7 +376,7 @@ export const AboutPageSimple: React.FC = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
                   <button
-                    onClick={() => navigate('/contact')}
+                    onClick={() => navigate('/onboarding')}
                     className="px-8 py-4 bg-neon-green text-dark-bg rounded-xl font-bold text-lg
                              shadow-glow hover:shadow-glow-xl hover:scale-105 active:scale-95
                              transition-all duration-300"

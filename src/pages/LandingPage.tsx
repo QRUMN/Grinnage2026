@@ -231,7 +231,7 @@ export const LandingPage: React.FC = () => {
                              before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent 
                              before:via-white/30 before:to-transparent before:translate-x-[-100%] 
                              hover:before:translate-x-[100%] before:transition-transform before:duration-700"
-                    onClick={() => navigate('/contact')}
+                    onClick={() => navigate('/onboarding')}
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
                       Get Free Estimate
@@ -336,11 +336,16 @@ export const LandingPage: React.FC = () => {
                   </ul>
 
                   {/* Action Button */}
-                  <button className="w-full py-3 backdrop-blur-sm border-2 border-neon-green/50 text-neon-green rounded-xl 
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate('/onboarding', { state: { selectedService: service } });
+                    }}
+                    className="w-full py-3 backdrop-blur-sm border-2 border-neon-green/50 text-neon-green rounded-xl 
                                    font-semibold hover:bg-neon-green/10 hover:border-neon-green hover:shadow-glow
                                    transition-all duration-300 flex items-center justify-center gap-2
                                    group-hover:bg-neon-green group-hover:text-dark-bg">
-                    Learn More
+                    Get This Service
                     <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
@@ -411,7 +416,7 @@ export const LandingPage: React.FC = () => {
 
                   {/* Quick Action Button */}
                   <button
-                    onClick={() => navigate('/contact')}
+                    onClick={() => navigate('/onboarding')}
                     className="w-full py-5 bg-neon-green text-dark-bg rounded-xl font-bold text-lg
                              shadow-glow hover:shadow-glow-xl hover:scale-105 active:scale-95
                              transition-all duration-300 relative overflow-hidden
@@ -518,7 +523,7 @@ export const LandingPage: React.FC = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
                   <button
-                    onClick={() => navigate('/contact')}
+                    onClick={() => navigate('/onboarding')}
                     className="px-8 py-4 bg-neon-green text-dark-bg rounded-xl font-bold text-lg
                              shadow-glow hover:shadow-glow-xl hover:scale-105 active:scale-95
                              transition-all duration-300 relative overflow-hidden

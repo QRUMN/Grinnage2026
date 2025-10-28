@@ -263,7 +263,7 @@ export const ServicesPageSimple: React.FC = () => {
                 <button
                   className="px-8 py-4 bg-neon-green text-dark-bg rounded-xl font-bold
                            shadow-glow hover:shadow-glow-lg hover:scale-105 transition-all duration-300"
-                  onClick={() => navigate('/contact')}
+                  onClick={() => navigate('/onboarding')}
                 >
                   <Calendar className="w-5 h-5 inline mr-2" />
                   Schedule Free Consultation
@@ -346,7 +346,7 @@ export const ServicesPageSimple: React.FC = () => {
 
                     {/* CTA Button */}
                     <button
-                      onClick={() => navigate('/contact')}
+                      onClick={() => navigate('/onboarding', { state: { selectedService: service } })}
                       className="w-full py-4 bg-neon-green text-dark-bg rounded-xl font-bold
                                shadow-glow hover:shadow-glow-lg hover:scale-105 active:scale-95
                                transition-all duration-300 relative overflow-hidden
@@ -489,7 +489,7 @@ export const ServicesPageSimple: React.FC = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
                   <button
-                    onClick={() => navigate('/contact')}
+                    onClick={() => navigate('/onboarding')}
                     className="px-8 py-4 bg-neon-green text-dark-bg rounded-xl font-bold text-lg
                              shadow-glow hover:shadow-glow-xl hover:scale-105 active:scale-95
                              transition-all duration-300 flex items-center justify-center gap-2"
