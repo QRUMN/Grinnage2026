@@ -15,28 +15,34 @@ export const LandingPage: React.FC = () => {
   // Featured services with pricing
   const featuredServices = [
     {
-      name: 'Residential Inspection',
-      description: 'Comprehensive pest inspection and assessment of your property',
-      price: 8999,
+      name: 'Advanced Guard',
+      description: 'Comprehensive pest protection with regular inspections and preventive treatments',
+      price: 12000,
+      interval: 'per quarter',
       icon: <Shield className="w-8 h-8" />,
-      features: ["Complete inspection", "Written report", "Treatment plan"],
-      color: 'neon'
+      features: ["Quarterly inspections", "All pest coverage", "Preventive treatments"],
+      color: 'neon',
+      popular: true
     },
     {
-      name: 'Residential Treatment',
-      description: 'Professional pest elimination service for your home',
-      price: 19999,
+      name: 'Same Day Service',
+      description: 'Urgent pest control response for immediate issues with guaranteed results',
+      price: 22500,
+      interval: 'one-time',
+      icon: <Clock className="w-8 h-8" />,
+      features: ["Same-day response", "Emergency treatment", "Expert technicians"],
+      color: 'cyan',
+      popular: false
+    },
+    {
+      name: 'Wood Eating Pest',
+      description: 'Termite and wood-destroying insect treatment with lasting protection',
+      price: null,
+      interval: 'Free Estimate',
       icon: <Bug className="w-8 h-8" />,
-      features: ["Eco-friendly", "Safe for family/pets", "30-day guarantee"],
-      color: 'cyan'
-    },
-    {
-      name: 'Commercial Service',
-      description: 'Monthly pest control for businesses',
-      price: 7999,
-      icon: <Calendar className="w-8 h-8" />,
-      features: ["Monthly service", "Compliance docs", "Emergency response"],
-      color: 'neon'
+      features: ["Free inspection", "Treatment plan", "Barrier protection"],
+      color: 'neon',
+      popular: false
     }
   ];
 
@@ -282,6 +288,14 @@ export const LandingPage: React.FC = () => {
                   style={{ animationDelay: `${index * 0.1}s` }}
                   onClick={() => navigate('/services')}
                 >
+                  {/* Popular Badge */}
+                  {service.popular && (
+                    <div className="absolute -top-3 right-8 px-4 py-1.5 bg-neon-green text-dark-bg rounded-full 
+                                  text-xs font-bold shadow-glow">
+                      MOST POPULAR
+                    </div>
+                  )}
+
                   {/* Shimmer Effect */}
                   <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full
                                 bg-gradient-to-r from-transparent via-neon-green/5 to-transparent
@@ -300,9 +314,11 @@ export const LandingPage: React.FC = () => {
 
                   <div className="flex items-baseline gap-2 mb-4">
                     <span className="text-4xl font-bold text-neon-green font-mono">
-                      {formatCurrencyFromCents(service.price)}
+                      {service.price ? formatCurrencyFromCents(service.price) : 'Free Estimate'}
                     </span>
-                    <span className="text-gray-400 text-sm">per service</span>
+                    {service.interval && (
+                      <span className="text-gray-400 text-sm">{service.interval}</span>
+                    )}
                   </div>
 
                   <p className="text-gray-300 mb-6 leading-relaxed">

@@ -11,103 +11,120 @@ export const ServicesPageSimple: React.FC = () => {
 
   const services = [
     {
-      id: 'residential-inspection',
-      title: 'Residential Inspection',
-      subtitle: 'Comprehensive Home Assessment',
-      price: '$89.99',
-      interval: 'one-time',
+      id: 'advanced-guard',
+      title: 'Advanced Guard',
+      subtitle: 'Comprehensive pest protection with regular inspections and preventive treatments',
+      price: '$120',
+      interval: 'per quarter',
       icon: <Shield className="w-10 h-10" />,
-      description: 'Thorough property inspection to identify pest issues and prevention opportunities.',
+      description: 'Comprehensive pest protection with regular inspections and preventive treatments.',
       features: [
-        'Complete interior and exterior inspection',
-        'Detailed written report with findings',
-        'Treatment recommendations',
-        'Prevention strategy plan',
-        'Follow-up consultation included'
+        'Quarterly inspections',
+        'All pest coverage',
+        'Preventive treatments',
+        'Priority service'
       ],
-      popular: false,
+      popular: true,
       color: 'neon'
     },
     {
-      id: 'residential-treatment',
-      title: 'Residential Treatment',
-      subtitle: 'Complete Pest Elimination',
-      price: '$199.99',
+      id: 'same-day-service',
+      title: 'Same Day Service',
+      subtitle: 'Urgent pest control response for immediate issues with guaranteed results',
+      price: '$225',
       interval: 'one-time',
-      icon: <Bug className="w-10 h-10" />,
-      description: 'Professional pest treatment using safe, effective methods for your home.',
+      icon: <Clock className="w-10 h-10" />,
+      description: 'Urgent pest control response for immediate issues with guaranteed results.',
       features: [
-        'Targeted pest elimination',
-        'Eco-friendly treatment options',
-        'Interior and exterior application',
-        'Safe for family and pets',
-        '30-day service guarantee'
+        'Same-day response',
+        'Emergency treatment',
+        'Targeted solutions',
+        'Expert technicians'
       ],
-      popular: true,
+      popular: false,
       color: 'cyan'
     },
     {
-      id: 'commercial-service',
-      title: 'Commercial Service',
-      subtitle: 'Business Pest Management',
-      price: '$79.99',
-      interval: 'per month',
+      id: 'wildlife-control',
+      title: 'Wildlife Control',
+      subtitle: 'Humane wildlife removal and exclusion services for all types of unwanted animals',
+      price: 'Free Estimate',
+      interval: '',
       icon: <Target className="w-10 h-10" />,
-      description: 'Ongoing pest control solutions designed for commercial properties.',
+      description: 'Humane wildlife removal and exclusion services for all types of unwanted animals.',
       features: [
-        'Monthly scheduled service',
-        'Customized treatment plans',
-        'Compliance documentation',
-        'Emergency response available',
-        'Dedicated account manager'
+        'Free inspection',
+        'Humane removal',
+        'Entry prevention',
+        'Damage repair'
       ],
       popular: false,
       color: 'neon'
     },
     {
-      id: 'quarterly-maintenance',
-      title: 'Quarterly Maintenance',
-      subtitle: 'Seasonal Pest Prevention',
-      price: '$159.99',
-      interval: 'every 3 months',
-      icon: <Clock className="w-10 h-10" />,
-      description: 'Seasonal pest prevention service to keep your property protected year-round.',
+      id: 'wood-eating-pest',
+      title: 'Wood Eating Pest',
+      subtitle: 'Termite and wood-destroying insect treatment with lasting protection',
+      price: 'Free Estimate',
+      interval: '',
+      icon: <Bug className="w-10 h-10" />,
+      description: 'Termite and wood-destroying insect treatment with lasting protection.',
       features: [
-        'Quarterly inspections',
-        'Preventive treatments',
-        'Seasonal pest focus',
-        'Priority scheduling',
-        'Extended warranty'
+        'Free inspection',
+        'Treatment plan',
+        'Barrier protection',
+        'Monitoring stations'
       ],
       popular: false,
       color: 'cyan'
     }
   ];
 
+  const specializedServices = [
+    {
+      id: 'rodent-control',
+      title: 'Rodent Control',
+      description: 'Effective solutions for mice, rats, and other rodent infestations',
+      icon: '🐭'
+    },
+    {
+      id: 'bed-bug-treatment',
+      title: 'Bed Bug Treatment',
+      description: 'Specialized heat treatments and targeted solutions for bed bug elimination',
+      icon: '🛏️'
+    },
+    {
+      id: 'mosquito-control',
+      title: 'Mosquito Control',
+      description: 'Yard treatments to reduce mosquito populations and protect your outdoor spaces',
+      icon: '🦟'
+    }
+  ];
+
   const processSteps = [
     {
-      number: '01',
-      title: 'Free Inspection',
-      description: 'Our experts identify the pest problem and assess your property',
+      number: '1',
+      title: 'Inspection',
+      description: 'We thoroughly inspect your property to identify pest issues and entry points',
       icon: <Shield className="w-6 h-6" />
     },
     {
-      number: '02',
-      title: 'Custom Solution',
-      description: 'We create a tailored treatment plan for your specific needs',
+      number: '2',
+      title: 'Treatment Plan',
+      description: 'We develop a customized treatment plan tailored to your specific situation',
       icon: <Target className="w-6 h-6" />
     },
     {
-      number: '03',
-      title: 'Safe Treatment',
-      description: 'Eco-friendly application that is safe for family and pets',
-      icon: <Leaf className="w-6 h-6" />
+      number: '3',
+      title: 'Implementation',
+      description: 'Our trained technicians implement the treatment using the latest methods',
+      icon: <Zap className="w-6 h-6" />
     },
     {
-      number: '04',
-      title: 'Guaranteed Results',
-      description: 'We ensure complete pest elimination with follow-up protection',
-      icon: <Award className="w-6 h-6" />
+      number: '4',
+      title: 'Follow-up',
+      description: 'We conduct follow-up visits to ensure the problem is completely resolved',
+      icon: <CheckCircle className="w-6 h-6" />
     }
   ];
 
@@ -342,6 +359,52 @@ export const ServicesPageSimple: React.FC = () => {
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Specialized Services Section */}
+        <section className="relative py-24">
+          <div className="container">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neon-green/20 border border-neon-green/30 
+                            rounded-full backdrop-blur-sm shadow-glow mb-6">
+                <Star className="w-4 h-4 text-neon-green" />
+                <span className="text-sm font-semibold text-neon-green">Specialized Services</span>
+              </div>
+
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+                Additional Pest Solutions
+              </h2>
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                Specialized treatments for specific pest problems.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {specializedServices.map((service, index) => (
+                <div
+                  key={service.id}
+                  className="backdrop-blur-xl bg-gradient-to-br from-dark-surface/30 to-dark-bg/40
+                           border border-neon-green/20 rounded-2xl p-6
+                           hover:shadow-glow hover:-translate-y-1 hover:border-neon-green/40
+                           transition-all duration-500 cursor-pointer animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                  onClick={() => navigate('/contact')}
+                >
+                  <div className="text-4xl mb-4">{service.icon}</div>
+                  <h3 className="text-xl font-bold text-white mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-400 mb-4 leading-relaxed">
+                    {service.description}
+                  </p>
+                  <button className="text-neon-green font-semibold hover:gap-2 transition-all flex items-center gap-1">
+                    Learn more
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
               ))}
             </div>
