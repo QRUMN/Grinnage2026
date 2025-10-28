@@ -1,9 +1,10 @@
 import React from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import type { FillLayer } from 'react-map-gl';
+import type { Feature, Polygon } from 'geojson';
 
 // Delaware state coordinates
-const delawareCoordinates = {
+const delawareCoordinates: Feature<Polygon> = {
   type: 'Feature',
   properties: {},
   geometry: {
@@ -71,7 +72,7 @@ export const ContactMap = () => {
           style={{ width: '100%', height: '100%' }}
           mapStyle="mapbox://styles/mapbox/dark-v11"
         >
-          <Source type="geojson" data={delawareCoordinates as any}>
+          <Source type="geojson" data={delawareCoordinates}>
             <Layer {...layerStyle} />
           </Source>
         </Map>

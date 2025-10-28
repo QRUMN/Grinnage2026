@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { UseFormReturn } from 'react-hook-form';
-import { FormInput } from '../../common/form/FormInput';
-import { FormSelect } from '../../common/form/FormSelect';
 import { FormTextarea } from '../../common/form/FormTextarea';
 import { supabase } from '../../../lib/supabase';
 import { Loader } from 'lucide-react';
 
+interface SchedulingFormData {
+  preferredDate: string;
+  preferredTime: string;
+  notes: string;
+  [key: string]: unknown;
+}
+
 interface SchedulingStepProps {
-  form: UseFormReturn<any>;
+  form: UseFormReturn<SchedulingFormData>;
 }
 
 export const SchedulingStep = ({ form }: SchedulingStepProps) => {

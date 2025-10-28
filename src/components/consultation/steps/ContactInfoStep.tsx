@@ -2,8 +2,15 @@ import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { FormInput } from '../../common/form/FormInput';
 
+interface ConsultationFormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  [key: string]: unknown;
+}
+
 interface ContactInfoStepProps {
-  form: UseFormReturn<any>;
+  form: UseFormReturn<ConsultationFormData>;
 }
 
 export const ContactInfoStep = ({ form }: ContactInfoStepProps) => {

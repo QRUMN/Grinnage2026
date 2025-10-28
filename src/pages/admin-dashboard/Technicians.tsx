@@ -18,7 +18,7 @@ const Technicians: React.FC = () => {
     rating: 4.9,
     certifications: ['Licensed Pest Control Operator', 'Termite Specialist', 'EPA Certified'],
     serviceAreas: ['San Francisco', 'Oakland', 'Berkeley', 'San Jose', 'Sunnyvale'],
-    bio: 'Keith Grinnage has over 15 years of experience in pest control and management. As the founder of GRINNAGE Pest Solutions, he personally oversees all operations to ensure the highest quality of service.'
+    bio: 'Keith Grinnage has over 15 years of experience in pest control and management. As the founder of Grinnage Exterminating, he personally oversees all operations to ensure the highest quality of service.'
   };
 
   return (

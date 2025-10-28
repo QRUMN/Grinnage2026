@@ -1,13 +1,10 @@
 import React from 'react';
 import { Bell, Search, Settings } from 'lucide-react';
 import { useAuth } from '../../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
 import { ThemeToggle } from '../../common/ThemeToggle';
 
 export const AdminHeader = () => {
   const { user } = useAuth();
-  const navigate = useNavigate();
-  const [unreadCount] = React.useState(2);
 
   return (
     <header className="sticky top-0 z-40 bg-[#313131] border-b border-gray-700">

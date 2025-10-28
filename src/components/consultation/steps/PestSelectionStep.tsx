@@ -2,8 +2,14 @@ import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { PEST_CATEGORIES, PEST_TYPES } from '../../../types/pest';
 
+interface PestFormData {
+  pestCategory: string;
+  pestType: string;
+  [key: string]: unknown;
+}
+
 interface PestSelectionStepProps {
-  form: UseFormReturn<any>;
+  form: UseFormReturn<PestFormData>;
 }
 
 export const PestSelectionStep = ({ form }: PestSelectionStepProps) => {

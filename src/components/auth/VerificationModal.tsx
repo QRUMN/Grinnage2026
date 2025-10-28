@@ -47,7 +47,7 @@ export const VerificationModal = ({
       await onResendCode();
       setTimeLeft(300); // Reset timer
       setError('');
-    } catch (error) {
+    } catch {
       setError('Failed to resend code');
     } finally {
       setIsResending(false);
@@ -66,7 +66,7 @@ export const VerificationModal = ({
       setError('');
       await onVerify(code);
       setIsSuccess(true);
-    } catch (error) {
+    } catch {
       setError('Invalid verification code');
     } finally {
       setIsSubmitting(false);

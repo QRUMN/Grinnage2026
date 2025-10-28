@@ -171,7 +171,7 @@ export const AdminDashboardDemo: React.FC = () => {
             {/* Logo */}
             <div className="flex items-center justify-between h-16 px-4 border-b border-white/10">
               <div className="flex items-center">
-                <div className="font-bold text-xl">GRINNAGE</div>
+                <div className="font-bold text-xl">Grinnage Exterminating</div>
                 <Badge className="ml-2 bg-[#56e39f]/20 text-[#56e39f] border-none">Admin</Badge>
               </div>
               <button

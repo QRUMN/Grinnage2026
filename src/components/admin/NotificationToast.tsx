@@ -39,7 +39,7 @@ export const NotificationToast: React.FC = () => {
         }, 300);
       }, 5000);
     }
-  }, [notifications]);
+  }, [notifications, toasts]);
 
   const removeToast = (id: string) => {
     setToasts(prev =>

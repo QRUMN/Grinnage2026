@@ -108,7 +108,7 @@ export const ContactPageSimple: React.FC = () => {
       <header className="sticky top-0 bg-[#0f1729]/80 backdrop-blur-md border-b border-white/10 z-50">
         <div className="container mx-auto flex justify-between items-center py-4">
           <div className="font-display font-bold text-2xl text-[#56e39f]">
-            GRINNAGE
+            Grinnage Exterminating
           </div>
           <nav className="hidden md:flex items-center space-x-8">
             <button
@@ -359,7 +359,7 @@ export const ContactPageSimple: React.FC = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <div className="lg:col-span-2">
               <div className="font-display font-bold text-2xl text-primary-400 mb-4">
-                GRINNAGE
+                Grinnage Exterminating
               </div>
               <p className="text-neutral-400 mb-6 max-w-md">
                 Professional pest control services since 2003.

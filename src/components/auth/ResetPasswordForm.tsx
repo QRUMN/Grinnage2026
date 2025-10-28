@@ -22,7 +22,7 @@ export const ResetPasswordForm = () => {
     try {
       await authApi.resetPassword(data.email);
       setIsSubmitted(true);
-    } catch (error) {
+    } catch {
       setError('root', {
         message: 'Failed to send reset instructions. Please try again.',
       });

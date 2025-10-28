@@ -29,7 +29,7 @@ export const DashboardHeader = () => {
               <div className="w-8 h-8 bg-[#56e39f] rounded-md flex items-center justify-center">
                 <span className="text-white font-bold text-lg">G</span>
               </div>
-              <span className="text-lg font-semibold text-gray-900 dark:text-white">GRINNAGE</span>
+              <span className="text-lg font-semibold text-gray-900 dark:text-white">Grinnage Exterminating</span>
             </div>
           </div>
 

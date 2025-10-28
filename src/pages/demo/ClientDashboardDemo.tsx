@@ -125,7 +125,7 @@ export const ClientDashboardDemo: React.FC = () => {
             {/* Logo */}
             <div className="flex items-center justify-between h-16 px-4 border-b border-white/10">
               <div className="flex items-center">
-                <div className="font-bold text-xl">GRINNAGE</div>
+                <div className="font-bold text-xl">Grinnage Exterminating</div>
               </div>
               <button
                 onClick={() => setSidebarOpen(false)}

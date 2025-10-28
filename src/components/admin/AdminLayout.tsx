@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, Users, UserPlus, Calendar, Settings,
-  FileText, BarChart3, MessageSquare, LogOut, Menu, X,
-  Bell, Search, Shield, ChevronDown
+  FileText, BarChart3, LogOut, Menu, X,
+  Search, Shield, ChevronDown
 } from 'lucide-react';
 import { useAdminAuth } from '../../lib/auth';
 import { ProtectedRoute } from '../auth/ProtectedRoute';
@@ -123,7 +123,7 @@ const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
         {/* Sidebar Header */}
         <div className="flex items-center justify-between h-16 px-6 border-b border-neutral-200 dark:border-neutral-800">
           <div className="font-display font-bold text-xl text-primary-600 dark:text-primary-400">
-            GRINNAGE
+            Grinnage Exterminating
           </div>
           <button
             onClick={() => setSidebarOpen(false)}

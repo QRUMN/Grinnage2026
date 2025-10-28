@@ -65,7 +65,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             {/* Logo */}
             <div className="flex items-center justify-between h-16 px-4 border-b border-white/10">
               <div className="flex items-center">
-                <div className="font-bold text-xl">GRINNAGE</div>
+                <div className="font-bold text-xl">Grinnage Exterminating</div>
                 {isAdmin && (
                   <div className="ml-2 px-2 py-0.5 text-xs font-medium bg-[#56e39f]/20 text-[#56e39f] rounded-full">Admin</div>
                 )}

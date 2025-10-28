@@ -3,8 +3,18 @@ import { UseFormReturn } from 'react-hook-form';
 import { FormInput } from '../../common/form/FormInput';
 import { FormSelect } from '../../common/form/FormSelect';
 
+interface PropertyFormData {
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  propertyType: string;
+  propertySize: string;
+  [key: string]: unknown;
+}
+
 interface PropertyDetailsStepProps {
-  form: UseFormReturn<any>;
+  form: UseFormReturn<PropertyFormData>;
 }
 
 export const PropertyDetailsStep = ({ form }: PropertyDetailsStepProps) => {

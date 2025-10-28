@@ -6,8 +6,21 @@ import {
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
+interface Client {
+  businessInfo: {
+    status: string;
+    clientType: string;
+    lifetime_value: number;
+    risk_level: string;
+  };
+  subscription: {
+    isActive: boolean;
+    monthlyValue: number;
+  };
+}
+
 interface ClientAnalyticsProps {
-  clients: any[];
+  clients: Client[];
   timeframe: 'week' | 'month' | 'quarter' | 'year';
   onTimeframeChange: (timeframe: 'week' | 'month' | 'quarter' | 'year') => void;
 }
@@ -122,7 +135,7 @@ export const ClientAnalytics: React.FC<ClientAnalyticsProps> = ({
           {timeframes.map((tf) => (
             <button
               key={tf.value}
-              onClick={() => onTimeframeChange(tf.value as any)}
+              onClick={() => onTimeframeChange(tf.value as 'week' | 'month' | 'quarter' | 'year')}
               className={cn(
                 "px-3 py-2 text-sm font-medium rounded-lg transition-colors",
                 timeframe === tf.value

@@ -72,7 +72,7 @@ export const LandingPage: React.FC = () => {
       <header className="sticky top-0 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 z-50">
         <div className="container mx-auto flex justify-between items-center py-4">
           <div className="font-display font-bold text-2xl text-primary-600 dark:text-primary-400">
-            GRINNAGE
+            Grinnage Exterminating
           </div>
 
           {/* Desktop Navigation */}
@@ -415,7 +415,7 @@ export const LandingPage: React.FC = () => {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="font-display font-bold text-2xl text-primary-400 mb-4">
-                GRINNAGE
+                Grinnage Exterminating
               </div>
               <p className="text-neutral-400 mb-6 max-w-md">
                 Professional pest control services since 2003.

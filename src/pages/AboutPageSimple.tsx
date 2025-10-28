@@ -82,7 +82,7 @@ export const AboutPageSimple: React.FC = () => {
         <Container>
           <div className="flex justify-between items-center py-4">
             <div className="font-display font-bold text-2xl text-primary-600 dark:text-primary-400">
-              GRINNAGE
+              Grinnage Exterminating
             </div>
             <nav className="hidden md:flex items-center space-x-8">
               <button onClick={() => navigate('/')} className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Home</button>

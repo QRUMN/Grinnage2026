@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
           {/* Column 1 - About */}
           <div className="space-y-6">
             <div>
-              <h2 className="text-xl font-bold text-white mb-2">GRINNAGE</h2>
+              <h2 className="text-xl font-bold text-white mb-2">Grinnage Exterminating</h2>
               <div className="w-12 h-1 bg-[#56e39f] rounded-full"></div>
             </div>
             <p className="text-gray-400">

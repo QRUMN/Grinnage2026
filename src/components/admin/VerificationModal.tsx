@@ -27,7 +27,7 @@ export const VerificationModal = ({ isOpen, onClose, onVerify, email }: Verifica
       setError('');
       await onVerify(code);
       setIsSuccess(true);
-    } catch (error) {
+    } catch {
       setError('Invalid verification code');
     } finally {
       setIsSubmitting(false);
